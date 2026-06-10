@@ -5,8 +5,10 @@ ft_garden_intro.py
 """
 
 
-def ft_garden_intro():
-    "prints garden info"
+def ft_garden_intro() -> None:
+    """
+    Prints garden info
+    """
     print("=== Welcome to My Garden ===")
     print("Plant: Rose")
     print("Height: 25cm")
@@ -15,7 +17,9 @@ def ft_garden_intro():
 
 
 def main():
-    """main"""
+    """
+    Main
+    """
     ft_garden_intro()
 
 

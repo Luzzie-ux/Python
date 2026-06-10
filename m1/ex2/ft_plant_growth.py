@@ -1,54 +1,70 @@
+# plant growth
+
 """
-defines functions that will simulate plant growth over time
+Defines Class Plant with new parameters, and new functions inside class
+that will help simulate plant growth over time
 """
 
 
 class Plant():
     """
-    class Plant that defines name, height and age of each plant
+    Plant class that will define name, age, height, modifier and initial_height
+    as Plant parameters, and then define four functions:
+    grow(), age(), show() and simulate()
     """
-    def __init__(self, name, height, age, growth_rate):
+    def __init__(self, name: str, old: int, height: float, modifier: float):
         self.name = name
+        self.old = old
         self.height = height
-        self.age = age
-        self.growth_rate = growth_rate
+        self.modifier = modifier
         self.initial_height = height
 
-    def grow(self):
-        self.height = round(self.height + self.growth_rate, 2)
-
-    def aging(self):
-        self.age += 1
-
     def show(self):
-        print(f"{self.name}: {self.height}cm, {self.age} days old")
+        """
+        Shows plant information at the start of the script
+        """
+        print(f"{self.name}: is {self.height}cms and {self.old} days old")
 
-    def simulate_week(self):
-        print(f"--- {self.name} starting state ---")
+    def grow(self):
+        """
+        Addes modifier with height every time its called with a 2 decimals
+        """
+        self.height = round(self.height + self.modifier, 2)
+
+    def age(self):
+        """
+        Addeds 1 to old every time its called
+        """
+        self.old = self.old + 1
+
+    def simulate(self):
+        """
+        Displays plant status in loop iterating grow and age,
+        showing every stage until 7, then at the end shows
+        "total growth" of the plant after the loop is done
+        """
+        print(f" --- {self.name} status: ---")
         self.show()
-        for day in range(1, 8):
+        for days in range(1, 8):
             self.grow()
-            self.aging()
-            print(f"Day {day}: ", end="")
+            self.age()
+            print(f"=== Day: {days} ===")
             self.show()
-        total_growth = round(self.height - self.initial_height, 2)
-        print(f"Total growth after 7 days: {total_growth}cm\n")
+        total = round(self.height - self.initial_height, 2)
+        print(f"Total growth after 7 days: {total}cm\n")
 
 
 def main():
     """
-    main function
+    Main Function
     """
-    print("=== Garden Plant Registry ===\n")
-
-    rose = Plant("Rose", 25, 30, growth_rate=1.5)
-    rose.simulate_week()
-
-    sunflower = Plant("Sunflower", 80, 45, growth_rate=3.0)
-    sunflower.simulate_week()
-
-    violet = Plant("Violet", 15, 120, growth_rate=0.8)
-    violet.simulate_week()
+    print("=== Garden Plant Growth ===")
+    rose = Plant("Roses", 10, 25, 0.8)
+    rose.simulate()
+    sunflower = Plant("Sunflowers", 5, 11, 2.5)
+    sunflower.simulate()
+    violet = Plant("Violets", 15, 5, 1.0)
+    violet.simulate()
 
 
 if __name__ == "__main__":

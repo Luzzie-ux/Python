@@ -1,15 +1,15 @@
 # garden data
 
 """
-garden data functions
+Garden data functions
 """
 
 
 class Plant():
     """
-    class Plant that defines name, height and age of each plant
+    Class Plant that defines name, height and age of each plant
     """
-    def __init__(self, name, height, age):
+    def __init__(self, name: str, height: int, age: int):
         self.name = name
         self.height = height
         self.age = age
@@ -20,7 +20,7 @@ class Plant():
 
 def main():
     """
-    main function to replicate example
+    Main Function
     """
     print("=== Garden Plant Registry ===")
     Plant("Rose", 25, 30).show

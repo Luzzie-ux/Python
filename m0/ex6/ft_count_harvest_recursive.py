@@ -5,7 +5,7 @@ this file defines the recursion helper and the count harvest with recursion
 """
 
 
-def recursion_helper(days, i):
+def recursion_helper(days: int, i: int):
     """
     helper to allow the counting with recursion
     """
@@ -17,7 +17,7 @@ def recursion_helper(days, i):
         print("Harvest time!")
 
 
-def ft_count_harvest_recursive():
+def ft_count_harvest_recursive() -> None:
     """
     function that will call recursion helper to count
     """

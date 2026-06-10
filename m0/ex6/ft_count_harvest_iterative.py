@@ -5,7 +5,7 @@ defined function that counts days until harvest
 """
 
 
-def ft_count_harvest_iterative():
+def ft_count_harvest_iterative() -> None:
     """
     function that counts how many days till harvest
     """
