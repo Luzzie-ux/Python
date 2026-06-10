@@ -1,18 +1,32 @@
-#garden data
+# garden data
+
+"""
+garden data functions
+"""
+
 
 class Plant():
+    """
+    class Plant that defines name, height and age of each plant
+    """
     def __init__(self, name, height, age):
-        self.name
-        self.height
-        self.age
-    def show(name, height, age):
-        print(f"{name}: {height}cm, {age} days old")
+        self.name = name
+        self.height = height
+        self.age = age
+
+    def show(self):
+        print(f"{self.name}: {self.height}cm, {self.age} days old")
+
 
 def main():
+    """
+    main function to replicate example
+    """
     print("=== Garden Plant Registry ===")
-    Plant.show("Rose", 25, 30)
-    Plant.show("Sunflowe", 80, 45)
-    Plant.show("Cactus", 15, 120)
+    Plant("Rose", 25, 30).show
+    Plant("Sunflower", 80, 45).show
+    Plant("Cactus", 15, 120).show
+
 
 if __name__ == "__main__":
     main()

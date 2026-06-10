@@ -1,7 +1,11 @@
-#ft_garden_intro.py
+# garden intro
 
-"""ft_garden_intro.py"""
-def	ft_garden_intro():
+"""
+ft_garden_intro.py
+"""
+
+
+def ft_garden_intro():
     "prints garden info"
     print("=== Welcome to My Garden ===")
     print("Plant: Rose")
@@ -9,9 +13,11 @@ def	ft_garden_intro():
     print("Age: 30 days\n")
     print("=== End of Program ===")
 
+
 def main():
     """main"""
     ft_garden_intro()
+
 
 if __name__ == "__main__":
     main()
