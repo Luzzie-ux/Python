@@ -5,7 +5,7 @@ defines function that checks plant age
 """
 
 
-def ft_plant_age():
+def ft_plant_age() -> None:
     """
     function that says if plant is ready to harvest
     """
@@ -14,3 +14,4 @@ def ft_plant_age():
         print("Plant is ready to harvest!")
     else:
         print("Plant needs more time to grow.")
+    return

@@ -5,7 +5,7 @@ defines function that counts total harvest
 """
 
 
-def ft_harvest_total():
+def ft_harvest_total() -> None:
     """
     function that counts how much was harvested in three days
     """
@@ -15,3 +15,4 @@ def ft_harvest_total():
 
     total = (w1 + w2 + w3)
     print(f"Total harvest: {total}")
+    return

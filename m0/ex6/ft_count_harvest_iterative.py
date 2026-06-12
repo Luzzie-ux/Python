@@ -16,3 +16,4 @@ def ft_count_harvest_iterative() -> None:
         if (i == days):
             print("Harvest time!")
         i += 1
+    return

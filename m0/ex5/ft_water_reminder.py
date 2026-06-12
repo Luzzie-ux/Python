@@ -5,7 +5,7 @@ defines function that checks if plants needs water
 """
 
 
-def ft_water_reminder():
+def ft_water_reminder() -> None:
     """
     function that reminds to water plants
     """
@@ -14,3 +14,4 @@ def ft_water_reminder():
         print("Water the plants!")
     else:
         print("Plants are fine")
+    return
