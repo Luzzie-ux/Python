@@ -14,11 +14,12 @@ class Plant():
         self.height = height
         self.age = age
 
-    def show(self):
+    def show(self) -> None:
         print(f"{self.name}: {self.height}cm, {self.age} days old")
+        return
 
 
-def main():
+def main() -> None:
     """
     Main Function
     """
@@ -26,6 +27,7 @@ def main():
     Plant("Rose", 25, 30).show
     Plant("Sunflower", 80, 45).show
     Plant("Cactus", 15, 120).show
+    return
 
 
 if __name__ == "__main__":

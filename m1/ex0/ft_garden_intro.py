@@ -14,13 +14,15 @@ def ft_garden_intro() -> None:
     print("Height: 25cm")
     print("Age: 30 days\n")
     print("=== End of Program ===")
+    return
 
 
-def main():
+def main() -> None:
     """
     Main
     """
     ft_garden_intro()
+    return
 
 
 if __name__ == "__main__":

@@ -19,25 +19,28 @@ class Plant():
         self.modifier = modifier
         self.initial_height = height
 
-    def show(self):
+    def show(self) -> None:
         """
         Shows plant information at the start of the script
         """
         print(f"{self.name}: is {self.height}cms and {self.old} days old")
+        return
 
-    def grow(self):
+    def grow(self) -> None:
         """
         Addes modifier with height every time its called with a 2 decimals
         """
         self.height = round(self.height + self.modifier, 2)
+        return
 
-    def age(self):
+    def age(self) -> None:
         """
         Addeds 1 to old every time its called
         """
         self.old = self.old + 1
+        return
 
-    def simulate(self):
+    def simulate(self) -> None:
         """
         Displays plant status in loop iterating grow and age,
         showing every stage until 7, then at the end shows
@@ -52,9 +55,10 @@ class Plant():
             self.show()
         total = round(self.height - self.initial_height, 2)
         print(f"Total growth after 7 days: {total}cm\n")
+        return
 
 
-def main():
+def main() -> None:
     """
     Main Function
     """
@@ -65,6 +69,7 @@ def main():
     sunflower.simulate()
     violet = Plant("Violets", 15, 5, 1.0)
     violet.simulate()
+    return
 
 
 if __name__ == "__main__":
