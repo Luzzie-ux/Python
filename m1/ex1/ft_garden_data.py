@@ -1,4 +1,4 @@
-# garden data
+#!/usr/bin/env python3
 
 """
 Garden data functions

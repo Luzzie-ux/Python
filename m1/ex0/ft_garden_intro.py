@@ -1,4 +1,4 @@
-# garden intro
+#!/usr/bin/env python3
 
 """
 ft_garden_intro.py

@@ -1,4 +1,4 @@
-# plant growth
+#!/usr/bin/env python3
 
 """
 Defines Class Plant with new parameters, and new functions inside class
