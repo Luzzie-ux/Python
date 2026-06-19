@@ -17,13 +17,5 @@ def ft_garden_intro() -> None:
     return
 
 
-def main() -> None:
-    """
-    Main
-    """
-    ft_garden_intro()
-    return
-
-
 if __name__ == "__main__":
-    main()
+    ft_garden_intro()

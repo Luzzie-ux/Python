@@ -58,7 +58,7 @@ class Plant():
         return
 
 
-def main() -> None:
+def ft_plant_growth() -> None:
     """
     Main Function
     """
@@ -73,4 +73,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    ft_plant_growth()
