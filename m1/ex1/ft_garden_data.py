@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Garden data functions
+ft_garden_data.py
 """
 
 

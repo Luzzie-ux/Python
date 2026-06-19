@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-plant factory.py
+ft_plant_factory.py
 """
 
 

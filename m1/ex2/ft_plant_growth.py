@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Defines Class Plant with new parameters, and new functions inside class
-that will help simulate plant growth over time
+ft_plant_growth.py
 """
 
 
