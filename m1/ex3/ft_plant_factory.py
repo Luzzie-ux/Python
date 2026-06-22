@@ -9,11 +9,11 @@ class Plant():
     """
     Plant class composed of name, initial height and initial age.
     """
-    def __init__(self, name: str, height: float, age: int, modifier: float):
+    def __init__(self, name: str, height: float, age: int, mod: float) -> None:
         self.name = name
         self.height = height
         self.age = age
-        self.modifier = modifier
+        self.mod = mod
         self.initial_height = height
 
     def show(self) -> None:
@@ -25,9 +25,9 @@ class Plant():
 
     def grow(self) -> None:
         """
-        Addes modifier with height every time its called with a 2 decimals
+        Addes mod with height every time its called with a 2 decimals
         """
-        self.height = round(self.height + self.modifier, 2)
+        self.height = round(self.height + self.mod, 2)
         return
 
     def aging(self) -> None:

@@ -7,15 +7,15 @@ ft_plant_growth.py
 
 class Plant():
     """
-    Plant class that will define name, age, height, modifier and initial_height
+    Plant class that will define name, age, height, mod and initial_height
     as Plant parameters, and then define four functions:
     grow(), age(), show() and simulate()
     """
-    def __init__(self, name: str, old: int, height: float, modifier: float):
+    def __init__(self, name: str, old: int, height: float, mod: float) -> None:
         self.name = name
         self.old = old
         self.height = height
-        self.modifier = modifier
+        self.mod = mod
         self.initial_height = height
 
     def show(self) -> None:
@@ -27,9 +27,9 @@ class Plant():
 
     def grow(self) -> None:
         """
-        Addes modifier with height every time its called with a 2 decimals
+        Addes mod with height every time its called with a 2 decimals
         """
-        self.height = round(self.height + self.modifier, 2)
+        self.height = round(self.height + self.mod, 2)
         return
 
     def age(self) -> None:

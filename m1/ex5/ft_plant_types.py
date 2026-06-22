@@ -6,7 +6,7 @@ ft_plant_types.py
 
 
 class Plant():
-    def __init__(self, name: str, height: float, age: int, mod: float):
+    def __init__(self, name: str, height: float, age: int, mod: float) -> None:
         self._name = name.capitalize()
         self._height = 0.0
         self._age = 0
@@ -75,21 +75,31 @@ class Plant():
 
 class Flower(Plant):
     def __init__(self, name: str, age: int, height: float, mod: float,
-                 color: str, isBloom: bool = False):
+                 color: str, isBloom: bool = False) -> None:
         super().__init__(name, height, age, mod)
         self._color = color
         self._isBloom = isBloom
 
 
 class Tree(Plant):
+    def __init__(self, name: str, age: int, height: float, mod: float,
+                 trunk_diameter: int) -> None:
+        super().__init__(name, height, age, mod)
+        self._diameter = trunk_diameter
+        self.produce_shade(trunk_diameter)
     pass
 
 
 class Vegetable(Plant):
+    def __init__(self, name: str, age: int, height: float, mod: float,
+                 harvest_season: str, nutritional_value: int) -> None:
+        super().__init__(name, height, age, mod)
+        self._harvest_season = harvest_season
+        self._nutritional_value = nutritional_value
     pass
 
 
-def ft_plant_types():
+def ft_plant_types() -> None:
     pass
 
 
