@@ -12,11 +12,11 @@ class Plant():
     grow(), age(), show() and simulate()
     """
     def __init__(self, name: str, old: int, height: float, mod: float) -> None:
-        self.name = name
-        self.old = old
-        self.height = height
-        self.mod = mod
-        self.initial_height = height
+        self.name: str = name
+        self.old: int = old
+        self.height: float = height
+        self.mod: float = mod
+        self.initial_height: float = height
 
     def show(self) -> None:
         """

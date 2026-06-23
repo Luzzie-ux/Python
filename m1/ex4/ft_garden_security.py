@@ -7,9 +7,9 @@ ft_garden_security.py
 
 class Plant():
     def __init__(self, name: str, height: float, age: int) -> None:
-        self._name = name.capitalize()
-        self._height = 0.0
-        self._age = 0
+        self._name: str = name.capitalize()
+        self._height: float = 0.0
+        self._age: int = 0
         self.set_att(round(height, 2), age)
         if self._age == age and self._height == height:
             print("Plant created:", end=" ")
@@ -21,19 +21,19 @@ class Plant():
         """
         if height < 0.0:
             print(f"{self._name}: Error: Height can't be negative")
-            print("Height Update Rejected")
+            print("Height update Rejected")
         if age < 0:
             print(f"{self._name}: Error: Age can't be negative")
-            print("Height Update Rejected")
+            print("Height update Rejected")
             return
         else:
             self._height = height
             self._age = age
         return
 
-    def Update(self, height: float, age: int) -> None:
+    def update(self, height: float, age: int) -> None:
         """
-        Updates plants attributes but first verifies if they are not negative
+        updates plants attributes but first verifies if they are not negative
         """
         self.set_att(height, age)
         if self._height == height:
@@ -48,7 +48,7 @@ class Plant():
     def get_age(self) -> int:
         return self._age
 
-    def Info(self) -> None:
+    def info(self) -> None:
         """
         Prints to stdout the current state of the plant
         """
@@ -61,11 +61,11 @@ class Plant():
 def ft_garden_security() -> None:
     print("=== Garden Security System ===")
     plant = Plant("Rose", 15, 10)
-    plant.Update(25, 30)
+    plant.update(25, 30)
     print()
-    plant.Update(-1, -1)
+    plant.update(-1, -1)
     print()
-    plant.Info()
+    plant.info()
 
 
 if __name__ == "__main__":

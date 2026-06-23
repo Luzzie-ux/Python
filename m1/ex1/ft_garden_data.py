@@ -10,9 +10,9 @@ class Plant():
     Class Plant that defines name, height and age of each plant
     """
     def __init__(self, name: str, height: int, age: int) -> None:
-        self.name = name
-        self.height = height
-        self.age = age
+        self.name: str = name
+        self.height: int = height
+        self.age: int = age
 
     def show(self) -> None:
         print(f"{self.name}: {self.height}cm, {self.age} days old")

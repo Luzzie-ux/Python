@@ -10,11 +10,11 @@ class Plant():
     Plant class composed of name, initial height and initial age.
     """
     def __init__(self, name: str, height: float, age: int, mod: float) -> None:
-        self.name = name
-        self.height = height
-        self.age = age
-        self.mod = mod
-        self.initial_height = height
+        self.name: str = name
+        self.height: float = height
+        self.age: int = age
+        self.mod: float = mod
+        self.initial_height: float = height
 
     def show(self) -> None:
         """
@@ -59,7 +59,7 @@ def ft_plant_factory() -> None:
     Main functions
     """
     print("\n=== Factory Input ===\n")
-    plants = [
+    plants: list[Plant] = [
         Plant("Rose", 5.0, 10, 1.5),
         Plant("Sunflower", 30.0, 23, 15.0),
         Plant("Cactus", 1.0, 0, 12.0),

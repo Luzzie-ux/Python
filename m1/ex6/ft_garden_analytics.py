@@ -1,47 +1,47 @@
 #!/usr/bin/env python3
 
 """
-ft_plant_types.py
+ft_garden_analytics.py
 """
 
 
 class Plant():
     def __init__(self, name: str, height: float, age: int, mod: float) -> None:
         self._name: str = name.capitalize()
-        self._height: float = 0.0
+        self._height: float = 0
         self._age: int = 0
-        self.mod: float = mod
-        self.set_att(round(height, 2), age)
+        self._mod: float = 0
+        self.set_att(round(height, 2), age, round(mod, 2))
+        self._stats: Plant.Stats = Plant.Stats()
 
     def grow(self) -> None:
-        """
-        Adds modifier to height and adds one to age
-        """
-        self._height = round(self._height + self.mod, 2)
-        self._age += 1
+        self._height = round(self._height + self._mod, 2)
+        self._stats.count_grow()
         return
 
-    def set_att(self, height: float, age: int) -> None:
-        """
-        Sets Attributes of the plant if they are not negative
-        """
-        if height < 0.0:
+    def aging(self) -> None:
+        self._age = self._age + 1
+        self._stats.count_age()
+        return
+
+    def set_att(self, height: float, age: int, mod: float) -> None:
+        if height < 0:
             print(f"{self._name}: Error: Height can't be negative")
             print("Height update Rejected")
         if age < 0:
             print(f"{self._name}: Error: Age can't be negative")
             print("Age update Rejected")
-            return
+        if mod < 0:
+            print(f"{self._name}: Error: Modifier can't be negative")
+            print("Modifier update Rejected")
         else:
             self._height = height
             self._age = age
+            self._mod = mod
         return
 
     def update(self, height: float, age: int) -> None:
-        """
-        updates plants attributes but first verifies if they are not negative
-        """
-        self.set_att(height, age)
+        self.set_att(height, age, self._mod)
         if self._height == height:
             print(f"Height updated: {height}cm")
         if self._age == age:
@@ -49,10 +49,35 @@ class Plant():
         return
 
     def show(self) -> None:
-        """
-        Prints the current info of the object
-        """
+        self._stats.count_show()
         print(f"{self._name}: {self._height}cm, {self._age} days old")
+
+    @staticmethod
+    def check(age: int) -> None:
+        print(f"Is {age} days more than a year? -> {age > 365}")
+
+    @classmethod
+    def anonymous(cls) -> "Plant":
+        return cls("Unknown plant", 0.0, 0, 0.0)
+
+    class Stats():
+        def __init__(self) -> None:
+            self._grow_calls: int = 0
+            self._age_calls: int = 0
+            self._show_calls: int = 0
+
+        def count_grow(self) -> None:
+            self._grow_calls += 1
+
+        def count_age(self) -> None:
+            self._age_calls += 1
+
+        def count_show(self) -> None:
+            self._show_calls += 1
+
+        def print_display(self) -> None:
+            print(f"Stats: {self._grow_calls} grow, {self._age_calls} age,"
+                  f" {self._show_calls} show")
 
 
 class Flower(Plant):
@@ -68,9 +93,6 @@ class Flower(Plant):
         self.bloom()
 
     def bloom(self) -> None:
-        """
-        Asks the Flower to bloom if it hasn't already
-        """
         if not self._isBloom:
             self._isBloom = True
             print(f"{self._name} has not bloomed yet")
@@ -92,9 +114,6 @@ class Tree(Plant):
         self.produce_shade()
 
     def produce_shade(self) -> None:
-        """
-        Asks the Tree to produce a shade
-        """
         print(f"[asking the {self._name} to produce shade]")
         print(f"Tree Oak now produces a shade of {self._height}cm", end=" ")
         print(f"long and {self._diameter}cm wide.")
@@ -113,30 +132,9 @@ class Vegetable(Plant):
         print(f"Nutritional value: {self._nutritional_value}")
 
     def age(self, days: int) -> None:
-        """
-        Makes the Vegetable age for a certain amount of time given as param
-        """
         for i in range(0, days):
             super().grow()
             self._nutritional_value += 1
             i += 1
         print(f"[make {self._name} grow and age for {days} days]")
         self.show()
-
-
-def ft_plant_types() -> None:
-    print("=== Garden Plant Types ===")
-    print("=== Flower")
-    rose: Flower = Flower("rose", 10, 15, 0.5, "red")
-    rose.show()
-    print("=== Tree")
-    oak: Tree = Tree("oak", 365, 200.00, 40.6, 5.0)
-    oak.show()
-    print("=== Vegetable")
-    tomato: Vegetable = Vegetable("tomato", 10, 5.0, 2.10, "april", 0)
-    tomato.show()
-    tomato.age(20)
-
-
-if __name__ == "__main__":
-    ft_plant_types()
