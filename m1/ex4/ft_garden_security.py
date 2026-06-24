@@ -5,7 +5,7 @@ ft_garden_security.py
 """
 
 
-class Plant():
+class Plant:
     def __init__(self, name: str, height: float, age: int) -> None:
         self._name: str = name.capitalize()
         self._height: float = 0.0

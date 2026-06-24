@@ -5,12 +5,13 @@ ft_plant_growth.py
 """
 
 
-class Plant():
+class Plant:
     """
     Plant class that will define name, age, height, mod and initial_height
     as Plant parameters, and then define four functions:
     grow(), age(), show() and simulate()
     """
+
     def __init__(self, name: str, old: int, height: float, mod: float) -> None:
         self.name: str = name
         self.old: int = old
@@ -52,7 +53,7 @@ class Plant():
             self.age()
             print(f"=== Day: {days} ===")
             self.show()
-        total = round(self.height - self.initial_height, 2)
+        total: float = round(self.height - self.initial_height, 2)
         print(f"Total growth after 7 days: {total}cm\n")
         return
 

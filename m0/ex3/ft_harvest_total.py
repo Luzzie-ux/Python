@@ -13,6 +13,6 @@ def ft_harvest_total() -> None:
     w2 = int(input("Day 2 harvest: "))
     w3 = int(input("Day 3 harvest: "))
 
-    total = (w1 + w2 + w3)
+    total = w1 + w2 + w3
     print(f"Total harvest: {total}")
     return

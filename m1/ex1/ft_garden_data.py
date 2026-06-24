@@ -5,10 +5,11 @@ ft_garden_data.py
 """
 
 
-class Plant():
+class Plant:
     """
     Class Plant that defines name, height and age of each plant
     """
+
     def __init__(self, name: str, height: int, age: int) -> None:
         self.name: str = name
         self.height: int = height

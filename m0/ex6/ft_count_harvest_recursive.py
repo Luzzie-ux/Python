@@ -9,7 +9,7 @@ def recursion_helper(days: int, i: int) -> None:
     """
     helper to allow the counting with recursion
     """
-    if (i != days + 1):
+    if i != days + 1:
         print(f"Day {i}")
         i += 1
         recursion_helper(days, i)

@@ -5,10 +5,11 @@ ft_plant_factory.py
 """
 
 
-class Plant():
+class Plant:
     """
     Plant class composed of name, initial height and initial age.
     """
+
     def __init__(self, name: str, height: float, age: int, mod: float) -> None:
         self.name: str = name
         self.height: float = height
@@ -49,7 +50,7 @@ class Plant():
             self.aging()
             print(f"=== Day: {days} ===")
             self.show()
-        total = round(self.height - self.initial_height, 2)
+        total: float = round(self.height - self.initial_height, 2)
         print(f"\n{self.name} total growth after 7 days: {total}cm\n")
         return
 

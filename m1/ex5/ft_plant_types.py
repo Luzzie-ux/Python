@@ -5,7 +5,7 @@ ft_plant_types.py
 """
 
 
-class Plant():
+class Plant:
     def __init__(self, name: str, height: float, age: int, mod: float) -> None:
         self._name: str = name.capitalize()
         self._height: float = 0.0
@@ -44,8 +44,15 @@ class Plant():
 
 
 class Flower(Plant):
-    def __init__(self, name: str, age: int, height: float, mod: float,
-                 color: str, isBloom: bool = False) -> None:
+    def __init__(
+        self,
+        name: str,
+        age: int,
+        height: float,
+        mod: float,
+        color: str,
+        isBloom: bool = False,
+    ) -> None:
         super().__init__(name, height, age, mod)
         self._color: str = color
         self._isBloom: bool = isBloom
@@ -69,8 +76,14 @@ class Flower(Plant):
 
 
 class Tree(Plant):
-    def __init__(self, name: str, age: int, height: float, mod: float,
-                 trunk_diameter: float) -> None:
+    def __init__(
+        self,
+        name: str,
+        age: int,
+        height: float,
+        mod: float,
+        trunk_diameter: float,
+    ) -> None:
         super().__init__(name, height, age, mod)
         self._diameter: float = trunk_diameter
 
@@ -89,8 +102,15 @@ class Tree(Plant):
 
 
 class Vegetable(Plant):
-    def __init__(self, name: str, age: int, height: float, mod: float,
-                 harvest_season: str, nutritional_value: int) -> None:
+    def __init__(
+        self,
+        name: str,
+        age: int,
+        height: float,
+        mod: float,
+        harvest_season: str,
+        nutritional_value: int,
+    ) -> None:
         super().__init__(name, height, age, mod)
         self._harvest_season: str = harvest_season
         self._nutritional_value: int = nutritional_value

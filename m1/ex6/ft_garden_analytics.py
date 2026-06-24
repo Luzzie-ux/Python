@@ -5,7 +5,7 @@ ft_garden_analytics.py
 """
 
 
-class Plant():
+class Plant:
     def __init__(self, name: str, height: float, age: int, mod: float) -> None:
         self._name: str = name.capitalize()
         self._height: float = height
@@ -40,11 +40,12 @@ class Plant():
         """
         return cls("Unknown plant", 0.0, 0, 0.0)
 
-    class Statistics():
+    class Statistics:
         """
         Statistics subclass of Plant, used to count how many times the methods:
         grow, age and show are used by each child of Plant
         """
+
         def __init__(self) -> None:
             self.grow: int = 0
             self.age: int = 0
@@ -64,8 +65,15 @@ class Plant():
 
 
 class Flower(Plant):
-    def __init__(self, name: str, height: float, age: int,
-                 mod: float, color: str, isBloom: bool = False) -> None:
+    def __init__(
+        self,
+        name: str,
+        height: float,
+        age: int,
+        mod: float,
+        color: str,
+        isBloom: bool = False,
+    ) -> None:
         super().__init__(name, height, age, mod)
         self._color: str = color
         self._isBloom: bool = isBloom
@@ -89,8 +97,9 @@ class Flower(Plant):
 
 
 class Seed(Flower):
-    def __init__(self, name: str, height: float, age: int, mod: float,
-                 color: str) -> None:
+    def __init__(
+        self, name: str, height: float, age: int, mod: float, color: str
+    ) -> None:
         super().__init__(name, height, age, mod, color)
         self._seeds: int = 0
 
@@ -110,8 +119,14 @@ class Seed(Flower):
 
 
 class Tree(Plant):
-    def __init__(self, name: str, height: float, age: int, mod: float,
-                 trunk_diameter: float) -> None:
+    def __init__(
+        self,
+        name: str,
+        height: float,
+        age: int,
+        mod: float,
+        trunk_diameter: float,
+    ) -> None:
         super().__init__(name, height, age, mod)
         self._diameter: float = trunk_diameter
         self._shade: int = 0
