@@ -11,9 +11,21 @@ class Plant():
         self._height: float = height
         self._age: int = age
         self._mod: float = mod
+        self._stats: Plant.Statistics = Plant.Statistics()
 
     def show(self) -> None:
+        self._stats.count_show()
         print(f"{self._name}: {self._height}cm, {self._age} days old")
+
+    def grow(self) -> None:
+        self._height = round(self._height + self._mod, 2)
+        self._stats.count_grow()
+        return
+
+    def aging(self) -> None:
+        self._age += 1
+        self._stats.count_age()
+        return
 
     @staticmethod
     def check_age(age: int) -> None:
@@ -69,10 +81,18 @@ class Flower(Plant):
         if not self._isBloom:
             self._isBloom = True
             print(f"{self._name} has not bloomed yet")
-            print(f"[asking the {self._name.lower()} to bloom]")
+            display(self)
+            print(f"[asking the {self._name.lower()} to grow and bloom]")
+            self.grow()
             self.show()
         else:
             print(f"{self._name} is blooming beautifully!")
+            display(self)
+
+
+def display(plant: Plant) -> None:
+    print(f"[statistics for {plant._name}]")
+    plant._stats.print_stats()
 
 
 def ft_garden_analytics() -> None:
@@ -81,7 +101,8 @@ def ft_garden_analytics() -> None:
     print("=== Check year-old")
     Plant.check_age(30)
     Plant.check_age(400)
-    flower: Flower = Flower("rose", 15, 10, 0.5, "red")
+    print("\n=== Flower")
+    flower: Flower = Flower("rose", 15, 10, 8.0, "red")
     flower.show()
     pass
 
