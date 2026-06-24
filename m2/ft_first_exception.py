@@ -7,7 +7,7 @@ ft_first_excption.py
 
 def input_temperature(temp_str: str) -> int:
     """Returns an integer from input"""
-    return (int(temp_str))
+    return int(temp_str)
 
 
 def test_temperature(inputs: list[str]) -> None:
