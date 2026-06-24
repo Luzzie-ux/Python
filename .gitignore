@@ -1,6 +1,3 @@
-.flake8
-.mypy.ini
 __pychache__/
 .mypy_cache
-micro.py
 .venv
