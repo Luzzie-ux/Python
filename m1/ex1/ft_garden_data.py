@@ -20,9 +20,7 @@ class Plant():
 
 
 def ft_garden_data() -> None:
-    """
-    Main Function
-    """
+    """Prints garden plants information"""
     print("=== Garden Plant Registry ===")
     Plant("Rose", 25, 30).show
     Plant("Sunflower", 80, 45).show

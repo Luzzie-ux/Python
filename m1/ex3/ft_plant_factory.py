@@ -25,14 +25,14 @@ class Plant():
 
     def grow(self) -> None:
         """
-        Addes mod with height every time its called with a 2 decimals
+        Adds modifier to height
         """
         self.height = round(self.height + self.mod, 2)
         return
 
     def aging(self) -> None:
         """
-        Addeds 1 to old every time its called
+        Adds one to age
         """
         self.age = self.age + 1
         return
@@ -55,9 +55,7 @@ class Plant():
 
 
 def ft_plant_factory() -> None:
-    """
-    Main functions
-    """
+    """Creates plants and prints it's growth cycle"""
     print("\n=== Factory Input ===\n")
     plants: list[Plant] = [
         Plant("Rose", 5.0, 10, 1.5),

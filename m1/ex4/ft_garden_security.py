@@ -17,7 +17,7 @@ class Plant():
 
     def set_att(self, height: float, age: int) -> None:
         """
-        Sets Atributes of the plant if they are  not negative
+        Sets Attributes of the plant if they are not negative
         """
         if height < 0.0:
             print(f"{self._name}: Error: Height can't be negative")
@@ -33,7 +33,7 @@ class Plant():
 
     def update(self, height: float, age: int) -> None:
         """
-        updates plants attributes but first verifies if they are not negative
+        Updates plants attributes but first verifies if they are not negative
         """
         self.set_att(height, age)
         if self._height == height:
@@ -43,15 +43,14 @@ class Plant():
         return
 
     def get_height(self) -> float:
+        """Returns the height when called"""
         return self._height
 
     def get_age(self) -> int:
+        """Retuns the age when called"""
         return self._age
 
     def info(self) -> None:
-        """
-        Prints to stdout the current state of the plant
-        """
         h: float = self.get_height()
         a: int = self.get_age()
         print(f"Current state: {self._name}: {h}cm, {a} days old")
@@ -59,6 +58,7 @@ class Plant():
 
 
 def ft_garden_security() -> None:
+    """Prints the security system working"""
     print("=== Garden Security System ===")
     plant = Plant("Rose", 15, 10)
     plant.update(25, 30)

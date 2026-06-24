@@ -14,17 +14,11 @@ class Plant():
         self.set_att(round(height, 2), age)
 
     def grow(self) -> None:
-        """
-        Adds modifier to height and adds one to age
-        """
         self._height = round(self._height + self.mod, 2)
         self._age += 1
         return
 
     def set_att(self, height: float, age: int) -> None:
-        """
-        Sets Attributes of the plant if they are not negative
-        """
         if height < 0.0:
             print(f"{self._name}: Error: Height can't be negative")
             print("Height update Rejected")
@@ -38,9 +32,6 @@ class Plant():
         return
 
     def update(self, height: float, age: int) -> None:
-        """
-        updates plants attributes but first verifies if they are not negative
-        """
         self.set_att(height, age)
         if self._height == height:
             print(f"Height updated: {height}cm")
@@ -49,9 +40,6 @@ class Plant():
         return
 
     def show(self) -> None:
-        """
-        Prints the current info of the object
-        """
         print(f"{self._name}: {self._height}cm, {self._age} days old")
 
 
@@ -125,6 +113,7 @@ class Vegetable(Plant):
 
 
 def ft_plant_types() -> None:
+    """Prints the plants types and their information"""
     print("=== Garden Plant Types ===")
     print("=== Flower")
     rose: Flower = Flower("rose", 10, 15, 0.5, "red")
