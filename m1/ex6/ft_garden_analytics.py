@@ -90,6 +90,12 @@ class Flower(Plant):
             display(self)
 
 
+class Seed(Plant):
+    def __init__(self, name: str, height: float, age: int, mod: float) -> None:
+        super().__init__(name, height, age, mod)
+        pass
+
+
 def display(plant: Plant) -> None:
     print(f"[statistics for {plant._name}]")
     plant._stats.print_stats()
