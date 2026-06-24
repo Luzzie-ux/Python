@@ -1,0 +1,32 @@
+[tool.black]
+line-length = 79
+target-version = ["py312"]
+skip-string-normalization = false
+skip-magic-trailing-comma = false
+preview = false
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+exclude = [
+    ".venv/",
+    ".git/",
+    "__pycache__/",
+    "migrations/",
+    "setup.py",
+]
+
+[tool.flake8]
+max-line-length = 79
+extend-ignore = ["E203", "W503"]
+exclude = [
+    ".git",
+    ".venv",
+    "build",
+    "dist",
+    "__pycache__",
+]
+count = true
+statistics = true
+show-source = true
+show-pep8-errors = true
