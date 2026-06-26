@@ -8,6 +8,7 @@ Authorized: import sys, sys.argv, len(), sum(), max(), min(), print()
 
 import sys
 
+
 def ft_score_analytics() -> None:
     print("=== Player Score Analytics ===")
     index: int = len(sys.argv)
@@ -31,7 +32,9 @@ def ft_score_analytics() -> None:
             print(f"Average score: {arg / (index - 1)}")
             print(f"High score: {max(sys.argv[1:])}")
             print(f"Low Score: {min(sys.argv[1:])}")
-            print(f"Score range: {int(max(sys.argv[1:])) - int(min(sys.argv[1:]))}")
+            print(
+                f"Score range: {int(max(sys.argv[1:])) - int(min(sys.argv[1:]))}"
+            )
         else:
             print("No scores provided.", end=" ")
             print(f"Usage: python3 {sys.argv[0]} <score1> <score2>")
@@ -39,6 +42,7 @@ def ft_score_analytics() -> None:
         print(f"Invalid parameter '{arg}'")
         print("No scores provided.", end=" ")
         print(f"Usage: python3 {sys.argv[0]} <score1> <score2>")
+
 
 def main() -> None:
     ft_score_analytics()
