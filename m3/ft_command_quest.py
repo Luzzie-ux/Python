@@ -19,11 +19,13 @@ def ft_command_quest() -> None:
         for i in range(1, len(sys.argv)):
             print(f"Argument {i}: {sys.argv[i]}")
     print(f"Total arguments: {len(sys.argv)}")
+    return
 
 
 def main() -> None:
     ft_command_quest()
+    return
 
 
 if __name__ == "__main__":
-    ft_command_quest()
+    main()
