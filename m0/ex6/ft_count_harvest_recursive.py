@@ -22,7 +22,7 @@ def ft_count_harvest_recursive() -> None:
     """
     function that will call recursion helper to count
     """
-    i = 1
-    days = int(input("Days until harvest: "))
+    i: int = 1
+    days: int = int(input("Days until harvest: "))
     recursion_helper(days, i)
     return
