@@ -22,10 +22,5 @@ def ft_command_quest() -> None:
     return
 
 
-def main() -> None:
-    ft_command_quest()
-    return
-
-
 if __name__ == "__main__":
-    main()
+    ft_command_quest()

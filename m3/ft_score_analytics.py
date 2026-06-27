@@ -44,10 +44,5 @@ def ft_score_analytics() -> None:
     return
 
 
-def main() -> None:
-    ft_score_analytics()
-    return
-
-
 if __name__ == "__main__":
-    main()
+    ft_score_analytics()
