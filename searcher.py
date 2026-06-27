@@ -29,7 +29,7 @@ def read_file(str_to_find: str, file: str) -> int:
     with open(file, "r") as f:
         line: str = f.readline()
         while line:
-            count += line.count(str_to_find)
+            count += line.lower().count(str_to_find.lower())
             line = f.readline()
     return count
 
