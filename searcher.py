@@ -16,7 +16,8 @@ def help() -> None:
         "Options:\n"
         " --help:                       Displays this information.\n"
         " --file [file]:                Displays the contents of [file(s)] in the terminal\n"
-        " --find [str]...:           Prints the number of occurrences of [str] in [file(s)]\n"
+        " --find [str]...:              Prints the number of occurrences of [str] in [file(s)]\n"
+        " --replace [old][new]...:      Replaces one string for a new one\n"
         "\n"
         "[nothing here yet]\n"
     )
@@ -31,6 +32,17 @@ def read_file(str_to_find: str, file: str) -> int:
             count += line.count(str_to_find)
             line = f.readline()
     return count
+
+
+def replace_str(target_str: str, new_str: str, file: str) -> None:
+    filedata: str
+    with open(file, 'r') as f:
+        filedata = f.read()
+    filedata = filedata.replace(target_str, new_str)
+    with open(file, "w") as f:
+        f.write(filedata)
+    return
+
 
 def parser(args: list[str]) -> None:
     if args[0] == "--help":
@@ -53,6 +65,13 @@ def parser(args: list[str]) -> None:
             else:
                 return print(f"Could not find file {file}")
         return
+    elif args[0] == "--replace":
+        for file in args[3:]:
+            f = Path(file)
+            if f.exists():
+                replace_str(args[1], args[2], file)
+            else:
+                return print(f"Could not find file {file}")
 
 
 def main() -> None:
