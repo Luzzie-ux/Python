@@ -1,1 +1,45 @@
 3.12
+
+py() {
+    [[ -z "$1" ]] && {
+        printf "Usage: py <filename.py>\n" >&2
+        return 1
+    }
+
+    local file="$1"
+    [[ "$file" != *.py ]] && file="${file}.py"
+
+    if [[ "$file" == */* ]]; then
+        mkdir -p "$(dirname "$file")"
+    fi
+
+    [[ -e "$file" ]] && {
+        printf "Error: File '%s' already exists.\n" "$file" >&2
+        return 1
+    }
+
+    local filename
+    filename="$(basename "$file")"
+    local script_name="$filename"
+
+    cat >"$file" <<EOF
+#!/usr/bin/env python3
+
+
+"""
+$script_name
+"""
+
+
+def main() -> None:
+    return
+
+
+if __name__ == "__main__":
+    main()
+EOF
+
+    chmod +x "$file"
+    printf "Created executable script: '%s'\n" "$file"
+}
+alias p=py
