@@ -55,6 +55,7 @@ def read_file(args: list[str]) -> None:
             while line:
                 count += line.lower().count(str_to_find.lower())
                 line = f.readline()
+            print(f"{count} occurences of '{str_to_find}' in {file}")
     return
 
 
@@ -63,17 +64,14 @@ def rename_file(args: list[str]) -> None:
     if size % 2 != 0:
         return print("Error: each file must have a paired new name")
     for i in range(0, size, 2):
-        new_name: str
-        file: str
-        new_path: Path
-        new_name = args[i]
+        new_name: str = args[i]
         if not new_name.strip():
             return print("New name cannot be empty")
-        file = args[i + 1]
+        file: str = args[i + 1]
         f = Path(file)
         if not f.exists():
             return print(f"Could not find file {file}")
-        new_path = f.parent / new_name
+        new_path: Path = f.parent / new_name
         if not new_path.exists():
             f.rename(new_path)
             continue
@@ -93,14 +91,14 @@ def rename_file(args: list[str]) -> None:
 def replace_str(args: list[str]) -> None:
     target: str = args[0]
     new: str = args[1]
+    if not target or not new:
+        empty: str = "target" if not target else "new"
+        return print(f"{empty} string cannot be empty")
     for file in args[2:]:
         filedata: str
         fd = Path(file)
         if not fd.exists():
             return print(f"Could not find file '{file}'")
-        if not target or not new:
-            empty: str = "target" if not target else "new"
-            return print(f"{empty} string cannot be empty")
         with open(file, "r") as f:
             filedata = f.read()
         filedata = filedata.replace(target, new)
@@ -143,6 +141,8 @@ def parser(args: list[str]) -> None:
         return create_file(args[1:])
     elif args[0] == "--make-dir" or args[0] == "-mkd":
         return create_directory(args[1:])
+    else:
+        return print(f"Unknown option '{args[0]}'")
 
 
 def main() -> None:
@@ -150,7 +150,7 @@ def main() -> None:
         return
     try:
         parser(argv[1:])
-    except (Exception, IndexError) as e:
+    except Exception as e:
         print(f"{e.__class__.__name__}: {e}")
     return
 
