@@ -129,15 +129,15 @@ def create_directory(dirs: list[str]) -> None:
 
 
 def parser(args: list[str]) -> None:
-    if args[0] == "--help":
+    if args[0] == "--help" or args[0] == "-h":
         return help()
-    elif args[0] == "--display":
+    elif args[0] == "--display" or args[0] == "-d":
         return display_file(args[1:])
-    elif args[0] == "--search":
+    elif args[0] == "--search" or args[0] == "-s":
         return read_file(args[1:])
-    elif args[0] == "--rename":
+    elif args[0] == "--rename" or args[0] == "-r":
         return rename_file(args[1:])
-    elif args[0] == "--change":
+    elif args[0] == "--change" or args[0] == "-c":
         return replace_str(args[1:])
     elif args[0] == "--make-file" or args[0] == "-mkf":
         return create_file(args[1:])
