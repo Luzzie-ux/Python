@@ -15,13 +15,13 @@ def help() -> None:
         "Version: 2.0.0 \n"
         "Options:\n"
         " --help:                       Displays this information.\n"
-        " --display [file]:             Displays the contents of [file(s)] in "
-        "the terminal\n"
-        " --find    [str]...:              Prints the number of occurrences of "
+        " --display [file]:             Displays the contents of [file(s)] in"
+        " the terminal\n"
+        " --search    [str]...:         Prints the number of occurrences of "
         "[str] in [file(s)]\n"
-        " --rename  [new_name]...:       Renames the [file(s)] given with a "
+        " --rename  [new_name]...:      Renames the [file(s)] given with a "
         "[new_name]\n"
-        " --replace [old][new]...:      Replaces one string for a [new] one\n"
+        " --change [old][new]...:      Replaces one string for a [new] one\n"
         " --make-file [file]:           Makes new [file(s)] in current root "
         "if they dont exist yet\n"
         " --make-dir  [dir]:            Makes new [dir(s)] in current root "
@@ -33,126 +33,112 @@ def help() -> None:
 def display_file(args: list[str]) -> None:
     for file in args:
         f = Path(file)
-        if f.exists():
-            with open(file, "r") as fd:
-                print(f"{fd.read()}\n")
-        else:
+        if not f.exists():
             return print(f"Could not find file {file}")
+        with open(file, "r") as fd:
+            print(f"{fd.read()}\n")
     return
 
 
-def read_file(args: list[str]) -> int:
-    count: int = 0
+def read_file(args: list[str]) -> None:
     str_to_find: str = args[0]
     if not str_to_find.strip():
-        print("String to find cannot be empty")
-        return count
+        return print(f"String {str_to_find} cannot be empty")
     for file in args[1:]:
+        count: int = 0
+        line: str
         fd = Path(file)
-        if fd.exists():
-            with open(file, "r") as f:
-                line: str = f.readline()
-                while line:
-                    count += line.lower().count(str_to_find.lower())
-                    line = f.readline()
-        else:
-            print(f"Could not find file {file}")
-            return count
-    return count
+        if not fd.exists():
+            return print(f"Could not find file {file}")
+        with open(file, "r") as f:
+            line = f.readline()
+            while line:
+                count += line.lower().count(str_to_find.lower())
+                line = f.readline()
+    return
 
 
 def rename_file(args: list[str]) -> None:
     size: int = len(args)
-    new_name: str
-    file: str
-    new_path: Path
-    if size % 2 == 0:
-        for i in range(0, size, 2):
-            new_name = args[i]
-            if not new_name.strip():
-                return print("New name cannot be empty")
-            file = args[i + 1]
-            f = Path(file)
-            if f.exists():
-                new_path = f.parent / new_name
-                if new_path.exists():
-                    print(
-                        f"{new_path} already exists, are you sure "
-                        "you want to rename it? The file with the "
-                        "same name will be truncated\n"
-                    )
-                    check: str = input("[y/n]: ")
-                    if check == "y":
-                        f.rename(new_path)
-                    elif check == "n":
-                        return print("Closing edit")
-                    else:
-                        return print("Invalid input, nothing done")
-                else:
-                    f.rename(new_path)
-            else:
-                return print(f"Could not find file {file}")
-        return
-    else:
+    if size % 2 != 0:
         return print("Error: each file must have a paired new name")
+    for i in range(0, size, 2):
+        new_name: str
+        file: str
+        new_path: Path
+        new_name = args[i]
+        if not new_name.strip():
+            return print("New name cannot be empty")
+        file = args[i + 1]
+        f = Path(file)
+        if not f.exists():
+            return print(f"Could not find file {file}")
+        new_path = f.parent / new_name
+        if not new_path.exists():
+            f.rename(new_path)
+            continue
+        print(
+            f"{new_path} already exists, are you sure "
+            "you want to rename it? The file with the "
+            "same name will be truncated\n"
+        )
+        check: str = input("[y/n]: ")
+        if check == "y":
+            f.rename(new_path)
+        else:
+            return print("Closing edit")
+    return
 
 
-def replace_str(target_str: str, new_str: str, file: str) -> None:
-    filedata: str
-    if not target_str or not new_str:
-        empty: str = "target" if not target_str else "new"
-        return print(f"{empty} string cannot be empty")
-    with open(file, 'r') as f:
-        filedata = f.read()
-    filedata = filedata.replace(target_str, new_str)
-    with open(file, "w") as f:
-        f.write(filedata)
+def replace_str(args: list[str]) -> None:
+    target: str = args[0]
+    new: str = args[1]
+    for file in args[2:]:
+        filedata: str
+        fd = Path(file)
+        if not fd.exists():
+            return print(f"Could not find file '{file}'")
+        if not target or not new:
+            empty: str = "target" if not target else "new"
+            return print(f"{empty} string cannot be empty")
+        with open(file, "r") as f:
+            filedata = f.read()
+        filedata = filedata.replace(target, new)
+        with open(file, "w") as f:
+            f.write(filedata)
     return
 
 
 def create_file(files: list[str]) -> None:
     for file in files:
         f = Path(file)
-        if not f.exists():
-            pass
-        else:
+        if f.exists():
             return print(f"'{file}' already exists")
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.touch()
     return
 
 
 def create_directory(dirs: list[str]) -> None:
     for d_name in dirs:
         d = Path(d_name)
-        if not d.exists():
-            pass
-        else:
+        if d.exists():
             return print(f"'{d_name}' already exists")
+        d.mkdir(parents=True, exist_ok=True)
     return
 
 
 def parser(args: list[str]) -> None:
-    file: str
     if args[0] == "--help":
         return help()
     elif args[0] == "--display":
         return display_file(args[1:])
-    elif args[0] == "--find":
+    elif args[0] == "--search":
         return read_file(args[1:])
     elif args[0] == "--rename":
-        file = args[2]
-        f = Path(file)
-        if f.exists():
-            new_path: Path = f.parent / args[1]
-            f.rename(new_path)
-        else:
-            return print(f"Could not find file {file}")
-    elif args[0] == "--replace":
-        for file in args[3:]:
-            f = Path(file)
-            if f.exists():
-                replace_str(args[1], args[2], file)
-            else:
-                return print(f"Could not find file {file}")
+        return rename_file(args[1:])
+    elif args[0] == "--change":
+        return replace_str(args[1:])
     elif args[0] == "--make-file" or args[0] == "-mkf":
         return create_file(args[1:])
     elif args[0] == "--make-dir" or args[0] == "-mkd":
