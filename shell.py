@@ -5,14 +5,14 @@
 Shell implementation in python
 """
 
-from sys import argv
+from sys import argv, exit, stderr
 from pathlib import Path
 
 
 def help() -> None:
     print(
         "usage: ./shell [option] ... [file]\n"
-        "Version: 2.5.0 \n"
+        "Version: 2.5.2 \n"
         "Options:\n"
         " --help:                       Displays this information.\n"
         " --display [file]:             Displays the contents of [file(s)] in"
@@ -142,12 +142,20 @@ def parser(args: list[str]) -> None:
     elif args[0] == "--make-dir" or args[0] == "-mkd":
         return create_directory(args[1:])
     else:
-        return print(f"Unknown option '{args[0]}'")
+        return print(
+                f"Unknown option: '{args[0]}'\n"
+                "usage: shell [option] ... [file]\n"
+                "Try '-h' for more information"
+            )
 
 
 def main() -> None:
     if len(argv) < 2:
-        return
+        print(
+            "shell: fatal error: no input files"
+            "\nprogram terminated.", file=stderr
+        )
+        exit(1)
     try:
         parser(argv[1:])
     except Exception as e:
