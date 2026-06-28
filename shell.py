@@ -2,7 +2,7 @@
 
 
 """
-Searching implementation in python
+Shell implementation in python
 """
 
 from sys import argv
@@ -11,29 +11,53 @@ from pathlib import Path
 
 def help() -> None:
     print(
-        "usage: ./searcher [option] ... [file]\n"
-        "Version: 1.0.0 \n"
+        "usage: ./shell [option] ... [file]\n"
+        "Version: 2.0.0 \n"
         "Options:\n"
         " --help:                       Displays this information.\n"
-        " --display [file]:                Displays the contents of [file(s)] in the terminal\n"
-        " --find [str]...:              Prints the number of occurrences of [str] in [file(s)]\n"
-        " --rename [new_name]...:       Renames the [file(s)] given with a [new_name]\n"
+        " --display [file]:             Displays the contents of [file(s)] in "
+        "the terminal\n"
+        " --find    [str]...:              Prints the number of occurrences of "
+        "[str] in [file(s)]\n"
+        " --rename  [new_name]...:       Renames the [file(s)] given with a "
+        "[new_name]\n"
         " --replace [old][new]...:      Replaces one string for a [new] one\n"
-        "\n"
+        " --make-file [file]:           Makes new [file(s)] in current root "
+        "if they dont exist yet\n"
+        " --make-dir  [dir]:            Makes new [dir(s)] in current root "
+        "if they dont exist yet\n"
     )
     return
 
 
-def read_file(str_to_find: str, file: str) -> int:
+def display_file(args: list[str]) -> None:
+    for file in args:
+        f = Path(file)
+        if f.exists():
+            with open(file, "r") as fd:
+                print(f"{fd.read()}\n")
+        else:
+            return print(f"Could not find file {file}")
+    return
+
+
+def read_file(args: list[str]) -> int:
     count: int = 0
+    str_to_find: str = args[0]
     if not str_to_find.strip():
         print("String to find cannot be empty")
         return count
-    with open(file, "r") as f:
-        line: str = f.readline()
-        while line:
-            count += line.lower().count(str_to_find.lower())
-            line = f.readline()
+    for file in args[1:]:
+        fd = Path(file)
+        if fd.exists():
+            with open(file, "r") as f:
+                line: str = f.readline()
+                while line:
+                    count += line.lower().count(str_to_find.lower())
+                    line = f.readline()
+        else:
+            print(f"Could not find file {file}")
+            return count
     return count
 
 
@@ -86,28 +110,34 @@ def replace_str(target_str: str, new_str: str, file: str) -> None:
     return
 
 
+def create_file(files: list[str]) -> None:
+    for file in files:
+        f = Path(file)
+        if not f.exists():
+            pass
+        else:
+            return print(f"'{file}' already exists")
+    return
+
+
+def create_directory(dirs: list[str]) -> None:
+    for d_name in dirs:
+        d = Path(d_name)
+        if not d.exists():
+            pass
+        else:
+            return print(f"'{d_name}' already exists")
+    return
+
+
 def parser(args: list[str]) -> None:
     file: str
     if args[0] == "--help":
         return help()
     elif args[0] == "--display":
-        for file in args[1:]:
-            f = Path(file)
-            if f.exists():
-                with open(file, "r") as fd:
-                    print(f"{fd.read()}\n")
-            else:
-                return print(f"Could not find file {file}")
-        return
+        return display_file(args[1:])
     elif args[0] == "--find":
-        for file in args[2:]:
-            f = Path(file)
-            if f.exists():
-                occurences: int = read_file(args[1], file)
-                print(f"{occurences} occurrences of: '{args[1]}' in {file}")
-            else:
-                return print(f"Could not find file {file}")
-        return
+        return read_file(args[1:])
     elif args[0] == "--rename":
         file = args[2]
         f = Path(file)
@@ -123,6 +153,10 @@ def parser(args: list[str]) -> None:
                 replace_str(args[1], args[2], file)
             else:
                 return print(f"Could not find file {file}")
+    elif args[0] == "--make-file" or args[0] == "-mkf":
+        return create_file(args[1:])
+    elif args[0] == "--make-dir" or args[0] == "-mkd":
+        return create_directory(args[1:])
 
 
 def main() -> None:
