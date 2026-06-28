@@ -7,6 +7,7 @@ Searching implementation in python
 
 from sys import argv
 from pathlib import Path
+from os import rename
 
 
 def help() -> None:
@@ -17,9 +18,9 @@ def help() -> None:
         " --help:                       Displays this information.\n"
         " --file [file]:                Displays the contents of [file(s)] in the terminal\n"
         " --find [str]...:              Prints the number of occurrences of [str] in [file(s)]\n"
-        " --replace [old][new]...:      Replaces one string for a new one\n"
+        " --rename [new_name]...:       Renames the [file(s)] given with a [new_name]\n"
+        " --replace [old][new]...:      Replaces one string for a [new] one\n"
         "\n"
-        "[nothing here yet]\n"
     )
     return
 
@@ -65,6 +66,14 @@ def parser(args: list[str]) -> None:
             else:
                 return print(f"Could not find file {file}")
         return
+    elif args[0] == "--rename":
+        file:str = args[2]
+        f = Path(file)
+        if f.exists():
+            new_path: Path = f.parent / args[1]
+            f.rename(new_path)
+        else:
+            return print(f"Could not find file {file}")
     elif args[0] == "--replace":
         for file in args[3:]:
             f = Path(file)
