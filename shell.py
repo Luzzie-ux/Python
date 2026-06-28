@@ -12,7 +12,7 @@ from pathlib import Path
 def help() -> None:
     print(
         "usage: ./shell [option] ... [file]\n"
-        "Version: 2.0.0 \n"
+        "Version: 2.5.0 \n"
         "Options:\n"
         " --help:                       Displays this information.\n"
         " --display [file]:             Displays the contents of [file(s)] in"
