@@ -7,6 +7,7 @@ Shell implementation in python
 
 from sys import argv, exit, stderr
 from pathlib import Path
+import shutil
 
 
 def help() -> None:
