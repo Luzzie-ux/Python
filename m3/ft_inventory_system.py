@@ -8,6 +8,9 @@ Authorized: import sys, sys.argv, len(), print(), sum(), list(), round(),
 dict.keys(), dict.values(), dict.update()
 """
 
+from sys import args
+
+
 def main() -> None:
     return
 
