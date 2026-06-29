@@ -185,5 +185,9 @@ def ft_garden_analytics() -> None:
     pass
 
 
-if __name__ == "__main__":
+def main() -> None:
     ft_garden_analytics()
+
+
+if __name__ == "__main__":
+    main()

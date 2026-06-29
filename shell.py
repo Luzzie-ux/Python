@@ -148,17 +148,17 @@ def parser(args: list[str]) -> None:
         return create_directory(args[1:])
     else:
         return print(
-                f"Unknown option: '{args[0]}'\n"
-                "usage: shell [option] ... [file]\n"
-                "Try '-h' for more information"
-            )
+            f"Unknown option: '{args[0]}'\n"
+            "usage: shell [option] ... [file]\n"
+            "Try '-h' for more information"
+        )
 
 
 def main() -> None:
     if len(argv) < 2:
         print(
-            "shell: fatal error: no input files"
-            "\nprogram terminated.", file=stderr
+            "shell: fatal error: no input files" "\nprogram terminated.",
+            file=stderr,
         )
         exit(1)
     try:

@@ -70,5 +70,9 @@ def ft_plant_growth() -> None:
     return
 
 
-if __name__ == "__main__":
+def main() -> None:
     ft_plant_growth()
+
+
+if __name__ == "__main__":
+    main()

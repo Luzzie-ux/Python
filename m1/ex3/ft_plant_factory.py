@@ -73,5 +73,9 @@ def ft_plant_factory() -> None:
     return
 
 
-if __name__ == "__main__":
+def main() -> None:
     ft_plant_factory()
+
+
+if __name__ == "__main__":
+    main()

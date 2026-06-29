@@ -147,5 +147,9 @@ def ft_plant_types() -> None:
     tomato.age(20)
 
 
-if __name__ == "__main__":
+def main() -> None:
     ft_plant_types()
+
+
+if __name__ == "__main__":
+    main()

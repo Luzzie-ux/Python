@@ -29,5 +29,9 @@ def ft_garden_data() -> None:
     return
 
 
-if __name__ == "__main__":
+def main() -> None:
     ft_garden_data()
+
+
+if __name__ == "__main__":
+    main()

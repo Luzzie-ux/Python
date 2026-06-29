@@ -68,5 +68,9 @@ def ft_garden_security() -> None:
     plant.info()
 
 
-if __name__ == "__main__":
+def main() -> None:
     ft_garden_security()
+
+
+if __name__ == "__main__":
+    main()
