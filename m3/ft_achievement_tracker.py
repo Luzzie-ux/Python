@@ -36,6 +36,7 @@ def gen_player_achievements() -> set:
 
 
 def ft_achievement_tracker() -> None:
+    all: set = set(ACHIEVEMENTS)
     print("=== Achievement Tracker System ===")
     alice: set = gen_player_achievements()
     bob: set = gen_player_achievements()
@@ -45,19 +46,19 @@ def ft_achievement_tracker() -> None:
     print(f"Player Bob: {bob}")
     print(f"Player Charlie: {charlie}")
     print(f"Player Dylan: {dylan}")
-    inter: set = set.intersection(alice, bob, charlie, dylan)
     com: set = set.union(alice, bob, charlie, dylan)
-    print(f"\nAll distinct achievements: {inter}")
-    print(f"\nCommon achievements: {com}\n")
+    inter: set = set.intersection(alice, bob, charlie, dylan)
+    print(f"\nAll distinct achievements: {com}")
+    print(f"\nCommon achievements: {inter}\n")
     print(f"Only Alice has: {alice.difference(bob, charlie, dylan)}")
     print(f"Only Bob has: {bob.difference(alice, charlie, dylan)}")
     print(f"Only Charlie has: {charlie.difference(alice, bob, dylan)}")
     print(f"Only Dylan has: {dylan.difference(alice, bob, charlie)}")
     print()
-    print(f"Only Alice has: {alice.difference(ACHIEVEMENTS)}")
-    print(f"Only Bob has: {bob.difference(ACHIEVEMENTS)}")
-    print(f"Only Charlie has: {charlie.difference(ACHIEVEMENTS)}")
-    print(f"Only Dylan has: {dylan.difference(ACHIEVEMENTS)}")
+    print(f"Alice doesnt have: {all.difference(alice)}")
+    print(f"Bob doesnt have: {all.difference(bob)}")
+    print(f"Charlie doesnt have: {all.difference(charlie)}")
+    print(f"Dylan doesnt have: {all.difference(dylan)}")
 
     return
 
