@@ -10,7 +10,7 @@ dict.keys(), dict.values(), dict.update()
 
 import sys
 
-
+# Each parameter must follow this format: <item_name>:<quantity>
 def ft_inventory_system() -> None:
     size: int = len(sys.argv)
     if size < 2:
