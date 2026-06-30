@@ -31,6 +31,9 @@ def help() -> None:
         " --write:       Writes to a [file(s)], overwriting "
         "the previous contents.\n"
         " --remove:      Removes the object(s) from root.\n"
+        " --remove:      Removes the object(s) from root.\n"
+        " --copy:        Copies a objects, allowing the creation of a copy\n"
+        " --modify:      Allows the modification of permissions of objects\n"
     )
     return
 
