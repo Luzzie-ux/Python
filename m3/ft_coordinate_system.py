@@ -55,5 +55,8 @@ def ft_coordinate_system() -> None:
     return
 
 
-if __name__ == "__main__":
+def main() -> None:
     ft_coordinate_system()
+
+if __name__ == "__main__":
+    main()

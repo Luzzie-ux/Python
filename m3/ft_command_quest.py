@@ -22,5 +22,9 @@ def ft_command_quest() -> None:
     return
 
 
-if __name__ == "__main__":
+def main() -> None:
     ft_command_quest()
+
+
+if __name__ == "__main__":
+    main()

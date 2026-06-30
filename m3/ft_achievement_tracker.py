@@ -63,5 +63,9 @@ def ft_achievement_tracker() -> None:
     return
 
 
-if __name__ == "__main__":
+def main() -> None:
     ft_achievement_tracker()
+
+
+if __name__ == "__main__":
+    main()

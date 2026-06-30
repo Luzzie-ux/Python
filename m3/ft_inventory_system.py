@@ -8,10 +8,32 @@ Authorized: import sys, sys.argv, len(), print(), sum(), list(), round(),
 dict.keys(), dict.values(), dict.update()
 """
 
-from sys import args
+import sys
+
+
+def ft_inventory_system() -> None:
+    size: int = len(sys.argv)
+    if size < 2:
+        return
+    print("=== Inventory System Analysis ===")
+    args: list[str] = sys.argv[1:]
+    items: list[str] = []
+    bad_arg: list[str] = []
+    for arg in args:
+        if ":" not in arg:
+            bad_arg.append(arg)
+        items.extend(arg.split(":"))
+    for item in items:
+        for i in items[1:]:
+            if item == i:
+                print(f"Redundant item {item} discarding")
+
+    print(f"Error - invalid parameter {bad_arg}")
+    return
 
 
 def main() -> None:
+    ft_inventory_system()
     return
 
 
