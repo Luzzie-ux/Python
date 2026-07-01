@@ -2,7 +2,10 @@
 
 
 """
-ft_data_stream.py
+Directory: ex5/
+Files to Submit: ft_data_stream.py
+Authorized: next(), range(), len(), print(), import typing,
+typing.Generator, import random, random.*
 """
 
 from typing import generator
