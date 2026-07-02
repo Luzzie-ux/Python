@@ -11,8 +11,8 @@ dict.keys(), dict.values(), dict.update()
 import sys
 
 
-def parser(args: list[str]) -> dict:
-    result: dict = {}
+def parser(args: list[str]) -> dict[str, int]:
+    result: dict[str, int] = {}
     for arg in args:
         try:
             parts: list[str] = arg.split(":")
@@ -34,8 +34,8 @@ def ft_inventory_system() -> None:
     if len(sys.argv) < 2:
         return
     print("=== Inventory System Analysis ===")
-    bag: dict = parser(sys.argv[1:])
-    print(f"Got bag: {bag}")
+    bag: dict[str, int] = parser(sys.argv[1:])
+    print(f"Got inventory: {bag}")
     t_key: int = len(bag.keys())
     t_value: int = sum(bag.values())
     print(f"Total quantity of the {t_key} items: {t_value}")
