@@ -11,9 +11,8 @@ typing.Generator, import random, random.*
 import typing
 import random
 
-
-PLAYERS: list = ["alice", "bob", "charlie", "dylan"]
-ACTIONS: list = [
+PLAYERS: list[str] = ["alice", "bob", "charlie", "dylan"]
+ACTIONS: list[str] = [
     "run",
     "eat",
     "sleep",
@@ -31,17 +30,30 @@ def gen_event() -> typing.Generator[tuple[str, str], None, None]:
         yield random.choice(PLAYERS), random.choice(ACTIONS)
 
 
+def con_event(
+    lista: list[tuple[str, str]],
+) -> typing.Generator[tuple[str, str], None, None]:
+    while len(lista) > 0:
+        event: tuple[str, str] = random.choice(lista)
+        lista.remove(event)
+        yield event
+
+
 def ft_data_stream() -> None:
     print("=== Game Data Stream Processor ===")
-    name: tuple[str]
-    move: tuple[str]
-    for i in range(6): #trocar pra 1000
-        name, move = next(gen_event())
+    stream: typing.Generator[tuple[str, str], None, None] = gen_event()
+    name: str
+    move: str
+    for i in range(1000):
+        name, move = next(stream)
         print(f"Event {i}: Player {name} did action {move}")
-    stream: list[tuple[tuple[str], tuple[str]]] = []
+    events: list[tuple[str,str]] = []
     for i in range(11):
-        stream.extend(next(gen_event()))
-    print(f"Built list of 10 events: {stream}")
+        events.append(next(stream))
+    print(f"Built list of 10 events: {events}")
+    for event in con_event(events):
+        print(f"Got event from list: {event}")
+        print(f"Remains in list: {events}")
     return
 
 

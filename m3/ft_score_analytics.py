@@ -13,9 +13,11 @@ def ft_score_analytics() -> None:
     print("=== Player Score Analytics ===")
     index: int = len(sys.argv)
     arg: int = 0
+    i: int = 1
+    j: int = 1
     try:
         if index != 1:
-            for i in range(1, index):
+            while i < index:
                 try:
                     arg += int(sys.argv[i])
                 except ValueError:
@@ -23,9 +25,11 @@ def ft_score_analytics() -> None:
                     print("No scores provided.", end=" ")
                     print(f"Usage: python3 {sys.argv[0]} <score1> <score2>")
                     return
-            print("Scores processed: [", end="")
-            for i in range(1, index - 1):
-                print(f"{sys.argv[i]},", end=" ")
+                print("Scores processed: [", end="")
+                i += 1
+            while j < index - 1:
+                print(f"{sys.argv[j]},", end=" ")
+                j += 1 
             print(f"{sys.argv[index - 1]}]")
             print(f"Total players: {index - 1}")
             print(f"Total score: {arg}")
