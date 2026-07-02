@@ -22,7 +22,7 @@ def input_temperature(temp_str: str) -> int:
 def test_temperature(inputs: list[str]) -> None:
     """
     Tests the return value of input_temperature(),
-    if it fails, it will not crash the program,~
+    if it fails, it will not crash the program,
     but print to stdout the msg:
     Caught input_temperatue error: {e}
     where e stores ValueError
