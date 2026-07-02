@@ -29,24 +29,24 @@ ACHIEVEMENTS: list[str] = [
 ]
 
 
-def gen_player_achievements() -> set {str,...}:
+def gen_player_achievements() -> set[str]:
     achx: list[str] = random.sample(ACHIEVEMENTS, random.randint(2, 7))
     return set(achx)
 
 
 def ft_achievement_tracker() -> None:
-    all: set = set(ACHIEVEMENTS)
+    all: set[str] = set(ACHIEVEMENTS)
     print("=== Achievement Tracker System ===")
-    alice: set = gen_player_achievements()
-    bob: set = gen_player_achievements()
-    charlie: set = gen_player_achievements()
-    dylan: set = gen_player_achievements()
+    alice: set[str] = gen_player_achievements()
+    bob: set[str] = gen_player_achievements()
+    charlie: set[str] = gen_player_achievements()
+    dylan: set[str] = gen_player_achievements()
     print(f"Player Alice: {alice}")
     print(f"Player Bob: {bob}")
     print(f"Player Charlie: {charlie}")
     print(f"Player Dylan: {dylan}")
-    com: set = set.union(alice, bob, charlie, dylan)
-    inter: set = set.intersection(alice, bob, charlie, dylan)
+    com: set[str] = set.union(alice, bob, charlie, dylan)
+    inter: set[str] = set.intersection(alice, bob, charlie, dylan)
     print(f"\nAll distinct achievements: {com}")
     print(f"\nCommon achievements: {inter}\n")
     print(f"Only Alice has: {alice.difference(bob, charlie, dylan)}")
