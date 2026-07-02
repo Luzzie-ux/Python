@@ -48,7 +48,7 @@ def ft_data_stream() -> None:
         name, move = next(stream)
         print(f"Event {i}: Player {name} did action {move}")
     events: list[tuple[str,str]] = []
-    for i in range(11):
+    for i in range(0, 10):
         events.append(next(stream))
     print(f"Built list of 10 events: {events}")
     for event in con_event(events):
