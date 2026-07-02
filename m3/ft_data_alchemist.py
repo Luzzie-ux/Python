@@ -7,8 +7,9 @@ ft_data_alchemist.py
 
 import random
 
+
 def create_dict(names: list[str]) -> dict[str, int]:
-    ids: dict[str,int] = {}
+    ids: dict[str, int] = {}
     for name in names:
         i: int = random.randint(0, 1000)
         ids[name] = i
@@ -17,7 +18,15 @@ def create_dict(names: list[str]) -> dict[str, int]:
 
 def ft_data_alchemist() -> None:
     mixed_list: list[str] = [
-        'Alice', 'bob', 'Charlie', 'dylan', 'Emma', 'Gregory', 'john', 'kevin', 'Liam'
+        "Alice",
+        "bob",
+        "Charlie",
+        "dylan",
+        "Emma",
+        "Gregory",
+        "john",
+        "kevin",
+        "Liam",
     ]
     all_cap_list: list[str] = []
     only_cap_list: list[str] = []
