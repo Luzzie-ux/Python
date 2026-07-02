@@ -47,5 +47,10 @@ def ft_finally_block() -> None:
     test_watering_plant()
 
 
-if __name__ == "__main__":
+def main() -> None:
     ft_finally_block()
+    return
+
+
+if __name__ == "__main__":
+    main()

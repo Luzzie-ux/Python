@@ -43,5 +43,10 @@ def ft_raise_exception() -> None:
     test_temperature(inputs)
 
 
-if __name__ == "__main__":
+def main() -> None:
     ft_raise_exception()
+    return
+
+
+if __name__ == "__main__":
+    main()

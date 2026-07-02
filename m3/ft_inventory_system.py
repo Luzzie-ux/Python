@@ -15,11 +15,11 @@ def parser(args: list[str]) -> dict:
     result: dict = {}
     for arg in args:
         try:
-            parts: list = arg.split(':')
+            parts: list[str] = arg.split(":")
             if len(parts) != 2:
                 print(f"Error - invalid parameter '{arg}'")
                 continue
-            key: str  = parts[0]
+            key: str = parts[0]
             value: str = parts[1]
             if key in result:
                 print(f"Redundant item '{key}' - discarding")
@@ -28,6 +28,7 @@ def parser(args: list[str]) -> dict:
         except ValueError as e:
             print(f"Quantity error for '{key}': {e}")
     return result
+
 
 def ft_inventory_system() -> None:
     if len(sys.argv) < 2:
@@ -43,7 +44,7 @@ def ft_inventory_system() -> None:
             f"Item {item} represents "
             f"{round(bag[item] / t_value * 100, 1)}%"
         )
-    inventory: list = list(bag.keys())
+    inventory: list[str] = list(bag.keys())
     least: str = inventory[0]
     most: str = inventory[0]
     for i in bag:

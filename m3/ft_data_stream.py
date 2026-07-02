@@ -8,7 +8,7 @@ Authorized: next(), range(), len(), print(), import typing,
 typing.Generator, import random, random.*
 """
 
-from typing import generator
+import typing
 import random
 
 

@@ -52,5 +52,10 @@ def ft_custom_errors() -> None:
     print("\nAll custom error types work correctly!")
 
 
-if __name__ == "__main__":
+def main() -> None:
     ft_custom_errors()
+    return
+
+
+if __name__ == "__main__":
+    main()

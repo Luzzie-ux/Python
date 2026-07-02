@@ -40,5 +40,10 @@ def ft_different_errors() -> None:
     test_error_types()
 
 
-if __name__ == "__main__":
+def main() -> None:
     ft_different_errors()
+    return
+
+
+if __name__ == "__main__":
+    main()

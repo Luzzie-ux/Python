@@ -9,7 +9,6 @@ set.intersection(), set.interference()
 
 import random
 
-
 ACHIEVEMENTS: list[str] = [
     "First Steps",
     "Boss Slayer",
@@ -30,7 +29,7 @@ ACHIEVEMENTS: list[str] = [
 ]
 
 
-def gen_player_achievements() -> set:
+def gen_player_achievements() -> set {str,...}:
     achx: list[str] = random.sample(ACHIEVEMENTS, random.randint(2, 7))
     return set(achx)
 
