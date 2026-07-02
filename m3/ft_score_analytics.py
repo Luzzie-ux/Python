@@ -16,7 +16,7 @@ def ft_score_analytics() -> None:
             "No scores provided. Usage: python3 "
             "ft_score_analytics.py <score1> <score2> ..."
         )
-    args: list[str] = []
+    args: list[int] = []
     for i in sys.argv[1:]:
         try:
             args.append(int(i))
@@ -38,7 +38,6 @@ def ft_score_analytics() -> None:
         print(f"High score: {max(args)}")
         print(f"Low score: {min(args)}")
         print(f"Score range: {max(args) - min(args)}")
-            
 
 
 def main() -> None:
