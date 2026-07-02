@@ -6,46 +6,40 @@ Files to Submit: ft_score_analytics.py
 Authorized: import sys, sys.argv, len(), sum(), max(), min(), print()
 """
 
+
 import sys
 
 
 def ft_score_analytics() -> None:
     print("=== Player Score Analytics ===")
-    index: int = len(sys.argv)
-    arg: int = 0
-    i: int = 1
-    j: int = 1
-    try:
-        if index != 1:
-            while i < index:
-                try:
-                    arg += int(sys.argv[i])
-                except ValueError:
-                    print(f"Invalid parameter '{sys.argv[i]}'")
-                    print("No scores provided.", end=" ")
-                    print(f"Usage: python3 {sys.argv[0]} <score1> <score2>")
-                    return
-                print("Scores processed: [", end="")
-                i += 1
-            while j < index - 1:
-                print(f"{sys.argv[j]},", end=" ")
-                j += 1 
-            print(f"{sys.argv[index - 1]}]")
-            print(f"Total players: {index - 1}")
-            print(f"Total score: {arg}")
-            print(f"Average score: {arg / (index - 1)}")
-            print(f"High score: {max(sys.argv[1:])}")
-            print(f"Low Score: {min(sys.argv[1:])}")
-            print(f"Score range: {int(max(sys.argv[1:])) -
-                                  int(min(sys.argv[1:]))}")
+    if len(sys.argv) < 2:
+        print(
+            "No scores provided. Usage: python3 "
+            "ft_score_analytics.py <score1> <score2> ..."
+        )
+    else:
+        args: list[str] = []
+        for i in sys.argv[1:]:
+            try:
+                args.append(int(i))
+            except ValueError:
+                print(f"Invalid parameter: '{i}'")
+        if len(args) != 0:
+            print("Scores processed: [", end="")
+            for arg in args:
+                print(f" {arg}", end="")
+            print(" ]")
+            print(f"Total players: {len(args)}")
+            print(f"Total score: {sum(args)}")
+            print(f"Average score: {sum(args) / len(args)}")
+            print(f"High score: {max(args)}")
+            print(f"Low score: {min(args)}")
+            print(f"Score range: {max(args) - min(args)}")
         else:
-            print("No scores provided.", end=" ")
-            print(f"Usage: python3 {sys.argv[0]} <score1> <score2>")
-    except ValueError:
-        print(f"Invalid parameter '{arg}'")
-        print("No scores provided.", end=" ")
-        print(f"Usage: python3 {sys.argv[0]} <score1> <score2>")
-    return
+            print(
+                "No scores provided. Usage: python3 "
+                "ft_score_analytics.py <score1> <score2> ..."
+            )
 
 
 def main() -> None:
