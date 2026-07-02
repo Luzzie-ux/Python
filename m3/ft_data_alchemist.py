@@ -2,18 +2,12 @@
 
 
 """
-ft_data_alchemist.py
+Directory: ex6/
+Files to Submit: ft_data_alchemist.py
+Authorized: import random, random.*, print(), len(), sum(), round()
 """
 
 import random
-
-
-def create_dict(names: list[str]) -> dict[str, int]:
-    ids: dict[str, int] = {}
-    for name in names:
-        i: int = random.randint(0, 1000)
-        ids[name] = i
-    return ids
 
 
 def ft_data_alchemist() -> None:
@@ -28,18 +22,11 @@ def ft_data_alchemist() -> None:
         "kevin",
         "Liam",
     ]
-    all_cap_list: list[str] = []
-    only_cap_list: list[str] = []
-    for name in mixed_list:
-        if name[0].isupper():
-            only_cap_list.append(name)
-        all_cap_list.append(name.capitalize())
-    scores: dict[str, int] = create_dict(all_cap_list)
+    all_cap_list: list[str] = [name.capitalize() for name in mixed_list]
+    only_cap_list: list[str] = [name for name in mixed_list if name[0].isupper()]
+    scores: dict[str, int] = {name: random.randint(0, 1000) for name in all_cap_list}
     average: float = sum(scores.values()) / len(scores.keys())
-    highs: dict[str, int] = {}
-    for name, score in scores.items():
-        if score > average:
-            highs[name] = score
+    highs: dict[str, int] = {name: score for name, score in scores.items() if score > average}
     print("=== Game Data ALchemist ===")
     print(f"Initial list of players: {mixed_list}")
     print(f"New list with all names capitalized {all_cap_list}")

@@ -30,12 +30,12 @@ ACHIEVEMENTS: list[str] = [
 
 
 def gen_player_achievements() -> set[str]:
-    achx: list[str] = random.sample(ACHIEVEMENTS, random.randint(2, 7))
-    return set(achx)
+    achv: list[str] = random.sample(ACHIEVEMENTS, random.randint(2, 7))
+    return set(achv)
 
 
 def ft_achievement_tracker() -> None:
-    all: set[str] = set(ACHIEVEMENTS)
+    all_achv: set[str] = set(ACHIEVEMENTS)
     print("=== Achievement Tracker System ===")
     alice: set[str] = gen_player_achievements()
     bob: set[str] = gen_player_achievements()
@@ -54,10 +54,10 @@ def ft_achievement_tracker() -> None:
     print(f"Only Charlie has: {charlie.difference(alice, bob, dylan)}")
     print(f"Only Dylan has: {dylan.difference(alice, bob, charlie)}")
     print()
-    print(f"Alice doesnt have: {all.difference(alice)}")
-    print(f"Bob doesnt have: {all.difference(bob)}")
-    print(f"Charlie doesnt have: {all.difference(charlie)}")
-    print(f"Dylan doesnt have: {all.difference(dylan)}")
+    print(f"Alice doesnt have: {all_achv.difference(alice)}")
+    print(f"Bob doesnt have: {all_achv.difference(bob)}")
+    print(f"Charlie doesnt have: {all_achv.difference(charlie)}")
+    print(f"Dylan doesnt have: {all_achv.difference(dylan)}")
 
     return
 

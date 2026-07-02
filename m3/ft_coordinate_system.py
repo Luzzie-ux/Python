@@ -41,10 +41,10 @@ def ft_coordinate_system() -> None:
     x1: float = set_1[0]
     y1: float = set_1[1]
     z1: float = set_1[2]
-    print(f"Got a first tuple: ({set_1})")
+    print(f"Got a first tuple: {set_1}")
     print(f"It includes: X={set_1[0]}, Y={set_1[1]}, Z={set_1[2]}")
     sqrt1: float = math.sqrt((x1**2) + (y1**2) + (z1**2))
-    print(f"Distance to center:{round(sqrt1, 4)}")
+    print(f"Distance to center: {round(sqrt1, 4)}")
     print("Get a second set of coordinates")
     set_2: tuple[float, float, float] = get_player_pos()
     x2: float = set_2[0]

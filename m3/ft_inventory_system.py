@@ -48,13 +48,13 @@ def ft_inventory_system() -> None:
     least: str = inventory[0]
     most: str = inventory[0]
     for i in bag:
-        if bag[least] < bag[i]:
-            least = i
-        elif bag[most] > bag[i]:
+        if bag[most] < bag[i]:
             most = i
+        elif bag[least] > bag[i]:
+            least = i
     print(f"Item most abundant: {least} with quantity {bag[least]}")
     print(f"Item least abundant: {most} with quantity {bag[most]}")
-    bag.update({"magic item": 1})
+    bag.update({"magic_item": 1})
     print(f"Updated inventory: {bag}")
     return
 
