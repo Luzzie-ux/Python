@@ -5,7 +5,7 @@
 Shell implementation in python
 """
 
-from sys import argv, exit, stderr
+from sys import *
 from pathlib import Path
 import shutil
 
