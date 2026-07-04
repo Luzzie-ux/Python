@@ -8,30 +8,28 @@ Authorized: import sys, sys.argv, len(), open(), import typing, typing.IO,
 io.read(), io.close(), print()
 """
 
-from sys import argv
-import typing
+import sys
 
 
-def ft_ancient_text(args: list[str]) -> None:
-    print("=== Cyber Archives Recovery ===")
-    for arg in args:
-        try:
-            print(f"Accesing {arg}")
-            fd = open(arg)
-            print("---\n")
-            print(fd.read())
-            print("\n---")
-            typing.IO.close(fd)
-            print(f"File '{arg}' closed")
-        except (FileNotFoundError, PermissionError) as e:
-            print(f"Error opening file '{arg}': {e}")
+def ft_ancient_text() -> None:
+    if len(sys.argv) != 2:
+        return print(f"Usage: {sys.argv[0]} <file>")
+    print(" ===  Cyber Archives Recovery ===")
+    file = None
+    print(f"Accesing file'{sys.argv[1]}'")
+    try:
+        file = open(sys.argv[1])
+        print(f"---\n\n{file.read()}\n\n---")
+    except Exception as e:
+        print(f"Error opening file '{sys.argv[1]}': {e}")
+    finally:
+        if file:
+            file.close()
+            print(f"File '{sys.argv[1]}' closed")
 
 
 def main() -> None:
-    if len(argv) < 2:
-        return print(f"Usage: {argv[0]} <file>")
-    args: list[str] = argv[1:]
-    ft_ancient_text(args)
+    ft_ancient_text()
     return
 
 
