@@ -4,46 +4,37 @@
 """
 Directory: ex6/
 Files to Submit: ft_data_alchemist.py
-Authorized: import random, random.*, print(), len(), sum(), round()
+Authorized: import random, random.*, print(), len(), sum(), round(
 """
 
 import random
 
-
-def ft_data_alchemist() -> None:
-    mixed_list: list[str] = [
-        "Alice",
-        "bob",
-        "Charlie",
-        "dylan",
-        "Emma",
-        "Gregory",
-        "john",
-        "kevin",
-        "Liam",
-    ]
-    all_cap_list: list[str] = [name.capitalize() for name in mixed_list]
-    only_cap_list: list[str] = [
-        name for name in mixed_list if name[0].isupper()
-    ]
-    scores: dict[str, int] = {
-        name: random.randint(0, 1000) for name in all_cap_list
-    }
-    average: float = sum(scores.values()) / len(scores.keys())
-    highs: dict[str, int] = {
-        name: score for name, score in scores.items() if score > average
-    }
-    print("=== Game Data Alchemist ===")
-    print(f"Initial list of players: {mixed_list}")
-    print(f"New list with all names capitalized: {all_cap_list}")
-    print(f"New list of capitalized names only: {only_cap_list}")
-    print(f"Score dict: {scores}")
-    print(f"Score average is {round(average, 2)}")
-    print(f"High scores: {highs}")
+PLAYERS: list[str] = [
+    "Alice",
+    "bob",
+    "Charlie",
+    "dylan",
+    "Emma",
+    "Gregory",
+    "john",
+    "kevin",
+    "Liam",
+]
 
 
 def main() -> None:
-    ft_data_alchemist()
+    print("=== Game Data Alchemist ===\n")
+    print(f"Intial list of players: {PLAYERS}\n")
+    upper: list[str] = [name.capitalize() for name in PLAYERS]
+    print(f"New list with all the names capitalized: {upper}")
+    caps: list[str] = [name for name in PLAYERS if name[0].isupper()]
+    print(f"New list of capitalized names only: {caps}\n")
+    score: dict[str, int] = {key: random.randint(0, 5000) for key in upper}
+    print(f"Score dict: {score}\n")
+    ave: float = sum(score.values()) / len(score.keys())
+    print(f"Score average: {round(ave, 2)}")
+    high: dict[str, int] = {key: p for key, p in score.items() if p > ave}
+    print(f"High score: {high}")
     return
 
 
