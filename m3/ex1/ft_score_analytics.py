@@ -1,47 +1,43 @@
 #!/usr/bin/env python3
 
+
 """
 Directory: ex1/
 Files to Submit: ft_score_analytics.py
-Authorized: import sys, sys.argv, len(), sum(), max(), min(), print()
+Authorized: import sys, sys.argv, len(), sum(), max(), min(), print(
 """
 
 import sys
 
 
-def ft_score_analytics() -> None:
+def main() -> None:
     print("=== Player Score Analytics ===")
-    if len(sys.argv) < 2:
-        return print(
-            "No scores provided. Usage: python3 "
-            "ft_score_analytics.py <score1> <score2> ..."
-        )
-    args: list[int] = []
-    for i in sys.argv[1:]:
-        try:
-            args.append(int(i))
-        except ValueError:
-            print(f"Invalid parameter: '{i}'")
-    if len(args) == 0:
+    scores: list[int] = []
+    if len(sys.argv) > 1:
+        for arg in sys.argv[1:]:
+            try:
+                scores.append(int(arg))
+            except ValueError:
+                print(f"Invalid parameter: '{arg}'")
+        if len(scores) != 0:
+            print(f"Scores processed: {scores}")
+            print(f"Total players: {len(scores)}")
+            print(f"Total score: {sum(scores)}")
+            print(f"Average score: {sum(scores) / len(scores)}")
+            print(f"High score: {max(scores)}")
+            print(f"Low score: {min(scores)}")
+            print(f"Score range: {max(scores) - min(scores)}")
+        else:
+            print(
+                "No scores provided. Usage: python3 "
+                "ft_score_analytics.py <score1> <score2> ..."
+            )
+    else:
         print(
             "No scores provided. Usage: python3 "
             "ft_score_analytics.py <score1> <score2> ..."
         )
-    else:
-        print("Scores processed: [", end="")
-        for arg in args:
-            print(f" {arg}", end="")
-        print(" ]")
-        print(f"Total players: {len(args)}")
-        print(f"Total score: {sum(args)}")
-        print(f"Average score: {sum(args) / len(args)}")
-        print(f"High score: {max(args)}")
-        print(f"Low score: {min(args)}")
-        print(f"Score range: {max(args) - min(args)}")
-
-
-def main() -> None:
-    ft_score_analytics()
+    return
 
 
 if __name__ == "__main__":
