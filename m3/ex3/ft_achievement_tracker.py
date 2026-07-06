@@ -1,69 +1,72 @@
 #!/usr/bin/env python3
 
+
 """
 Directory: ex3/
 Files to Submit: ft_achievement_tracker.py
 Authorized: len(), print(), import random, random.*, set(), set.union(),
-set.intersection(), set.interference()
+set.intersection(), set.difference()
 """
 
 import random
 
 ACHIEVEMENTS: list[str] = [
-    "First Steps",
-    "Boss Slayer",
-    "Speed Runner",
-    "Untouchable",
+    "Crafting Genius",
     "World Savior",
     "Master Explorer",
     "Collector Supreme",
+    "Untouchable",
+    "Boss Slayer",
     "Strategist",
+    "Unstoppable",
+    "Speed Runner",
     "Survivor",
     "Treasure Hunter",
-    "Crafting Genius",
+    "First Steps",
     "Sharp Mind",
-    "Unstoppable",
     "Hidden Path Finder",
-    "Dragon Slayer",
-    "Legend",
+    "Are We There Yet",
+    "In The End Of The World",
+    "Destroyer of Hearts",
+    "First come, First serve"
 ]
 
 
 def gen_player_achievements() -> set[str]:
-    achv: list[str] = random.sample(ACHIEVEMENTS, random.randint(2, 7))
-    return set(achv)
-
-
-def ft_achievement_tracker() -> None:
-    all_achv: set[str] = set(ACHIEVEMENTS)
-    print("=== Achievement Tracker System ===")
-    alice: set[str] = gen_player_achievements()
-    bob: set[str] = gen_player_achievements()
-    charlie: set[str] = gen_player_achievements()
-    dylan: set[str] = gen_player_achievements()
-    print(f"Player Alice: {alice}")
-    print(f"Player Bob: {bob}")
-    print(f"Player Charlie: {charlie}")
-    print(f"Player Dylan: {dylan}")
-    com: set[str] = set.union(alice, bob, charlie, dylan)
-    inter: set[str] = set.intersection(alice, bob, charlie, dylan)
-    print(f"\nAll distinct achievements: {com}")
-    print(f"\nCommon achievements: {inter}\n")
-    print(f"Only Alice has: {alice.difference(bob, charlie, dylan)}")
-    print(f"Only Bob has: {bob.difference(alice, charlie, dylan)}")
-    print(f"Only Charlie has: {charlie.difference(alice, bob, dylan)}")
-    print(f"Only Dylan has: {dylan.difference(alice, bob, charlie)}")
-    print()
-    print(f"Alice doesnt have: {all_achv.difference(alice)}")
-    print(f"Bob doesnt have: {all_achv.difference(bob)}")
-    print(f"Charlie doesnt have: {all_achv.difference(charlie)}")
-    print(f"Dylan doesnt have: {all_achv.difference(dylan)}")
-
-    return
+    return set(random.sample(ACHIEVEMENTS, random.randint(3,9)))
 
 
 def main() -> None:
-    ft_achievement_tracker()
+    all: set[str] = set(ACHIEVEMENTS)
+    players: dict[str, set[str]] = {
+        "Alice": gen_player_achievements(),
+        "Bob": gen_player_achievements(),
+        "Charlie": gen_player_achievements(),
+        "Dylan": gen_player_achievements()
+    }
+    for name, achievements in players.items():
+        print(f"Player {name}: {achievements}")
+    print()
+    distinct: set[str] = set()
+    for achievements in players.values():
+        distinct = distinct & achievements
+    print(f"\nAll distinct achievements: {distinct}")
+    common: set[str] = all.copy()
+    for achievements in players.values():
+        common = common - achievements
+    print(f"\nCommon achievements: {common}\n")
+    for player, achievements in players.items():
+        other: set[str] = set()
+        for o_player, o_achievements in players.items():
+            if (player != o_player):
+                other = other | o_achievements 
+        print(f"Only {player} has: {other - achievements}")
+    print()
+    missing: set[str] = set()
+    for user, achievements in players.items():
+        missing = all - achievements
+        print(f"{user} is missing: {missing}")
+    return
 
 
 if __name__ == "__main__":
