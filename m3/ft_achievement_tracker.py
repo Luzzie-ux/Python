@@ -47,20 +47,25 @@ def main() -> None:
     for name, achievements in players.items():
         print(f"Player {name}: {achievements}")
     print()
-    distinct: set[str] = []
+    distinct: set[str] = set()
     for achievements in players.values():
-        distinct = set.union(distinct, achievements)
+        distinct = distinct & achievements
     print(f"\nAll distinct achievements: {distinct}")
     common: set[str] = all.copy()
     for achievements in players.values():
-        common = set.intersection(common, achievements)
+        common = common - achievements
     print(f"\nCommon achievements: {common}\n")
-    print(f"Only Alice has: {a - b - c - d}")
-    print(f"Only Bob has: {b - a - c - d}")
-    print(f"Only Charlie has: {c - b - a - d}")
-    print(f"Only Dylan has: {d - b - c - a}\n")
-    
-    print(f"")
+    for player, achievements in players.items():
+        other: set[str] = set()
+        for o_player, o_achievements in players.items():
+            if (player != o_player):
+                other = other | o_achievements 
+        print(f"Only {player} has: {other - achievements}")
+    print()
+    missing: set[str] = set()
+    for user, achievements in players.items():
+        missing = all - achievements
+        print(f"{user} is missing: {missing}")
     return
 
 
