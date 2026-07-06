@@ -14,7 +14,7 @@ import sys
 def parser() -> list[str]:
     args: list[str] = []
     for arg in sys.argv[1:]:
-        item: list[str] = arg.split(':')
+        item: list[str] = arg.split(":")
         if len(item) % 2 != 0:
             print(f"Error - invalid parameter '{arg}'")
             continue
@@ -25,8 +25,6 @@ def parser() -> list[str]:
 
 def inventory_system(args: list[str]) -> dict[str, int]:
     i: int = 0
-    key: str
-    value: str
     inventory: dict[str, int] = {}
     while i < len(args):
         key: str = args[i]
@@ -67,8 +65,8 @@ def main() -> None:
             least = item
         print(
             f"Item {item} represents "
-            f"{round(bag[item] / t_value * 100,2)}%"
-              )
+            f"{round(bag[item] / t_value * 100, 2)}%"
+        )
     print(f"Item most abundant: {most} with quantity {bag[most]}")
     print(f"Item least abundant: {least} with quantity {bag[least]}")
     bag.update({"magic_item": 1})
@@ -78,23 +76,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-
-"""
-> python3 ft_inventory_system.py sword:1 potion:5 shield:2 armor:3 helmet:1 sword:2 hello key:value
-=== Inventory System Analysis ===
-Redundant item 'sword'- discarding
-Error - invalid parameter 'hello'
-Quantity error for 'key': invalid literal for int() with base 10: 'value'
-Got inventory: {'sword': 1, 'potion': 5, 'shield': 2, 'armor': 3, 'helmet': 1}
-Item list: ['sword', 'potion', 'shield', 'armor', 'helmet']
-Total quantity of the 5 items: 12
-Item sword represents 8.3%
-Item potion represents 41.7%
-Item shield represents 16.7%
-Item armor represents 25.0%
-Item helmet represents 8.3%
-Item most abundant: potion with quantity 5
-Item least abundant: sword with quantity 1
-Updated inventory: {'sword': 1, 'potion': 5, 'shield': 2, 'armor': 3, 'helmet': 1, 'magic_item': 1}
-"""

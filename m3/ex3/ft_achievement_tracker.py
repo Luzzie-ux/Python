@@ -28,12 +28,12 @@ ACHIEVEMENTS: list[str] = [
     "Are We There Yet",
     "In The End Of The World",
     "Destroyer of Hearts",
-    "First come, First serve"
+    "First come, First serve",
 ]
 
 
 def gen_player_achievements() -> set[str]:
-    return set(random.sample(ACHIEVEMENTS, random.randint(3,9)))
+    return set(random.sample(ACHIEVEMENTS, random.randint(3, 9)))
 
 
 def main() -> None:
@@ -42,7 +42,7 @@ def main() -> None:
         "Alice": gen_player_achievements(),
         "Bob": gen_player_achievements(),
         "Charlie": gen_player_achievements(),
-        "Dylan": gen_player_achievements()
+        "Dylan": gen_player_achievements(),
     }
     for name, achievements in players.items():
         print(f"Player {name}: {achievements}")
@@ -58,8 +58,8 @@ def main() -> None:
     for player, achievements in players.items():
         other: set[str] = set()
         for o_player, o_achievements in players.items():
-            if (player != o_player):
-                other = other | o_achievements 
+            if player != o_player:
+                other = other | o_achievements
         print(f"Only {player} has: {other - achievements}")
     print()
     missing: set[str] = set()
