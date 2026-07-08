@@ -9,61 +9,58 @@ io.read(), io.write(), io.close(), print(), input()
 """
 
 import sys
-
-
-def display_stream() -> str | None:
-    if len(sys.argv) != 2:
-        return print(f"Usage: {sys.argv[0]} <file>")
-    content: str | None = None
-    file = None
-    print(f"Accesing file'{sys.argv[1]}'")
-    try:
-        file = open(sys.argv[1])
-        content = file.read()
-        print(f"---\n\n{content}\n\n---")
-    except Exception as e:
-        return print(f"Error opening file '{sys.argv[1]}': {e}")
-    finally:
-        if file:
-            file.close()
-            print(f"File '{sys.argv[1]}' closed\n")
-    return content
+import typing
 
 
 def save(content: str) -> None:
-    print("Enter new file name (or empty):", end=" ")
-    file_name: str = input()
-    f = None
-    if not file_name:
-        return print("Not saving data")
+    name: str = input("Enter new file name (or empty): ")
+    if not name:
+        return print("Not saving data.")
+    print(f"Saving data to '{name}'")
+    file: typing.IO[str] | None = None
     try:
-        print(f"Saving data to '{file_name}'")
-        f = open(file_name, "w")
-        f.write(content)
-        print(f"Data saved in file '{file_name}'")
-    except Exception as e:
-        print(f"Error opening file '{file_name}': {e}")
+        file = open(name, "w")
+        file.write(content)
+    except PermissionError as e:
+        print(f"Error opening file {name}: {e}")
     finally:
-        if f:
-            f.close()
+        if file:
+            file.close()
+            print(f"Data saved in file '{name}'")
+    return
 
 
-def ft_archive_creation() -> None:
-    print(" ===  Cyber Archives Recovery & Preservation ===")
-    content: str | None = display_stream()
-    if not content:
-        return
-    print("Transform data: ")
+def transform(text: str) -> None:
+    print("\nTransform data:\n")
     new: list[str] = []
-    for line in content.splitlines():
+    for line in text.splitlines():
         new.append(line + "#")
-    content = "\n".join(new)
-    print(f"---\n\n{content}\n\n---")
+    content: str = "\n".join(new)
+    print(f"\n---\n\n{content}\n\n---\n")
     save(content)
+    return
 
 
 def main() -> None:
-    ft_archive_creation()
+    argc: int = len(sys.argv)
+    if not argc == 2:
+        return print(f"Usage: {sys.argv[0]} <file>")
+    print("=== Cyber Archives Recovery & Preservation ===")
+    print(f"accessing file '{sys.argv[1]}'")
+    file: typing.IO[str] | None = None
+    data: str | None = None
+    try:
+        file = open(sys.argv[1])
+        data = file.read()
+        print(f"\n---\n\n{data}\n\n---\n")
+    except (FileNotFoundError, PermissionError) as e:
+        print(f"Error opening file '{sys.argv[1]}': {e}")
+    finally:
+        if file:
+            file.close()
+        print(f"File '{sys.argv[1]}' closed.")
+    if data:
+        transform(data)
     return
 
 

@@ -9,27 +9,26 @@ io.read(), io.close(), print()
 """
 
 import sys
+import typing
 
 
-def ft_ancient_text() -> None:
-    if len(sys.argv) != 2:
+def main() -> None:
+    argc: int = len(sys.argv)
+    if not argc == 2:
         return print(f"Usage: {sys.argv[0]} <file>")
-    print(" ===  Cyber Archives Recovery ===")
-    file = None
-    print(f"Accesing file'{sys.argv[1]}'")
+    print("=== Cyber Archives Recovery ===")
+    print(f"accessing file '{sys.argv[1]}'")
+    file: typing.IO[str] | None = None
     try:
         file = open(sys.argv[1])
-        print(f"---\n\n{file.read()}\n\n---")
-    except Exception as e:
+        data: str = file.read()
+        print(f"\n---\n\n{data}\n\n---\n")
+    except (FileNotFoundError, PermissionError) as e:
         print(f"Error opening file '{sys.argv[1]}': {e}")
     finally:
         if file:
             file.close()
-            print(f"File '{sys.argv[1]}' closed")
-
-
-def main() -> None:
-    ft_ancient_text()
+            print(f"File '{sys.argv[1]}' closed.")
     return
 
 

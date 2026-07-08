@@ -9,71 +9,62 @@ open(), import typing, typing.IO, io.read(), io.readline(), io.write(),
 io.flush(), io.close(), print()
 """
 
-import sys
+from sys import argv, stdin, stderr, stdout
+from typing import IO
 
 
-def display_stream() -> str | None:
-    if len(sys.argv) != 2:
-        sys.stdout.write(f"Usage: {sys.argv[0]} <file>\n")
-        return None
-    content: str | None = None
-    file = None
-    sys.stdout.write(f"Accesing file'{sys.argv[1]}'\n")
-    sys.stdout.flush()
+def save(content: str) -> int:
+    stdout.write("Enter new file name (or empty): ")
+    stdout.flush()
+    name: str = stdin.readline().strip("\n")
+    if not name:
+        return stdout.write("Not saving data.\n")
+    stdout.write(f"Saving data to '{name}'\n")
+    file: IO[str] | None = None
     try:
-        file = open(sys.argv[1])
-        content = file.read()
-        sys.stdout.write(f"---\n\n{content}\n\n---\n")
-    except Exception as e:
-        sys.stderr.write(f"[STDERR] Error opening file '{sys.argv[1]}': {e}\n")
-        return None
-    finally:
-        if file:
-            file.close()
-            sys.stdout.write(f"File '{sys.argv[1]}' closed\n")
-    return content
-
-
-def save_stream(content: str) -> None:
-    sys.stdout.write("Enter new file name (or empty): ")
-    sys.stdout.flush()
-    file_name: str = sys.stdin.readline().rstrip("\n")
-    if not file_name:
-        sys.stdout.write("Not saving data\n")
-        return
-    file = None
-    try:
-        sys.stdout.write(f"Saving data to '{file_name}'\n")
-        file = open(file_name, "w")
+        file = open(name, "w")
         file.write(content)
-        sys.stdout.write(f"Data saved in file '{file_name}'\n")
-    except Exception as e:
-        sys.stderr.write(
-            f"[STDERR] Error saving to file '{file_name}': {e}"
-            "\ndata not saved\n"
+    except PermissionError as e:
+        stderr.write(
+            f"[STDERR] Error opening file {name}: {e}" "\nData not saved\n"
         )
-        return
     finally:
         if file:
             file.close()
+            stdout.write(f"Data saved in file '{name}'\n")
+    return 0
 
 
-def ft_stream_management() -> None:
-    sys.stdout.write(" ===  Cyber Archives Recovery & Preservation ===\n")
-    content: str | None = display_stream()
-    if not content:
-        return
-    sys.stdout.write("\nTransform data: \n")
+def transform(text: str) -> None:
+    stdout.write("\nTransform data:\n")
     new: list[str] = []
-    for line in content.splitlines():
+    for line in text.splitlines():
         new.append(line + "#")
-    content = "\n".join(new)
-    sys.stdout.write(f"---\n\n{content}\n\n---\n")
-    save_stream(content)
+    content: str = "\n".join(new)
+    stdout.write(f"\n---\n\n{content}\n\n---\n")
+    save(content)
+    return
 
 
 def main() -> None:
-    ft_stream_management()
+    if len(argv) != 2:
+        return
+    stdout.write("=== Cyber Archives Recovery & Preservation === \n")
+    stdout.write(f"accessing file '{argv[1]}'\n")
+    file: IO[str] | None = None
+    data: str | None = None
+    try:
+        file = open(argv[1])
+        data = file.read()
+        stdout.write(f"---\n\n{data}\n\n---\n")
+    except (FileNotFoundError, PermissionError) as e:
+        stderr.write(f"[STDERR] Error opening file '{argv[1]}': {e}\n")
+    finally:
+        if file:
+            file.close()
+            stdout.write(f"File '{argv[1]}' closed\n")
+    if data:
+        transform(data)
     return
 
 
