@@ -1,4 +1,4 @@
-# *Ex00 Instructions*
+# Ex00
 
 ## Set up the following architecture:
     
