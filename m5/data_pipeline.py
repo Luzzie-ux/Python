@@ -24,7 +24,23 @@ class DataProcessor(ABC):
         pass
 
 
+class NumericProcessor(DataProcessor):
+    pass
+
+class TextProcessor(DataProcessor):
+    pass
+
+class LogProcessor(DataProcessor):
+    pass
+
+
+def data_pipeline() -> None:
+    print("=== Code Nexus - Data Processor ===")
+    return
+
+
 def main() -> None:
+    data_pipeline()
     return
 
 
