@@ -11,31 +11,8 @@ from typing import Any
 from abc import ABC, abstractmethod
 
 
-class DataProcessor(ABC):
-    def __init__(self) -> None:
-        pass
-
-    @abstractmethod
-    def validation(self) -> None:
-        pass
-
-    @abstractmethod
-    def ingest(self) -> None:
-        pass
-
-
-class NumericProcessor(DataProcessor):
-    pass
-
-class TextProcessor(DataProcessor):
-    pass
-
-class LogProcessor(DataProcessor):
-    pass
-
-
 def data_pipeline() -> None:
-    print("=== Code Nexus - Data Processor ===")
+    print("=== Code Nexus - Data Pipeline ===")
     return
 
 
