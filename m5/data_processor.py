@@ -9,33 +9,33 @@ Authorized: builtins, standard types, import typing, import abc
 
 from typing import Any
 from abc import ABC, abstractmethod
-
+from sys import stdout, stdin, stderr
 
 class DataProcessor(ABC):
     def __init__(self) -> None:
         super().__init__()
-        self.data: list[str] = []
-
+    
+    # validate, which will check whether the input data are appropriate for the current data processor. 
     @abstractmethod
-    def validation(self, data: Any) -> bool:
+    def validate(self, data: Any) -> bool:
         pass
 
+    # ingest, which will process the input data. Each specialized class will need to override these methods.
     @abstractmethod
     def ingest(self, data: Any) -> None:
         pass
 
-    def output(self, data: Any) -> None:
-        return
+    # output, which will output ingested data.
+    def output(self) -> tuple[int, str]:
+        pass
+
 
 class NumericProcessor(DataProcessor):
     def __init__(self) -> None:
         super().__init__()
 
-    def validation(self, number: int) -> None:
-        return super().validation()
-    
-    def ingest(self, array: list[int]) -> None:
-        return super().ingest()
+    def validate(self, data: Any) -> bool:
+        pass
 
 class TextProcessor(DataProcessor):
     pass
@@ -45,7 +45,7 @@ class LogProcessor(DataProcessor):
 
 
 def data_processor() -> None:
-    print("=== Code Nexus - Data Processor ===")
+    stdout.write("=== Code Nexus - Data Processor ===\n\n")
     return
 
 
