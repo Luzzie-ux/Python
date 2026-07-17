@@ -12,9 +12,6 @@ from abc import ABC, abstractmethod
 from sys import stdout, stdin, stderr
 
 class DataProcessor(ABC):
-    def __init__(self) -> None:
-        super().__init__()
-    
     # validate, which will check whether the input data are appropriate for the current data processor. 
     @abstractmethod
     def validate(self, data: Any) -> bool:
@@ -31,17 +28,38 @@ class DataProcessor(ABC):
 
 
 class NumericProcessor(DataProcessor):
-    def __init__(self) -> None:
-        super().__init__()
-
     def validate(self, data: Any) -> bool:
+        try:
+            x: int
+            x = int(data)
+            return x
+        except ValueError as e:
+            print(f"{e.__class__.__name__}: {e}")
+
+    def ingest(self, data: Any) -> None:
         pass
 
 class TextProcessor(DataProcessor):
-    pass
+    def validate(self, data: Any) -> bool:
+        try:
+            if int(data):
+                return False
+        except ValueError as e:
+            print(f"{e.__class__.__name__}: {e}")
+
+    def ingest(self, data: Any) -> None:
+        pass
 
 class LogProcessor(DataProcessor):
-    pass
+    def validate(self, data: Any) -> bool:
+        try:
+            if not data:
+                return False
+        except ValueError as e:
+            print(f"{e.__class__.__name__}: {e}")
+
+    def ingest(self, data: Any) -> None:
+        pass
 
 
 def data_processor() -> None:
