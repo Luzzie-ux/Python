@@ -63,7 +63,6 @@ Trying to validate input 'Hello': False
 Processing data: [{'log_level': 'NOTICE', 'log_message': 'Connection to server'}, {'log_level': 'ERROR
 ', 'log_message': 'Unauthorized access!!'}]
 Extracting 2 values...
-
 Log entry 0: NOTICE: Connection to server
 Log entry 1: ERROR: Unauthorized access!!
 ```
