@@ -1,0 +1,201 @@
+#!/usr/bin/env python3
+
+
+"""
+Directory: ex1/
+Files to Submit: data_stream.py
+Authorized: builtins, standard types, import typing, import abc
+"""
+
+from typing import Any
+from abc import ABC, abstractmethod
+
+# Data Processor Exception
+class DPE(Exception):
+    def __init__(self, message: str = "Unknown Processor Error") -> None:
+        super().__init__(message)
+
+
+# Numeric Processor Exception
+class NPE(DPE):
+    def __init__(
+        self, message: str = "Unknown Numeric Processor Error"
+    ) -> None:
+        super().__init__(message)
+
+
+# Textual Processor Exception
+class TPE(DPE):
+    def __init__(self, message: str = "Unknown Text Processor Error") -> None:
+        super().__init__(message)
+
+
+# Logical Processor Exception
+class LPE(DPE):
+    def __init__(
+        self, message: str = "Unknown Logical Processor Error"
+    ) -> None:
+        super().__init__(message)
+
+
+# Original Data Construct
+class DataProcessor(ABC):
+    def __init__(self) -> None:
+        super().__init__()
+        self._storage: list[tuple[int, str]] = []
+        self._rank: int = 0
+
+    @abstractmethod
+    def validate(self, data: Any) -> bool:
+        pass
+
+    @abstractmethod
+    def ingest(self, data: Any) -> None:
+        pass
+
+    def output(self) -> tuple[int, str]:
+        return self._storage.pop(0)
+
+    @abstractmethod
+    def all_data(self, data: Any) -> bool:
+        pass
+
+
+# Numbers and List of Numbers
+class NumericProcessor(DataProcessor):
+    def __init__(self) -> None:
+        super().__init__()
+
+    def validate(self, data: Any) -> bool:
+        if isinstance(data, (int, float)) and not isinstance(data, bool):
+            return True
+        elif isinstance(data, list):
+            return self.all_data(data)
+        return False
+
+    def ingest(self, data: int | float | list[int | float]) -> None:
+        if self.validate(data) is not True:
+            raise NPE("Improper numeric data")
+        items: list[int | float] = data if isinstance(data, list) else [data]
+        for item in items:
+            self._storage.append((self._rank, str(item)))
+            self._rank += 1
+
+    def all_data(self, data: list[int | float]) -> bool:
+        if not data:
+            return False
+        for i in data:
+            if not isinstance(i, (int, float)):
+                return False
+        return True
+
+
+# Strings and List of strings
+class TextProcessor(DataProcessor):
+    def __init__(self) -> None:
+        super().__init__()
+
+    def validate(self, data: Any) -> bool:
+        if isinstance(data, str):
+            return True
+        elif isinstance(data, list):
+            return self.all_data(data)
+        return False
+
+    def ingest(self, data: str | list[str]) -> None:
+        if self.validate(data) is not True:
+            raise TPE("Improper textual data")
+        items: list[str] = data if isinstance(data, list) else [data]
+        for item in items:
+            self._storage.append((self._rank, item))
+            self._rank += 1
+
+    def all_data(self, data: list[str]) -> bool:
+        if not data:
+            return False
+        for s in data:
+            if not isinstance(s, str):
+                return False
+        return True
+
+
+# Dictionaries and List of dicts
+class LogProcessor(DataProcessor):
+    def __init__(self) -> None:
+        super().__init__()
+
+    def validate(self, data: Any) -> bool:
+        if isinstance(data, list):
+            for d in data:
+                return self.all_data(d)
+        return self.all_data(data)
+
+    def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
+        if self.validate(data) is not True:
+            raise LPE("Improper logical error")
+        items: list[dict[str, str]] = (
+            data if isinstance(data, list) else [data]
+        )
+        for item in items:
+            self._storage.append(
+                (self._rank, f"{item['log_level']}: {item['log_message']}")
+            )
+            self._rank += 1
+
+    # check if all the instances is a dict and inside that dict is two strs
+    def all_data(self, data: dict[str, str]) -> bool:
+        if not data:
+            return False
+        if isinstance(data, dict):
+            for key, value in data.items():
+                if not isinstance(key, str) and not isinstance(value, str):
+                    return False
+            return True
+        return False
+
+
+class DataStream():
+    def __init__(self) -> None:
+        self._procs: list[DataProcessor] = []
+
+    def register_processor(self, proc: DataProcessor) -> None:
+        self._procs.append(proc)
+
+    def process_stream(self, stream: list[Any]) -> None:
+        for data in stream:
+            if not self._procs:
+                return print("No processor found, no data")
+            for proc in self._procs:
+                if proc.validate():
+                    self.register_processor(proc)
+                print(f"DataStream Error - Can't process element in stream: {data}")
+        return
+
+    def print_processors_stats(self) -> None:
+        return
+
+def data_stream() -> None:
+    print("=== Code Nexus - Data Stream ===")
+
+    ds: DataStream = DataStream
+    data: list[Any] = [
+        'Hello world',
+        [3.14, -1, 2.71],
+        [
+            {'log_level': 'WARNING', 'log_message': 'Telnet access! Use ssh instead'},
+            {'log_level': 'INFO', 'log_message': 'User wil is connected'}
+        ],
+        42,
+        ['Hi', 'five']
+    ]
+    ds.process_stream(data)
+    return
+
+
+def main() -> None:
+    data_stream()
+    return
+
+
+if __name__ == "__main__":
+    main()
