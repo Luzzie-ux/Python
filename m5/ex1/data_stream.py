@@ -157,27 +157,34 @@ class LogProcessor(DataProcessor):
 class DataStream():
     def __init__(self) -> None:
         self._procs: list[DataProcessor] = []
+        self._proc_count: int = 0
+        self._stream_size: int = 0
 
     def register_processor(self, proc: DataProcessor) -> None:
+        self._proc_count += 1
         self._procs.append(proc)
+        return
 
     def process_stream(self, stream: list[Any]) -> None:
-        for data in stream:
-            if not self._procs:
-                return print("No processor found, no data")
+        self._stream_size = len(stream)
+        for item in stream:
+            if len(self._procs) == 0:
+                return print("== DataStream statistics ==\nNo processor found, no data\n")
             for proc in self._procs:
-                if proc.validate():
-                    self.register_processor(proc)
-                print(f"DataStream Error - Can't process element in stream: {data}")
+                if not proc.validate(item):
+                    print(f"DataStream Error - Can't process element in stream: {item}")
+                self.print_processors_stats()
         return
 
     def print_processors_stats(self) -> None:
+        print("== DataStream statistics ==\n")
+        
         return
 
 def data_stream() -> None:
-    print("=== Code Nexus - Data Stream ===")
+    print("=== Code Nexus - Data Stream ===\n")
 
-    ds: DataStream = DataStream
+    ds: DataStream = DataStream()
     data: list[Any] = [
         'Hello world',
         [3.14, -1, 2.71],
@@ -188,14 +195,10 @@ def data_stream() -> None:
         42,
         ['Hi', 'five']
     ]
+    print("Initialize Data Stream...")
     ds.process_stream(data)
     return
 
 
-def main() -> None:
-    data_stream()
-    return
-
-
 if __name__ == "__main__":
-    main()
+    data_stream()

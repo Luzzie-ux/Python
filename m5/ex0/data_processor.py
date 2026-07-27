@@ -224,10 +224,5 @@ def data_processor() -> None:
     return
 
 
-def main() -> None:
-    data_processor()
-    return
-
-
 if __name__ == "__main__":
-    main()
+    data_processor()
