@@ -10,6 +10,7 @@ Authorized: builtins, standard types, import typing, import abc
 from typing import Any
 from abc import ABC, abstractmethod
 
+
 # Data Processor Exception
 class DPE(Exception):
     def __init__(self, message: str = "Unknown Processor Error") -> None:
@@ -154,49 +155,83 @@ class LogProcessor(DataProcessor):
         return False
 
 
-class DataStream():
+class DataStream:
     def __init__(self) -> None:
         self._procs: list[DataProcessor] = []
-        self._proc_count: int = 0
-        self._stream_size: int = 0
 
     def register_processor(self, proc: DataProcessor) -> None:
-        self._proc_count += 1
         self._procs.append(proc)
-        return
 
     def process_stream(self, stream: list[Any]) -> None:
-        self._stream_size = len(stream)
-        for item in stream:
-            if len(self._procs) == 0:
-                return print("== DataStream statistics ==\nNo processor found, no data\n")
-            for proc in self._procs:
-                if not proc.validate(item):
-                    print(f"DataStream Error - Can't process element in stream: {item}")
-                self.print_processors_stats()
+
+        for proc in self._procs:
+            name: str = proc.__class__.__name__
+            print(f"\nRegistering {name}...")
+            for i in range(len(stream) - 1, -1, -1):
+                item: Any = stream[i]
+                if proc.validate(item) is not True:
+                    print(
+                        "DataStream Error - "
+                        f"Can't process element in stream: {item}"
+                    )
+                    continue
+                proc.ingest(item)
+                del stream[i]
+
+            n: int = len(proc._storage)
+            print("== DataStream statistics ==")
+            print(f"{name}:", end=" ")
+            print(f"total {n} items processed, remaining {n} on processor")
         return
 
     def print_processors_stats(self) -> None:
-        print("== DataStream statistics ==\n")
-        
+        if not self._procs:
+            print("== DataStream statistics ==")
+            print("No processor found, no data")
+            return
+        print()
+        print("== DataStream statistics ==")
+        for p in self._procs:
+            name: str = p.__class__.__name__
+            t: int = p._rank
+            r: int = len(p._storage)
+            print(f"{name}:", end=" ")
+            print(f"total {t} items processed, remaining {r} on processor")
+        print()
         return
+
 
 def data_stream() -> None:
     print("=== Code Nexus - Data Stream ===\n")
 
     ds: DataStream = DataStream()
     data: list[Any] = [
-        'Hello world',
+        "Hello world",
         [3.14, -1, 2.71],
         [
-            {'log_level': 'WARNING', 'log_message': 'Telnet access! Use ssh instead'},
-            {'log_level': 'INFO', 'log_message': 'User wil is connected'}
+            {
+                "log_level": "WARNING",
+                "log_message": "Telnet access! Use ssh instead",
+            },
+            {"log_level": "INFO", "log_message": "User wil is connected"},
         ],
         42,
-        ['Hi', 'five']
+        ["Hi", "five"],
     ]
     print("Initialize Data Stream...")
     ds.process_stream(data)
+    ds.print_processors_stats()
+
+    np = NumericProcessor()
+    tp = TextProcessor()
+    lp = LogProcessor()
+    ps: list[DataProcessor] = [np, tp, lp]
+    for p in ps:
+        ds.register_processor(p)
+    ds.process_stream(data)
+    for p in ps:
+        p.output()
+    ds.print_processors_stats()
     return
 
 
