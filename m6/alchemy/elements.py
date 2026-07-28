@@ -1,3 +1,7 @@
+
+__all__: list[str] = ["create_earth", "create_air"]
+
+
 def create_earth() -> str: return "Earth element created"
 
 
