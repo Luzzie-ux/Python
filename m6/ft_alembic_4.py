@@ -9,7 +9,7 @@ import alchemy
 
 
 def main() -> None:
-    a: str =alchemy.create_air()
+    a: str = alchemy.create_air()
     print("=== Alembic 4 ===")
     print("Acessiing the alchemy module using 'import alchemy'")
     print("Testing create_air:", end=" ")
@@ -19,7 +19,10 @@ def main() -> None:
         "This will raise an exception!"
     )
     print("Testing the hidden create_earth:", end=" ")
-    alchemy.create_earth()
+    try:
+        alchemy.create_earth()  #type: ignore
+    except AttributeError as e:
+        print(f"{e.__class__.__name__}: {e}")
     return
 
 

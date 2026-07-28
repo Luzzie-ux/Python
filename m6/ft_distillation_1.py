@@ -9,11 +9,6 @@ import alchemy
 
 
 def main() -> None:
-    """
-    Using: 'import alchemy'structure to access potions
-    Testing strength_potion: Strength potion brewed with 'Fire element created'and 'Water element created'
-    Testing heal alias: Healing potion brewed with 'Earth element created'and 'Air element created'
-    """
     print("=== Distilation 1 ===")
     print("Using 'import alchemy' structure to access potions")
     print(f"Testing strength_potion: {alchemy.strength_potion()}")
