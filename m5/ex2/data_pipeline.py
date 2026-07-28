@@ -238,7 +238,8 @@ def data_pipeline() -> None:
         ['I love AI', 'LLMs are wonderful', 'Stay healthy'],
         [
             {'log_level': 'ERROR', 'log_message': '500 server crash'},
-            {'log_level': 'NOTICE', 'log_message': 'Certificate expires in 10 days'}
+            {'log_level': 'NOTICE', 'log_message':
+                'Certificate expires in 10 days'}
         ],
         [32, 42, 64, 84, 128, 168],
         'World hello'
@@ -252,16 +253,22 @@ def data_pipeline() -> None:
     print("Initialize Data Stream...")
     stream.process_stream(data)
     print()
-    print(f"Registering Processors...\n")
+    print("Registering Processors...\n")
     for proc in procs:
         stream.register_processor(proc)
     print(f"Send first batch of data on stream: {data}")
-    stream.process_stream(data)
+    try:
+        stream.process_stream(data)
+    except DPE as e:
+        print(f" Got exception: {e}")
     print("Send 3 processed data from each processor to a CSV plugin")
     stream.output_pipeline(3, CSVExportPlugin())
     stream.print_processors_stats()
     print(f"Send another batch of data: {batch}")
-    stream.process_stream(batch)
+    try:
+        stream.process_stream(batch)
+    except DPE as e:
+        print(f" Got exception: {e}")
     print("Send 3 processed data from each processor to a JSON plugin")
     stream.output_pipeline(5, JSONExportPlugin())
     stream.print_processors_stats()

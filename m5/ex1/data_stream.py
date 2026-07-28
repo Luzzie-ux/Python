@@ -214,7 +214,6 @@ def data_stream() -> None:
     ]
     print("Initialize Data Stream...")
     ds.process_stream(data)
-    
     ps: list[DataProcessor] = [
         NumericProcessor(),
         TextProcessor(),
@@ -222,9 +221,11 @@ def data_stream() -> None:
     ]
     for p in ps:
         ds.register_processor(p)
-    ds.process_stream(data)
-
-    print(f"Consuming one element from each data processor")
+    try:
+        ds.process_stream(data)
+    except DPE as e:
+        print(f" Got exception: {e}")
+    print("Consuming one element from each data processor")
     for p in ps:
         p.output()
     ds.print_processors_stats()
