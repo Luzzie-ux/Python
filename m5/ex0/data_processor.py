@@ -47,19 +47,16 @@ class DataProcessor(ABC):
         self._rank: int = 0
 
     @abstractmethod
-    def validate(self, data: Any) -> bool:
-        pass
+    def validate(self, data: Any) -> bool: ...
 
     @abstractmethod
-    def ingest(self, data: Any) -> None:
-        pass
+    def ingest(self, data: Any) -> None: ...
 
     def output(self) -> tuple[int, str]:
         return self._storage.pop(0)
 
     @abstractmethod
-    def all_data(self, data: Any) -> bool:
-        pass
+    def ft_all(self, data: Any) -> bool: ...
 
 
 # Numbers and List of Numbers
@@ -71,7 +68,7 @@ class NumericProcessor(DataProcessor):
         if isinstance(data, (int, float)) and not isinstance(data, bool):
             return True
         elif isinstance(data, list):
-            return self.all_data(data)
+            return self.ft_all(data)
         return False
 
     def ingest(self, data: int | float | list[int | float]) -> None:
@@ -82,7 +79,8 @@ class NumericProcessor(DataProcessor):
             self._storage.append((self._rank, str(item)))
             self._rank += 1
 
-    def all_data(self, data: list[int | float]) -> bool:
+    # check for ints or floats inside list
+    def ft_all(self, data: list[int | float]) -> bool:
         if not data:
             return False
         for i in data:
@@ -100,7 +98,7 @@ class TextProcessor(DataProcessor):
         if isinstance(data, str):
             return True
         elif isinstance(data, list):
-            return self.all_data(data)
+            return self.ft_all(data)
         return False
 
     def ingest(self, data: str | list[str]) -> None:
@@ -111,7 +109,8 @@ class TextProcessor(DataProcessor):
             self._storage.append((self._rank, item))
             self._rank += 1
 
-    def all_data(self, data: list[str]) -> bool:
+    # check for instances of str inside list
+    def ft_all(self, data: list[str]) -> bool:
         if not data:
             return False
         for s in data:
@@ -128,8 +127,8 @@ class LogProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
         if isinstance(data, list):
             for d in data:
-                return self.all_data(d)
-        return self.all_data(data)
+                return self.ft_all(d)
+        return self.ft_all(data)
 
     def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if self.validate(data) is not True:
@@ -144,7 +143,7 @@ class LogProcessor(DataProcessor):
             self._rank += 1
 
     # check if all the instances is a dict and inside that dict is two strs
-    def all_data(self, data: dict[str, str]) -> bool:
+    def ft_all(self, data: dict[str, str]) -> bool:
         if not data:
             return False
         if isinstance(data, dict):
@@ -199,10 +198,11 @@ def process(data: list[Any], proc: DataProcessor) -> None:
 def data_processor() -> None:
     print("=== Code Nexus - Data Pipeline ===")
 
-    nproc: DataProcessor = NumericProcessor()
-    tproc: DataProcessor = TextProcessor()
-    lproc: DataProcessor = LogProcessor()
-    procs: list[DataProcessor] = [nproc, tproc, lproc]
+    procs: list[DataProcessor] = [
+        NumericProcessor(),
+        TextProcessor(),
+        LogProcessor()
+    ]
     datas: list[list[Any]] = [
         [1, 2, 3, 4, 5],
         ["Hello", "Nexus", "World"],
