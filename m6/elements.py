@@ -1,6 +1,6 @@
-# m6/elements.py
+#!/usr/bin/env python3
 
-__all__ = ["create_fire", "create_water"]
+__all__: list[str] = ["create_fire", "create_water"]
 
 
 def create_fire() -> str: return "Fire element created"

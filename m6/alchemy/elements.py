@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 
 __all__: list[str] = ["create_earth", "create_air"]
 

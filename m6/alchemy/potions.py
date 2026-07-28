@@ -1,7 +1,7 @@
-# alchemy/potions.py
+#!/usr/bin/env python3
 
 from elements import create_fire, create_water
-from .elements import create_air, create_earth
+from alchemy.elements import create_air, create_earth
 
 __all__: list[str] = ["healing_potion", "strength_potion"]
 
