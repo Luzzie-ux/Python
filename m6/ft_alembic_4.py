@@ -20,7 +20,7 @@ def main() -> None:
     )
     print("Testing the hidden create_earth:", end=" ")
     try:
-        alchemy.create_earth()  #type: ignore
+        alchemy.create_earth()  # type: ignore
     except AttributeError as e:
         print(f"{e.__class__.__name__}: {e}")
     return
