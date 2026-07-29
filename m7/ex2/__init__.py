@@ -10,14 +10,14 @@ from .strategy import (
     AggressiveStrategy,
     BattleStrategy,
     DefensiveStrategy,
-    AE,
+    IAE,
     NormalStrategy,
 )
 
 __all__: list[str] = [
-    "BattleStrategy",
-    "NormalStrategy",
     "AggressiveStrategy",
+    "BattleStrategy",
     "DefensiveStrategy",
-    "AE",
+    "IAE",
+    "NormalStrategy",
 ]

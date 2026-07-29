@@ -31,9 +31,9 @@ from ex0.creature import Creature
 from ex1.capabilities import HealCapability, TransformCapability
 
 
-# Act exception
-class AE(Exception):
-    def __init__(self, msg: str = "Unknown Act Exception") -> None:
+# Invalid Act Error
+class IAE(Exception):
+    def __init__(self, msg: str = "Unknown Act Error") -> None:
         super().__init__(msg)
 
 
@@ -42,18 +42,57 @@ class BattleStrategy(ABC):
         super().__init__()
 
     @abstractmethod
-    def act() -> None: ...
+    def act(self, creature: Creature) -> List[str]: ...
 
     @abstractmethod
-    def is_valid() -> bool: ...
+    def is_valid(self, c: Creature) -> bool: ...
 
 
 class NormalStrategy(BattleStrategy):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
-    def act():
-        pass
+    def act(self, creature: Creature) -> List[str]:
+        if not self.is_valid(creature):
+            raise IAE(
+                f"Invalid Creature '{creature._name}' "
+                "for this aggressive strategy"
+            )
+        return [creature.attack()]
 
-    def is_valid():
-        pass
+    def is_valid(self, c: Creature) -> bool:
+        return True
+
+
+class AggressiveStrategy(BattleStrategy):
+    def __init__(self) -> None:
+        super().__init__()
+
+    def act(self, creature: Creature) -> List[str]:
+        if not self.is_valid(creature):
+            raise IAE(
+                f"Invalid Creature '{creature._name}' "
+                "for this aggressive strategy"
+            )
+        ct: TransformCapability = cast(TransformCapability, creature)
+        return [ct.transform(), creature.attack(), ct.revert()]
+
+    def is_valid(self, c: Creature) -> bool:
+        return isinstance(c, TransformCapability)
+
+
+class DefensiveStrategy(BattleStrategy):
+    def __init__(self) -> None:
+        super().__init__()
+
+    def act(self, creature: Creature) -> List[str]:
+        if not self.is_valid(creature):
+            raise IAE(
+                f"Invalid Creature '{creature._name}' "
+                "for this defensive strategy"
+            )
+        ch: HealCapability = cast(HealCapability, creature)
+        return [creature.attack(), ch.heal(creature)]
+
+    def is_valid(self, c: Creature) -> bool:
+        return isinstance(c, HealCapability)

@@ -11,7 +11,7 @@ from ex2 import (
     AggressiveStrategy,
     BattleStrategy,
     DefensiveStrategy,
-    InvalidStrategyError,
+    IAE,
     NormalStrategy,
 )
 

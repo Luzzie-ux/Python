@@ -51,7 +51,7 @@ class Shiftling(Creature, TransformCapability):
     def attack(self) -> str:
         if not self._state:
             return f"{self._name} attacks {self._attack}."
-        return f"{self._name} performs a boosted strike!\n{self.revert()}"
+        return f"{self._name} performs a boosted strike!"
 
     def transform(self) -> str:
         if not self._state:
@@ -72,7 +72,7 @@ class Morphagon(Creature, TransformCapability):
     def attack(self) -> str:
         if not self._state:
             return f"{self._name} attacks {self._attack}."
-        return f"{self._name} performs a boosted strike!\n{self.revert()}"
+        return f"{self._name} performs a boosted strike!"
 
     def transform(self) -> str:
         if not self._state:

@@ -18,6 +18,7 @@ These methods will return simple strings that describe
     the action (just like the attack method).
 """
 
+from ex0.creature import Creature
 from abc import ABC, abstractmethod
 
 
@@ -26,7 +27,7 @@ class HealCapability(ABC):
         super().__init__()
 
     @abstractmethod
-    def heal(self, target: str) -> str: ...
+    def heal(self, target: Creature) -> str: ...
 
 
 class TransformCapability(ABC):
