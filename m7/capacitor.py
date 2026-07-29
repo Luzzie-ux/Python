@@ -51,9 +51,9 @@ def test_transform(factory: TransformCreatureFactory) -> None:
             print(" base:")
         print(f"{creature.describe()}\n"
         f"{creature.attack()}\n"
-        f"{cast(TransformCapability, creature).transform()}")
-        f"{creature.attack()}\n"
-    print()
+        f"{cast(TransformCapability, creature).transform()}\n"
+        f"{creature.attack()}"
+        )
     
 
 def main() -> None:
