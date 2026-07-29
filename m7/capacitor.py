@@ -20,12 +20,8 @@ Create a transforming Creature factory.
 """
 
 from typing import cast, Any
-from ex1 import (
-    HealCapability,
-    TransformCapability,
-    HealingCreatureFactory,
-    TransformCreatureFactory
-)
+from ex1 import HealCapability,TransformCapability
+from ex0.factory_type import HealingCreatureFactory, TransformCreatureFactory
 
 
 def test_heal(factory: HealingCreatureFactory) -> None:
