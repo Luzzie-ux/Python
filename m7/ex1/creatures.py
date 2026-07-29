@@ -50,13 +50,13 @@ class Shiftling(Creature, TransformCapability):
 
     def attack(self) -> str:
         if not self._state:
-            return f"{self._name} attacks {self._attack}."
-        return f"{self._name} performs a boosted strike!"
+            return f"{self._name} attacks {self._attack}.\n{self.transform()}"
+        return f"{self._name} performs a boosted strike!\n{self.revert()}"
 
     def transform(self) -> str:
         if not self._state:
             self._state = True
-            return f"{self._name} shifts into a sharper form!"
+            return f"{self._name} shifts into a sharper form!\n{self.attack()}"
         return f"[{self._name} is already on its best form]"
 
     def revert(self) -> str:
@@ -71,13 +71,13 @@ class Morphagon(Creature, TransformCapability):
 
     def attack(self) -> str:
         if not self._state:
-            return f"{self._name} attacks {self._attack}."
-        return f"{self._name} performs a boosted strike!"
+            return f"{self._name} attacks {self._attack}.\n{self.transform()}"
+        return f"{self._name} performs a boosted strike!\n{self.revert()}"
 
     def transform(self) -> str:
         if not self._state:
             self._state = True
-            return f"{self._name} morphs into a dragonic battle form!"
+            return f"{self._name} morphs into a dragonic battle form!\n{self.attack()}"
         return f"[{self._name} is already on its best form]"
 
     def revert(self) -> str:

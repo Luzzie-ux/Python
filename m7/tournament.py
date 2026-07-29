@@ -20,18 +20,26 @@ Opponent = Tuple[CF, BS]
 
 
 def battle(ops: List[Opponent]) -> None:
-    print(f"*** Tournament ***\n{len(ops)} opponents involved")
+    size: int = len(ops)
+    print(f"*** Tournament ***\n{size} opponents involved")
     print("\n   * BATTLE *\n")
-    return
+    for i in range(size):
+        a = ops[i]; b = ops[i + 1 % size]
+        f1, s1 = a
+        f2, s2 = b
+        b1 = f1.create_base()
+        b2 = f2.create_base()
 
+    return
+        
 
 def format_tournament(tournament: list[Opponent]) -> str:
     parts: list[str] = []
     for o in tournament:
         f, s = o
         beast = f.create_base()
-        name: str = type(s).__name__
-        parts.append(f"({beast._name}+{name.removesuffix('Strategy')})")
+        mode: str = type(s).__name__
+        parts.append(f"({beast._name}+{mode.removesuffix('Strategy')})")
     return " [ " + ", ".join(parts) + " ]"
 
 
@@ -42,8 +50,7 @@ def main() -> None:
         [(AF(), NS()),(HCF(), DS()),(TCF(), AS())]
     ]
     j: int = 0
-    k: int = 0
-    for i in range(1, 4):
+    for i in range(1, len(Tournament)):
         print(f"=== Tournament {i} ===")
         try:
             print(f"{format_tournament(Tournament[j])}")
@@ -51,7 +58,7 @@ def main() -> None:
         except IAE as e:
             print(f"Battle error, aborting tournament: {e}")
         finally:
-            j += 1; k += 1
+            j += 1
     return
 
 
