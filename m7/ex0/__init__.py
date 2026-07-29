@@ -7,16 +7,6 @@ Authorized: builtins, standard types, import typing, import abc
 """
 
 from .factory import CreatureFactory
-from .factory_type import (
-    AquaFactory,
-    FlameFactory,
-    TransformCreatureFactory,
-    HealingCreatureFactory)
+from .factory_type import FlameFactory, AquaFactory
 
-__all__: list[str] = [
-    "CreatureFactory",
-    "AquaFactory",
-    "FlameFactory",
-    "TransformCreatureFactory",
-    "HealingCreatureFactory",
-    ]
+__all__: list[str] = ["CreatureFactory","AquaFactory","FlameFactory",]
