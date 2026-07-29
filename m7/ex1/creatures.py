@@ -21,7 +21,7 @@ class Sproutling(Creature, HealCapability):
         HealCapability.__init__(self)
 
     def attack(self) -> str:
-        return f"{self._name} uses {self._attack}!"
+        return f"{self._name} uses {self._attack}!\n{self.heal(self)}"
 
     def heal(self, target: Creature) -> str:
         if target._name == self._name:
@@ -35,7 +35,7 @@ class Bloomelle(Creature, HealCapability):
         HealCapability.__init__(self)
 
     def attack(self) -> str:
-        return f"{self._name} uses {self._attack}!"
+        return f"{self._name} uses {self._attack}!\n{self.heal(self)}"
 
     def heal(self, target: Creature) -> str:
         if target._name == self._name:

@@ -37,8 +37,7 @@ def test_heal(factory: HealingCreatureFactory) -> None:
             print(" base:")
         print(
             f"{creature.describe()}\n"
-            f"{creature.attack()}\n"
-            f"{cast(HealCapability, creature).heal(creature)}"
+            f"{creature.attack()}"
         )
     print()
 

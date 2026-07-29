@@ -91,8 +91,7 @@ class DefensiveStrategy(BattleStrategy):
                 f"Invalid Creature '{creature._name}' "
                 "for this defensive strategy"
             )
-        ch: HealCapability = cast(HealCapability, creature)
-        return [creature.attack(), ch.heal(creature)]
+        return [creature.attack()]
 
     def is_valid(self, c: Creature) -> bool:
         return isinstance(c, HealCapability)
