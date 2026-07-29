@@ -18,20 +18,19 @@ Create a transforming Creature factory.
     5) revert.
 """
 
-from typing import cast, Any
+from typing import Any
+from ex0 import CreatureFactory
 from ex1 import (
-    HealCapability,
-    TransformCapability,
     HealingCreatureFactory,
     TransformCreatureFactory,
 )
 
 
-def test_heal(factory: HealingCreatureFactory) -> None:
+def test_capabilities(factory: CreatureFactory) -> None:
     print("Testing Creature with healing capability")
     creatures: list[Any] = [factory.create_base(), factory.create_evolved()]
     for creature in creatures:
-        if creature._name == "Bloomelle":
+        if creature._name == "Bloomelle" or creature._name == "Morphagon":
             print(" evolved:")
         else:
             print(" base:")
@@ -42,24 +41,10 @@ def test_heal(factory: HealingCreatureFactory) -> None:
     print()
 
 
-def test_transform(factory: TransformCreatureFactory) -> None:
-    print("Testing Creature with transform capability")
-    creatures: list[Any] = [factory.create_base(), factory.create_evolved()]
-    for creature in creatures:
-        if creature._name == "Morphagon":
-            print(" evolved:")
-        else:
-            print(" base:")
-        print(
-            f"{creature.describe()}\n"
-            f"{creature.attack()}"
-            
-        )
-
-
 def main() -> None:
-    test_heal(HealingCreatureFactory())
-    test_transform(TransformCreatureFactory())
+    factories = [HealingCreatureFactory(), TransformCreatureFactory()]
+    for factory in factories:
+        test_capabilities(factory)
     return
 
 

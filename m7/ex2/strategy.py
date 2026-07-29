@@ -26,7 +26,7 @@ The is_valid method returns a bool if a Creature can use the strategy,
 """
 
 from abc import ABC, abstractmethod
-from typing import List, cast
+from typing import List
 from ex0.creature import Creature
 from ex1.capabilities import HealCapability, TransformCapability
 
@@ -56,7 +56,7 @@ class NormalStrategy(BattleStrategy):
         if not self.is_valid(creature):
             raise IAE(
                 f"Invalid Creature '{creature._name}' "
-                "for this aggressive strategy"
+                "for this normal strategy"
             )
         return [creature.attack()]
 
@@ -74,8 +74,7 @@ class AggressiveStrategy(BattleStrategy):
                 f"Invalid Creature '{creature._name}' "
                 "for this aggressive strategy"
             )
-        ct: TransformCapability = cast(TransformCapability, creature)
-        return [ct.transform(), creature.attack(), ct.revert()]
+        return [creature.attack()]
 
     def is_valid(self, c: Creature) -> bool:
         return isinstance(c, TransformCapability)
