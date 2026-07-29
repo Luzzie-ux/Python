@@ -22,13 +22,21 @@ Opponent = Tuple[CF, BS]
 def battle(ops: List[Opponent]) -> None:
     size: int = len(ops)
     print(f"*** Tournament ***\n{size} opponents involved")
-    print("\n   * BATTLE *\n")
-    for i in range(size):
-        a = ops[i]; b = ops[i + 1 % size]
-        f1, s1 = a
-        f2, s2 = b
-        b1 = f1.create_base()
-        b2 = f2.create_base()
+    for i in range(0, size):
+        for j in range(i + 1, size):
+            a = ops[i]; b = ops[j]
+            f1, s1 = a
+            f2, s2 = b
+            factories = [f1, f2]
+            c1 = factories[0].create_base()
+            c2 = factories[1].create_base()
+            print(
+                "\n   * BATTLE *\n"
+                f" {c1.describe()}\n"
+                "   vs."
+                f"\n {c2.describe()}\n\n"
+                "NOW FIGHT!\n"
+            )
 
     return
         
