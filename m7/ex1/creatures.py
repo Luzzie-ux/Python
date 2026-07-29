@@ -77,7 +77,11 @@ class Morphagon(Creature, TransformCapability):
     def transform(self) -> str:
         if not self._state:
             self._state = True
-            return f"{self._name} morphs into a dragonic battle form!\n{self.attack()}"
+            new_attck: str = str(
+                f"{self._name} morphs into a dragonic battle form!"
+                f"\n{self.attack()}"
+                )
+            return new_attck
         return f"[{self._name} is already on its best form]"
 
     def revert(self) -> str:

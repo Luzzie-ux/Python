@@ -34,10 +34,7 @@ def test_capabilities(factory: CreatureFactory) -> None:
             print(" evolved:")
         else:
             print(" base:")
-        print(
-            f"{creature.describe()}\n"
-            f"{creature.attack()}"
-        )
+        print(f"{creature.describe()}\n" f"{creature.attack()}")
     print()
 
 

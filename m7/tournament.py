@@ -4,7 +4,7 @@
 tournament.py
 """
 
-from typing import List, Tuple, Any
+from typing import List, Tuple
 from ex0 import AquaFactory as AF, CreatureFactory as CF, FlameFactory as FF
 from ex1 import HealingCreatureFactory as HCF, TransformCreatureFactory as TCF
 from ex2 import (
@@ -15,7 +15,6 @@ from ex2 import (
     NormalStrategy as NS,
 )
 
-
 Opponent = Tuple[CF, BS]
 
 
@@ -24,7 +23,8 @@ def battle(ops: List[Opponent]) -> None:
     print(f"*** Tournament ***\n{size} opponents involved")
     for i in range(0, size):
         for j in range(i + 1, size):
-            a = ops[i]; b = ops[j]
+            a = ops[i]
+            b = ops[j]
             f1, s1 = a
             f2, s2 = b
             factories = [f1, f2]
@@ -37,9 +37,12 @@ def battle(ops: List[Opponent]) -> None:
                 f"\n {c2.describe()}\n\n"
                 "NOW FIGHT!\n"
             )
-
+            for line in s1.act(c1):
+                print(line)
+            for line in s2.act(c2):
+                print(line)
     return
-        
+
 
 def format_tournament(tournament: list[Opponent]) -> str:
     parts: list[str] = []
@@ -54,11 +57,11 @@ def format_tournament(tournament: list[Opponent]) -> str:
 def main() -> None:
     Tournament: list[list[Opponent]] = [
         [(FF(), NS()), (HCF(), DS())],
-        [(FF(), AS()),(HCF(), AS())],
-        [(AF(), NS()),(HCF(), DS()),(TCF(), AS())]
+        [(FF(), AS()), (HCF(), AS())],
+        [(AF(), NS()), (HCF(), DS()), (TCF(), AS())],
     ]
     j: int = 0
-    for i in range(1, len(Tournament)):
+    for i in range(1, len(Tournament) + 1):
         print(f"=== Tournament {i} ===")
         try:
             print(f"{format_tournament(Tournament[j])}")
