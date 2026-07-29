@@ -9,4 +9,8 @@ Authorized: builtins, standard types, import typing, import abc
 from .factory import CreatureFactory
 from .factory_type import FlameFactory, AquaFactory
 
-__all__: list[str] = ["CreatureFactory","AquaFactory","FlameFactory",]
+__all__: list[str] = [
+    "CreatureFactory",
+    "AquaFactory",
+    "FlameFactory",
+]

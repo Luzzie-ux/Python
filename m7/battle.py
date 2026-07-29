@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-
 """
 battle.py will test ex0 by:
 

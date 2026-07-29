@@ -22,6 +22,9 @@ from abc import ABC, abstractmethod
 
 
 class HealCapability(ABC):
+    def __init__(self) -> None:
+        super().__init__()
+
     @abstractmethod
     def heal(self, target: str) -> str: ...
 

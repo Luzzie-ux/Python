@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-
 """
 capacitor.py will:
 
@@ -24,8 +23,8 @@ from ex1 import (
     HealCapability,
     TransformCapability,
     HealingCreatureFactory,
-    TransformCreatureFactory
-    )
+    TransformCreatureFactory,
+)
 
 
 def test_heal(factory: HealingCreatureFactory) -> None:
@@ -36,10 +35,13 @@ def test_heal(factory: HealingCreatureFactory) -> None:
             print(" evolved:")
         else:
             print(" base:")
-        print(f"{creature.describe()}\n"
-        f"{creature.attack()}\n"
-        f"{cast(HealCapability, creature).heal(creature)}")
+        print(
+            f"{creature.describe()}\n"
+            f"{creature.attack()}\n"
+            f"{cast(HealCapability, creature).heal(creature)}"
+        )
     print()
+
 
 def test_transform(factory: TransformCreatureFactory) -> None:
     print("Testing Creature with transform capability")
@@ -49,12 +51,13 @@ def test_transform(factory: TransformCreatureFactory) -> None:
             print(" evolved:")
         else:
             print(" base:")
-        print(f"{creature.describe()}\n"
-        f"{creature.attack()}\n"
-        f"{cast(TransformCapability, creature).transform()}\n"
-        f"{creature.attack()}"
+        print(
+            f"{creature.describe()}\n"
+            f"{creature.attack()}\n"
+            f"{cast(TransformCapability, creature).transform()}\n"
+            f"{creature.attack()}"
         )
-    
+
 
 def main() -> None:
     test_heal(HealingCreatureFactory())
