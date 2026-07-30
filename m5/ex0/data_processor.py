@@ -201,7 +201,7 @@ def data_processor() -> None:
     procs: list[DataProcessor] = [
         NumericProcessor(),
         TextProcessor(),
-        LogProcessor()
+        LogProcessor(),
     ]
     datas: list[list[Any]] = [
         [1, 2, 3, 4, 5],

@@ -217,7 +217,7 @@ def data_stream() -> None:
     ps: list[DataProcessor] = [
         NumericProcessor(),
         TextProcessor(),
-        LogProcessor()
+        LogProcessor(),
     ]
     for p in ps:
         ds.register_processor(p)

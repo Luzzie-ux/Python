@@ -14,10 +14,11 @@ class AcidFactory(CreatureFactory):
         super().__init__()
 
     def create_base(self):
-        return 
+        return
 
     def create_evolved(self):
-        self._evolved =  True
+        self._evolved = True
         return super().create_evolved()
+
 
 class ShadowFactory(CreatureFactory): ...

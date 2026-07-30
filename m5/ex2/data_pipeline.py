@@ -235,20 +235,22 @@ def data_pipeline() -> None:
     ]
     batch: list[Any] = [
         21,
-        ['I love AI', 'LLMs are wonderful', 'Stay healthy'],
+        ["I love AI", "LLMs are wonderful", "Stay healthy"],
         [
-            {'log_level': 'ERROR', 'log_message': '500 server crash'},
-            {'log_level': 'NOTICE', 'log_message':
-                'Certificate expires in 10 days'}
+            {"log_level": "ERROR", "log_message": "500 server crash"},
+            {
+                "log_level": "NOTICE",
+                "log_message": "Certificate expires in 10 days",
+            },
         ],
         [32, 42, 64, 84, 128, 168],
-        'World hello'
+        "World hello",
     ]
     stream: DataStream = DataStream()
     procs: list[DataProcessor] = [
         NumericProcessor(),
         TextProcessor(),
-        LogProcessor()
+        LogProcessor(),
     ]
     print("Initialize Data Stream...")
     stream.process_stream(data)

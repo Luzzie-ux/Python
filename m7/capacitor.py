@@ -38,15 +38,15 @@ def test_heal(f: HealingCreatureFactory) -> None:
             print(" base:")
         print(
             f"{creature.describe()}\n"
-              f"{creature.attack()}\n"
-              f"{h.heal(creature)}"
-            )
+            f"{creature.attack()}\n"
+            f"{h.heal(creature)}"
+        )
     print()
 
 
 def test_trans(f: TransformCreatureFactory) -> None:
     print("Testing Creature with transformation capability")
-    creatures= [f.create_base(), f.create_evolved()]
+    creatures = [f.create_base(), f.create_evolved()]
     for creature in creatures:
         t = cast(TransformCapability, creature)
         if creature._name == "Bloomelle" or creature._name == "Morphagon":
@@ -59,7 +59,7 @@ def test_trans(f: TransformCreatureFactory) -> None:
             f"{t.transform()}\n"
             f"{creature.attack()}\n"
             f"{t.revert()}"
-            )
+        )
     print()
 
 
@@ -68,7 +68,7 @@ def main() -> None:
     for factory in factories:
         if isinstance(factory, HealingCreatureFactory):
             test_heal(factory)
-        else:
+        elif isinstance(factory, TransformCreatureFactory):
             test_trans(factory)
     return
 

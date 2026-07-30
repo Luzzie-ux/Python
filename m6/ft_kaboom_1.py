@@ -14,6 +14,7 @@ print(
 
 def main() -> None:
     import alchemy.grimoire.dark_spellbook as recorder
+
     print(f"{recorder.dark_spell_record("Fantasy", "Earth, wind, and fire")}")
 
 
