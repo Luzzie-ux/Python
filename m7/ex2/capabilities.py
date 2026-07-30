@@ -8,7 +8,7 @@ from ex0.creature import Creature
 from abc import ABC, abstractmethod
 
 
-class AcidCapability(ABC):
+class PoisonCapability(ABC):
     def __init__(self, mod: float = 0.5) -> None:
         super().__init__()
         self._poison_points: int = 3
@@ -18,7 +18,7 @@ class AcidCapability(ABC):
     def poison(self, target: Creature) -> str: ...
 
 
-class ShadowCapability(ABC):
+class DarkCapability(ABC):
     def __init__(self, mod: float = 0.5) -> None:
         super().__init__()
         self._ability: float = 10.0

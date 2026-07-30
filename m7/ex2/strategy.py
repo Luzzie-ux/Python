@@ -26,13 +26,13 @@ The is_valid method returns a bool if a Creature can use the strategy,
 """
 
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, cast
 from ex0.creature import Creature
 from ex1.capabilities import HealCapability, TransformCapability
 
 
 # Invalid Act Error
-class IAE(Exception):
+class InvalidActError(Exception):
     def __init__(self, msg: str = "Unknown Act Error") -> None:
         super().__init__(msg)
 
@@ -54,7 +54,7 @@ class NormalStrategy(BattleStrategy):
 
     def act(self, creature: Creature) -> List[str]:
         if not self.is_valid(creature):
-            raise IAE(
+            raise InvalidActError(
                 f"Invalid Creature '{creature._name}' "
                 "for this normal strategy"
             )
@@ -70,11 +70,12 @@ class AggressiveStrategy(BattleStrategy):
 
     def act(self, creature: Creature) -> List[str]:
         if not self.is_valid(creature):
-            raise IAE(
+            raise InvalidActError(
                 f"Invalid Creature '{creature._name}' "
                 "for this aggressive strategy"
             )
-        return [creature.attack()]
+        t = cast(TransformCapability, creature)
+        return [t.transform(), creature.attack(), t.revert()]
 
     def is_valid(self, c: Creature) -> bool:
         return isinstance(c, TransformCapability)
@@ -86,11 +87,12 @@ class DefensiveStrategy(BattleStrategy):
 
     def act(self, creature: Creature) -> List[str]:
         if not self.is_valid(creature):
-            raise IAE(
+            raise InvalidActError(
                 f"Invalid Creature '{creature._name}' "
                 "for this defensive strategy"
             )
-        return [creature.attack()]
+        h = cast(HealCapability, creature)
+        return [creature.attack(), h.heal()]
 
     def is_valid(self, c: Creature) -> bool:
         return isinstance(c, HealCapability)

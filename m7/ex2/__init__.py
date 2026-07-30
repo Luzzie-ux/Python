@@ -10,14 +10,21 @@ from .strategy import (
     AggressiveStrategy,
     BattleStrategy,
     DefensiveStrategy,
-    IAE,
+    InvalidActError,
     NormalStrategy,
 )
 
+from .capabilities import PoisonCapability, DarkCapability
+from .factories import PoisonFactory, DarkFactory
+
 __all__: list[str] = [
     "AggressiveStrategy",
+    "PoisonCapability",
+    "PoisonFactory",
     "BattleStrategy",
+    "DarkCapability",
+    "DarkFactory",
     "DefensiveStrategy",
-    "IAE",
+    "InvalidActError",
     "NormalStrategy",
 ]

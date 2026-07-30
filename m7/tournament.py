@@ -9,9 +9,13 @@ from ex0 import AquaFactory as AF, CreatureFactory as CF, FlameFactory as FF
 from ex1 import HealingCreatureFactory as HCF, TransformCreatureFactory as TCF
 from ex2 import (
     AggressiveStrategy as AS,
+    PoisonCapability as PC,
+    PoisonFactory as PF,
     BattleStrategy as BS,
+    DarkCapability as DC,
+    DarkFactory as DF,
     DefensiveStrategy as DS,
-    IAE,
+    InvalidActError as IAE,
     NormalStrategy as NS,
 )
 
