@@ -24,6 +24,7 @@ class HealingCreatureFactory(CreatureFactory):
         return Sproutling()
 
     def create_evolved(self) -> Creature:
+        self._evolved = True
         return Bloomelle()
 
 
@@ -35,4 +36,5 @@ class TransformCreatureFactory(CreatureFactory):
         return Shiftling()
 
     def create_evolved(self) -> Creature:
+        self._evolved = True
         return Morphagon()

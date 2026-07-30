@@ -29,6 +29,7 @@ class FlameFactory(CreatureFactory):
         return Flameling()
 
     def create_evolved(self) -> Creature:
+        self._evolved = True
         return Pyrogon()
 
 
@@ -40,4 +41,5 @@ class AquaFactory(CreatureFactory):
         return Aquabub()
 
     def create_evolved(self) -> Creature:
+        self._evolved = True
         return Torragon()

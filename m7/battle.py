@@ -24,17 +24,14 @@ def test(factory: CreatureFactory) -> None:
     return
 
 
-def battle(factories: list[CreatureFactory]) -> None:
-    if len(factories) % 2 != 0:
-        return print(
-            "Each creature needs a pair, not enough creatures for battle"
-        )
+def battle(f1: CreatureFactory, f2: CreatureFactory) -> None:
+    factories: list[CreatureFactory] = [f1, f2]
     for i in range(0, len(factories), 2):
         c1 = factories[i].create_base()
         c2 = factories[i + 1].create_base()
         print(
             "Testing battle: \n"
-            f" {c1._name} vs {c2._name}\nFight!\n\n"
+            f" {c1.describe()}\n    vs. \n {c2.describe()}\nFight!\n\n"
             f" {c1.attack()}\n"
             f" {c2.attack()}"
         )
@@ -45,7 +42,7 @@ def main() -> None:
     factories: list[CreatureFactory] = [FlameFactory(), AquaFactory()]
     for factory in factories:
         test(factory)
-    battle(factories)
+    battle(factories[0], factories[1])
     return
 
 

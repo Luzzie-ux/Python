@@ -14,11 +14,15 @@ from abc import ABC, abstractmethod
 
 
 class Creature(ABC):
-    def __init__(self, name: str, type: str, attack: str) -> None:
+    def __init__(
+            self, name: str, type: str, attack: str, hp: int = 50, mp: int = 20, evade: float = 25.0) -> None:
         super().__init__()
         self._name: str = name
         self._type: str = type
         self._attack: str = attack
+        self._hp: int = hp
+        self._mp: int = mp
+        self._evade: float = evade
 
     @abstractmethod
     def attack(self) -> str: ...

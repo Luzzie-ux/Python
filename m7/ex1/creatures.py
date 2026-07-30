@@ -19,28 +19,36 @@ class Sproutling(Creature, HealCapability):
     def __init__(self) -> None:
         Creature.__init__(self, "Sprountling", "Grass", "Vine Whip")
         HealCapability.__init__(self)
+        self._heal: int = self._hp * (self._mp / 100)
 
     def attack(self) -> str:
-        return f"{self._name} uses {self._attack}!\n{self.heal(self)}"
+        return f"{self._name} uses {self._attack}!"
 
     def heal(self, target: Creature) -> str:
+        heal: int = self._heal
         if target._name == self._name:
-            return f"{self._name} heals itself for a small amount"
-        return f"{self._name} heals {target._name} for a small amount"
+            return f"{self._name} heals itself for a small amount({heal})"
+        return f"{self._name} heals {target._name} for a small amount({heal})"
 
 
 class Bloomelle(Creature, HealCapability):
     def __init__(self) -> None:
         Creature.__init__(self, "Bloomelle", "Grass/Fairy", "Petal Dance")
         HealCapability.__init__(self)
+        self._heal: int = self._hp * (self._mp / 50)
 
     def attack(self) -> str:
-        return f"{self._name} uses {self._attack}!\n{self.heal(self)}"
+        return f"{self._name} uses {self._attack}!"
 
     def heal(self, target: Creature) -> str:
+        heal: int = self._heal
         if target._name == self._name:
-            return f"{self._name} heals itself and others for a large amount"
-        return f"{self._name} heals {target._name} for a large amount"
+            spell: str = (
+                f"{self._name} heals itself "
+                f"and others for a large amount({heal})"
+            )
+            return spell
+        return f"{self._name} heals {target._name} for a large amount({heal})"
 
 
 class Shiftling(Creature, TransformCapability):
@@ -50,13 +58,13 @@ class Shiftling(Creature, TransformCapability):
 
     def attack(self) -> str:
         if not self._state:
-            return f"{self._name} attacks {self._attack}.\n{self.transform()}"
-        return f"{self._name} performs a boosted strike!\n{self.revert()}"
+            return f"{self._name} attacks {self._attack}."
+        return f"{self._name} performs a boosted strike!"
 
     def transform(self) -> str:
         if not self._state:
             self._state = True
-            return f"{self._name} shifts into a sharper form!\n{self.attack()}"
+            return f"{self._name} shifts into a sharper form!"
         return f"[{self._name} is already on its best form]"
 
     def revert(self) -> str:
@@ -71,17 +79,13 @@ class Morphagon(Creature, TransformCapability):
 
     def attack(self) -> str:
         if not self._state:
-            return f"{self._name} attacks {self._attack}.\n{self.transform()}"
-        return f"{self._name} performs a boosted strike!\n{self.revert()}"
+            return f"{self._name} attacks {self._attack}."
+        return f"{self._name} performs a boosted strike!"
 
     def transform(self) -> str:
         if not self._state:
             self._state = True
-            new_attck: str = str(
-                f"{self._name} morphs into a dragonic battle form!"
-                f"\n{self.attack()}"
-                )
-            return new_attck
+            return f"{self._name} morphs into a dragonic battle form!"
         return f"[{self._name} is already on its best form]"
 
     def revert(self) -> str:

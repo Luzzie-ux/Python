@@ -16,6 +16,7 @@ from .creature import Creature
 class CreatureFactory(ABC):
     def __init__(self) -> None:
         super().__init__()
+        self._evolved: bool = False
 
     @abstractmethod
     def create_base(self) -> Creature: ...
