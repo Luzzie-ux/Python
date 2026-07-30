@@ -19,7 +19,10 @@ class AcidCapability(ABC):
 
 
 class ShadowCapability(ABC):
-    def __init__(self, ability: float = 10.0, mod: float = 0.5) -> None:
+    def __init__(self, mod: float = 0.5) -> None:
         super().__init__()
-        self._ability: float = ability
+        self._ability: float = 10.0
         self._mod: float = mod
+
+    @abstractmethod
+    def still_image(self) -> str: ...

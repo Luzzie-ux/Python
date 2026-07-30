@@ -19,13 +19,13 @@ class Sproutling(Creature, HealCapability):
     def __init__(self) -> None:
         Creature.__init__(self, "Sprountling", "Grass", "Vine Whip")
         HealCapability.__init__(self)
-        self._heal: int = self._hp * (self._mp / 100)
+        self._heal: float = self._hp * (self._mp / 100)
 
     def attack(self) -> str:
         return f"{self._name} uses {self._attack}!"
 
     def heal(self, target: Creature) -> str:
-        heal: int = self._heal
+        heal: int = int(self._heal)
         if target._name == self._name:
             return f"{self._name} heals itself for a small amount({heal})"
         return f"{self._name} heals {target._name} for a small amount({heal})"
@@ -35,13 +35,13 @@ class Bloomelle(Creature, HealCapability):
     def __init__(self) -> None:
         Creature.__init__(self, "Bloomelle", "Grass/Fairy", "Petal Dance")
         HealCapability.__init__(self)
-        self._heal: int = self._hp * (self._mp / 50)
+        self._heal: float = self._hp * (self._mp / 50)
 
     def attack(self) -> str:
         return f"{self._name} uses {self._attack}!"
 
     def heal(self, target: Creature) -> str:
-        heal: int = self._heal
+        heal: int = int(self._heal)
         if target._name == self._name:
             spell: str = (
                 f"{self._name} heals itself "
