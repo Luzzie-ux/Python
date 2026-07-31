@@ -13,12 +13,12 @@ import sys, os, site
 def is_venv() -> bool:
     if sys.prefix == sys.base_exec_prefix:
         return True
-    return sys.prefix != sys.base_prefix
+    return False
 
 
 def main() -> int:
     os.write(1, b"=== Isolated Enviroment Checker ===\n")
-    if is_venv():
+    if not is_venv():
         sys.stdout.write(
             "Hello There! You are running this script in a venv!\n"
             f" we can know that because your sys.prefix: {sys.prefix}\n"
@@ -30,7 +30,8 @@ def main() -> int:
             "In case you want to use one, "
             "type into your terminal the following:\n"
             "\n   python3 -m venv <name_of_venv>\n"
-            "   source <name_of_venv>/bin/activate\n"
+            "   source <name_of_venv>/bin/activate # ON Unix\n"
+            "   <name_of_venv>\\Scripts\\activate # On Windows\n"
             "\n(name_of_venv here is a user given name)\n"
         )
     print("Have a good day!")
