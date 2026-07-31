@@ -6,13 +6,12 @@ tournament.py
 
 from typing import List, Tuple
 from ex0 import AquaFactory as AF, CreatureFactory as CF, FlameFactory as FF
+from ex0.creature import Creature
 from ex1 import HealingCreatureFactory as HCF, TransformCreatureFactory as TCF
 from ex2 import (
     AggressiveStrategy as AS,
-    PoisonCapability as PC,
     PoisonFactory as PF,
     BattleStrategy as BS,
-    DarkCapability as DC,
     DarkFactory as DF,
     DefensiveStrategy as DS,
     InvalidActError as IAE,
@@ -31,9 +30,9 @@ def battle(ops: List[Opponent]) -> None:
             b = ops[j]
             f1, s1 = a
             f2, s2 = b
-            factories = [f1, f2]
-            c1 = factories[0].create_base()
-            c2 = factories[1].create_base()
+            factories: list[CF] = [f1, f2]
+            c1: Creature = factories[0].create_base()
+            c2: Creature = factories[1].create_base()
             print(
                 "\n   * BATTLE *\n"
                 f" {c1.describe()}\n"
@@ -52,7 +51,7 @@ def format_tournament(tournament: list[Opponent]) -> str:
     parts: list[str] = []
     for o in tournament:
         f, s = o
-        beast = f.create_base()
+        beast: Creature = f.create_base()
         mode: str = type(s).__name__
         parts.append(f"({beast._name}+{mode.removesuffix('Strategy')})")
     return " [ " + ", ".join(parts) + " ]"
@@ -61,8 +60,9 @@ def format_tournament(tournament: list[Opponent]) -> str:
 def main() -> None:
     Tournament: list[list[Opponent]] = [
         [(FF(), NS()), (HCF(), DS())],
-        [(FF(), AS()), (HCF(), AS())],
+        [(FF(), AS()), (HCF(), DS())],
         [(AF(), NS()), (HCF(), DS()), (TCF(), AS())],
+        [(FF(), NS()), (AF(), NS()), (PF(), DS()), (DF(), AS())],
     ]
     j: int = 0
     for i in range(1, len(Tournament) + 1):

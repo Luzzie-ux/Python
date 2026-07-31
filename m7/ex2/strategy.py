@@ -61,7 +61,7 @@ class NormalStrategy(BattleStrategy):
         return [creature.attack()]
 
     def is_valid(self, c: Creature) -> bool:
-        return True
+        return isinstance(c, Creature)
 
 
 class AggressiveStrategy(BattleStrategy):
@@ -74,7 +74,7 @@ class AggressiveStrategy(BattleStrategy):
                 f"Invalid Creature '{creature._name}' "
                 "for this aggressive strategy"
             )
-        t = cast(TransformCapability, creature)
+        t: TransformCapability = cast(TransformCapability, creature)
         return [t.transform(), creature.attack(), t.revert()]
 
     def is_valid(self, c: Creature) -> bool:
@@ -91,7 +91,7 @@ class DefensiveStrategy(BattleStrategy):
                 f"Invalid Creature '{creature._name}' "
                 "for this defensive strategy"
             )
-        h = cast(HealCapability, creature)
+        h: HealCapability = cast(HealCapability, creature)
         return [creature.attack(), h.heal(creature)]
 
     def is_valid(self, c: Creature) -> bool:
