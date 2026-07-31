@@ -9,10 +9,10 @@ import alchemy
 
 
 def main() -> None:
-    print("=== Distilation 1 ===")
-    print("Using 'import alchemy' structure to access potions")
-    print(f"Testing strength_potion: {alchemy.strength_potion()}")
-    print(f"Testing heal alias: {alchemy.heal()}")
+    print("=== Distillation 1 ===\n"
+          "Using: 'import alchemy' structure to access potions\n"
+          f"Testing strength_potion: {alchemy.strength_potion()}\n"
+          f"Testing heal alias: {alchemy.heal()}")
     return
 
 
