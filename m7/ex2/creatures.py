@@ -18,16 +18,16 @@ class Snape(Creature, PoisonCapability, HealCapability):
         self._poison_points += int(self._poison_points * self._modifier)
 
     def attack(self) -> str:
-        return f"{self._name} casts {self._attack}!"
+        return f"{self._name} casts {self._attack}!\n{self.poison(self)}"
 
     def heal(self, target: Creature) -> str:
         heal: int = int(self._heal)
-        return f"{target._name} heals itself for a small amount({heal})"
+        return f"{target._name} heals itself for a small amount ({heal})"
 
     def poison(self, target: Creature) -> str:
         turns: int = self._poison_points
         if target._name == self._name:
-            return self.heal(target)
+            return f"{target._name} is now buffed for {turns} turns"
         return f"{target._name} is now poisoned for {turns} turns"
 
 
@@ -42,16 +42,16 @@ class Viper(Creature, PoisonCapability, HealCapability):
         self._poison_points += int(self._poison_points * self._modifier)
 
     def attack(self) -> str:
-        return f"{self._name} summons {self._attack}!"
+        return f"{self._name} summons {self._attack}!\n{self.poison(self)}"
 
     def heal(self, target: Creature) -> str:
         heal: int = int(self._heal)
-        return f"{target._name} heals itself for a large amount({heal})"
+        return f"{target._name} heals itself for a large amount ({heal})"
 
     def poison(self, target: Creature) -> str:
         turns: int = self._poison_points
         if target._name == self._name:
-            return self.heal(target)
+            return f"{target._name} is now buffed for {turns} turns"
         return f"{target._name} is now poisoned for {turns} turns"
 
 
@@ -88,7 +88,7 @@ class Umbralon(Creature, DarkCapability, TransformCapability):
         TransformCapability.__init__(self)
         DarkCapability.__init__(self, 1.8)
         Creature.__init__(
-            self, "Veilaw", "Dark/Explosive", "Boom Claw", evade=12
+            self, "Umbralon", "Dark/Explosive", "Boom Claw", evade=12
         )
         self._evade *= self._mod
 

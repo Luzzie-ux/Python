@@ -11,7 +11,7 @@ of the base and evolved Creature for each family
 Aquabub and Torragon for AquaFactory,)
 """
 
-from ex0 import CreatureFactory
+from .factory import CreatureFactory
 from .creature import Creature
 from .creature_type import (
     Flameling,

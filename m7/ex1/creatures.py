@@ -27,8 +27,8 @@ class Sproutling(Creature, HealCapability):
     def heal(self, target: Creature) -> str:
         heal: int = int(self._heal)
         if target._name == self._name:
-            return f"{self._name} heals itself for a small amount({heal})"
-        return f"{self._name} heals {target._name} for a small amount({heal})"
+            return f"{self._name} heals itself for a small amount ({heal})"
+        return f"{self._name} heals {target._name} for a small amount ({heal})"
 
 
 class Bloomelle(Creature, HealCapability):
@@ -45,10 +45,10 @@ class Bloomelle(Creature, HealCapability):
         if target._name == self._name:
             spell: str = (
                 f"{self._name} heals itself "
-                f"and others for a large amount({heal})"
+                f"and others for a large amount ({heal})"
             )
             return spell
-        return f"{self._name} heals {target._name} for a large amount({heal})"
+        return f"{self._name} heals {target._name} for a large amount ({heal})"
 
 
 class Shiftling(Creature, TransformCapability):
