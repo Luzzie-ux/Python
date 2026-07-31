@@ -15,20 +15,20 @@ class Snape(Creature, PoisonCapability, HealCapability):
         PoisonCapability.__init__(self, 1.0)
         Creature.__init__(self, "Snape", "Poison", "Grime Rain", 20, 40)
         self._heal: float = self._hp * (self._mp / 100)
+        self._poison_points += int(self._poison_points * self._modifier)
 
     def attack(self) -> str:
         return f"{self._name} casts {self._attack}!"
 
+    def heal(self, target: Creature) -> str:
+        heal: int = int(self._heal)
+        return f"{target._name} heals itself for a small amount({heal})"
+
     def poison(self, target: Creature) -> str:
-        self._poison_points += (self._poison_points * self._modifier)
         turns: int = self._poison_points
         if target._name == self._name:
             return self.heal(target)
         return f"{target._name} is now poisoned for {turns} turns"
-
-    def heal(self, target: Creature) -> str:
-        heal: int = int(self._heal)
-        return f"{target._name} heals itself for a small amount({heal})"
 
 
 class Viper(Creature, PoisonCapability, HealCapability):
@@ -36,23 +36,23 @@ class Viper(Creature, PoisonCapability, HealCapability):
         HealCapability.__init__(self)
         PoisonCapability.__init__(self, 1.5)
         Creature.__init__(
-            self, "Viper", "Poison/Ghost", "Karmic Thunderstorm", 35, 50
+            self, "Viper", "Poison/Thunder", "Karmic Thunderstorm", 35, 50
         )
         self._heal: float = self._hp * (self._mp / 50)
+        self._poison_points += int(self._poison_points * self._modifier)
 
     def attack(self) -> str:
         return f"{self._name} summons {self._attack}!"
 
+    def heal(self, target: Creature) -> str:
+        heal: int = int(self._heal)
+        return f"{target._name} heals itself for a large amount({heal})"
+
     def poison(self, target: Creature) -> str:
-        self._poison_points += (self._poison_points * self._modifier)
         turns: int = self._poison_points
         if target._name == self._name:
             return self.heal(target)
         return f"{target._name} is now poisoned for {turns} turns"
-
-    def heal(self, target: Creature) -> str:
-        heal: int = int(self._heal)
-        return f"{target._name} heals itself for a large amount({heal})"
 
 
 class Veilaw(Creature, DarkCapability, TransformCapability):
@@ -88,15 +88,17 @@ class Umbralon(Creature, DarkCapability, TransformCapability):
         TransformCapability.__init__(self)
         DarkCapability.__init__(self, 1.8)
         Creature.__init__(
-            self, "Veilaw", "Dark/Explosive", "Talon Strike", evade=12
+            self, "Veilaw", "Dark/Explosive", "Boom Claw", evade=12
         )
         self._evade *= self._mod
 
     def attack(self) -> str:
         if not self._state:
-            return f"{self._name} uses explosive {self._attack}!"
-        clones: str = self.still_image()
-        return f"{clones}\n{self._name} and its clones use boom claw"
+            return f"{self._name} uses {self._attack}!"
+        clones: str = (
+            f"{self.still_image()}\n"
+            f"{self._name} and its clones use {self._attack}")
+        return clones
 
     def transform(self) -> str:
         if not self._state:
