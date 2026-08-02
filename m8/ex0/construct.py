@@ -7,7 +7,9 @@ Files to Submit: construct.py
 Authorized: sys, os, site modules, print()
 """
 
-import sys, os, site
+import sys
+import os
+import site
 
 
 def is_venv() -> bool:
@@ -33,10 +35,11 @@ def get_pkcg() -> str:
 
     pyv: str = f"python{sys.version_info.major}.{sys.version_info.minor}"
     pgkc: str = os.path.join(sys.prefix, "lib", pyv, "site-packages")
-    
+
     if hasattr(site, "getsitepackages"):
         pack: list[str] = site.getsitepackages()
         return pack[0] if pack else pgkc
+    return pgkc
 
 
 def main() -> None:
@@ -68,12 +71,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    has_venv_var = os.environ.get("VIRTUAL_ENV") is not None
-
-    has_prefix_diff = sys.prefix != getattr(sys, "base_prefix", sys.prefix)
-
-    has_real_prefix = hasattr(sys, "real_prefix")
-
-    print(has_venv_var or has_prefix_diff or has_real_prefix)
-    
-    #main()
+    main()
