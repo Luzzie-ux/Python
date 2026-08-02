@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
-from .. import create_air, strength_potion as buff
 from elements import create_fire
+from .. import create_air
+from alchemy.potions import strength_potion as buff
+
 
 __all__: list[str] = ["lead_to_gold"]
 

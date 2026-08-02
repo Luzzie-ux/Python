@@ -9,10 +9,10 @@ from alchemy.potions import strength_potion, healing_potion
 
 
 def main() -> None:
-    print("=== Distilation 0 ===")
-    print("Direct Access to alchemy/potions.py")
-    print(f"Testing strength_potion: {strength_potion()}")
-    print(f"Testing healing_potion: {healing_potion()}")
+    print("=== Distillation 0 ===\n"
+          "Direct access to alchemy/potions.py\n"
+          f"Testing strength_potion: {healing_potion()}\n"
+          f"Testing heal alias: {strength_potion()}")
     return
 
 
