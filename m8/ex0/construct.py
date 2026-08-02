@@ -11,31 +11,69 @@ import sys, os, site
 
 
 def is_venv() -> bool:
-    if sys.prefix == sys.base_exec_prefix:
+    if sys.prefix != sys.base_exec_prefix:
+        return True
+    elif os.environ.get("VIRTUAL_ENV"):
         return True
     return False
 
 
-def main() -> int:
-    os.write(1, b"=== Isolated Enviroment Checker ===\n")
-    if not is_venv():
-        sys.stdout.write(
-            "Hello There! You are running this script in a venv!\n"
-            f" we can know that because your sys.prefix: {sys.prefix}\n"
-            f" is not the same as sys.base_prefix: {sys.base_prefix}\n"
+def env_name() -> str:
+    env: str | None = os.environ.get("VIRTUAL_ENV")
+    if env:
+        return os.path.basename(env)
+    return os.path.basename(sys.prefix)
+
+
+def path() -> str:
+    return os.environ.get("VIRTUAL_ENV", sys.prefix)
+
+
+def get_pkcg() -> str:
+
+    pyv: str = f"python{sys.version_info.major}.{sys.version_info.minor}"
+    pgkc: str = os.path.join(sys.prefix, "lib", pyv, "site-packages")
+    
+    if hasattr(site, "getsitepackages"):
+        pack: list[str] = site.getsitepackages()
+        return pack[0] if pack else pgkc
+
+
+def main() -> None:
+    print("\nMATRIX STATUS: ", end="")
+    if is_venv():
+        return print(
+            "Welcome to the construct\n\n"
+            f"Current Python: {sys.executable}\n"
+            f"Virtual Environment: {env_name()} \n"
+            f"Environment Path: {path()}\n\n"
+            "SUCCESS: You're in an isolated environment!\n"
+            "Safe to install packages without affecting\n"
+            "the global system.\n\n"
+            "Package installation path:\n"
+            f"{get_pkcg()}"
         )
-    else:
-        sys.stdout.write(
-            "Hello There! You are running this script without a venv!\n"
-            "In case you want to use one, "
-            "type into your terminal the following:\n"
-            "\n   python3 -m venv <name_of_venv>\n"
-            "   source <name_of_venv>/bin/activate # ON Unix\n"
-            "   <name_of_venv>\\Scripts\\activate # On Windows\n"
-            "\n(name_of_venv here is a user given name)\n"
-        )
-    print("Have a good day!")
+    return print(
+        "You're still plugged in\n\n"
+        f"Current Python: {sys.executable}\n"
+        "Virtual Environment: None detected\n\n"
+        "WARNING: You're in the global environment!\n"
+        "The machines can see everything you install.\n\n"
+        "To enter the construct, run:\n"
+        "python -m venv matrix_env\n"
+        "source matrix_env/bin/activate # On Unix\n"
+        "matrix_env\\Scripts\\activate # On Windows\n\n"
+        "Then run this program again."
+    )
 
 
 if __name__ == "__main__":
-    main()
+    has_venv_var = os.environ.get("VIRTUAL_ENV") is not None
+
+    has_prefix_diff = sys.prefix != getattr(sys, "base_prefix", sys.prefix)
+
+    has_real_prefix = hasattr(sys, "real_prefix")
+
+    print(has_venv_var or has_prefix_diff or has_real_prefix)
+    
+    #main()
