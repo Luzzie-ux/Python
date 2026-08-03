@@ -7,12 +7,8 @@ Files to Submit: loading.py, requirements.txt, pyproject.toml
 Authorized: pandas, requests, matplotlib, numpy, sys, importlib
 """
 
-import importlib
 import sys
-import pandas
-import requests
-import numpy
-import matplotlib
+import importlib
 
 def main() -> None:
     return
