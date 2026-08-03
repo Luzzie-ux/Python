@@ -1,10 +1,8 @@
-__pycache__
+.vscode
+.python-version
 .mypy_cache
 .venv
-test
-build
-snap
-matrix_env
 vpip
-vpoetry
-.python-version
+matrix_env
+poetry.lock
+__pycache__
