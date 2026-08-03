@@ -11,7 +11,10 @@ strict = true
 exclude = [
     ".venv/",
     ".git/",
-    "__pycache__/"
+    "__pycache__/",
+    "matrix_env/",
+    "vpip/",
+    "vpoetry/",
 ]
 
 [tool.flake8]
@@ -21,7 +24,10 @@ extend-exclude = [
     ".git",
     ".venv",
     "__pycache__",
-    ".mypy_cache"
+    ".mypy_cache",
+    "matrix_env",
+    "vpip",
+    "vpoetry",
 ]
 count = true
 statistics = true
