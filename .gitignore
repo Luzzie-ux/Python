@@ -6,3 +6,4 @@ vpip
 matrix_env
 poetry.lock
 __pycache__
+matrix_analysis.png
