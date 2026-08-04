@@ -13,7 +13,7 @@ import dotenv
 
 
 def main() -> None:
-
+    sys.stdout.write("Loading vars from .env")
     return
 
 
