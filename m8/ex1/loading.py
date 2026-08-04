@@ -9,7 +9,7 @@ Authorized: pandas, requests, matplotlib, numpy, sys, importlib
 
 import sys
 from importlib import import_module as imp
-from importlib.metadata import version, PackageNotFoundError as PNFE
+from importlib.metadata import version
 
 
 def check() -> None:
@@ -25,19 +25,10 @@ def check() -> None:
             continue
     if not pkgs or len(pkgs.values()) < size:
         conflict(len(pkgs.values()) - size)
-    check: bool = False
     for name in pkgs.keys():
-
         print(f"[OK] {name}: ", end="")
-        try:
-            print(f"({version(name)})", end="")
-        except PNFE as e:
-            print(f"{e}")
-            check = True
-            continue
+        print(f"({version(name)})", end="")
         print(f" - {desc(name)} ready")
-    if not check:
-        sys.exit(1)
     return compute()
 
 
@@ -70,8 +61,8 @@ def compute() -> None:
     print("\nAnalyzing Matrix Data")
     import numpy as np
 
-    s: int = 50
-    t: int = 20
+    s: int = 10
+    t: int = 10
 
     rng = np.random.default_rng(42)
     pairs = rng.integers(1, 10, size=(s, 2))
@@ -111,6 +102,8 @@ def graph(df) -> None:
     ax.set_ylabel("Value")
     ax.legend()
 
+    print(df)
+    print()
     print(df.iloc[:, -1].describe())
     print()
 
