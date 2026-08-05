@@ -36,7 +36,7 @@ def get(condition: bool) -> dict[str, str | None]:
     if not condition:
         print("Looking in PATH for vars\n")
 
-    vars: dict[str, str] = {}
+    vars: dict[str, str | None] = {}
     for name, _, _ in VARS:
         var: str | None = os.environ.get(name)
         if var is None:
@@ -51,9 +51,7 @@ def display(vars: dict[str, str | None], error: bool, mode: str) -> bool:
     if error is True:
         print("MATRIX_MODE has to be set to either:")
         print("     development or production")
-        sys.exit(1)
         return False
-
     if mode == "dev":
         print(f"Mode: {vars.pop('MATRIX_MODE')}")
         for key, value in vars.items():
@@ -64,6 +62,8 @@ def display(vars: dict[str, str | None], error: bool, mode: str) -> bool:
         for name, _, default in VARS[1:]:
             print(f"{name}: {default}")
         return True
+    else:
+        return False
 
 
 def oracle(vars: dict[str, str | None]) -> bool:
@@ -74,7 +74,7 @@ def oracle(vars: dict[str, str | None]) -> bool:
             if name not in vars:
                 print(f"{name} missing, using default value for it")
                 vars[name] = default
-    value: str = vars["MATRIX_MODE"]
+    value: str | None = vars["MATRIX_MODE"]
 
     if value == "production":
         return display(vars, False, "prod")
@@ -89,14 +89,15 @@ def main() -> None:
     loaded: bool = check()
     data: dict[str, str | None] = get(loaded)
     sec_check = oracle(data)
-    if sec_check:
-        print(
-            "Environment security check:"
-            "[OK] No hardcoded secrets detected"
-            "[OK] .env file properly configured"
-            "[OK] Production overrides available"
-            "The Oracle sees all configurations"
-        )
+    if not sec_check:
+        sys.exit(1)
+    print(
+        "Environment security check:"
+        "[OK] No hardcoded secrets detected"
+        "[OK] .env file properly configured"
+        "[OK] Production overrides available"
+        "The Oracle sees all configurations"
+    )
     return
 
 
