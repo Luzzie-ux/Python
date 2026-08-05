@@ -32,7 +32,7 @@ def check() -> bool:
     return True
 
 
-def get(condition: bool) -> dict[str, str]:
+def get(condition: bool) -> dict[str, str | None]:
     if not condition:
         print("Looking in PATH for vars\n")
 
@@ -46,7 +46,7 @@ def get(condition: bool) -> dict[str, str]:
     return vars
 
 
-def display(vars: dict[str, str], error: bool, mode: str) -> bool:
+def display(vars: dict[str, str | None], error: bool, mode: str) -> bool:
 
     if error is True:
         print("MATRIX_MODE has to be set to either:")
@@ -66,7 +66,7 @@ def display(vars: dict[str, str], error: bool, mode: str) -> bool:
         return True
 
 
-def oracle(vars: dict[str, str]) -> bool:
+def oracle(vars: dict[str, str | None]) -> bool:
     print("\nConfiguration loaded:")
 
     if len(vars) < len(VARS):
@@ -87,7 +87,7 @@ def oracle(vars: dict[str, str]) -> bool:
 def main() -> None:
     print("ORACLE STATUS: Reading the Matrix...\n")
     loaded: bool = check()
-    data: dict[str, str] = get(loaded)
+    data: dict[str, str | None] = get(loaded)
     sec_check = oracle(data)
     if sec_check:
         print(
