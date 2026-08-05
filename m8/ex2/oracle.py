@@ -52,6 +52,7 @@ def display(vars: dict[str, str], error: bool, mode: str) -> bool:
         print("MATRIX_MODE has to be set to either:")
         print("     development or production")
         sys.exit(1)
+        return False
 
     if mode == "dev":
         print(f"Mode: {vars.pop('MATRIX_MODE')}")
