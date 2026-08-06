@@ -20,10 +20,11 @@ PROD: list[tuple[str, str]] = [
     ("ZION_ENDPOINT", "https://zion.local:8080"),
 ]
 
+
 def check() -> bool:
     if EXISTS:
         try:
-            from dotenv import load_dotenv
+            from dotenv import load_dotenv  # type: ignore
         except ModuleNotFoundError:
             print("Could Not Find module 'dotenv'\n", file=stderr)
             return False
@@ -31,7 +32,7 @@ def check() -> bool:
         load_dotenv(FILE)
         return True
     else:
-        print(f"Could Not find file {FILE}\n", file=stderr)  
+        print(f"Could Not find file {FILE}\n", file=stderr)
         return False
 
 
@@ -46,7 +47,7 @@ def get(condition: bool) -> dict[str, str | None]:
         if var is None or var == "":
             print(f"Value for variable '{name}' missing", file=stderr)
             continue
-        
+
         vars[name] = var
     return vars
 
@@ -58,7 +59,7 @@ def oracle(env: dict[str, str | None]) -> bool:
         if name not in env:
             print(f"{name} missing, defaulting", file=stderr)
             env[name] = default
-    
+
     mode: str | None = env["MATRIX_MODE"]
 
     match mode:
