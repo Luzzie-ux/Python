@@ -25,10 +25,16 @@ def check() -> bool:
     try:
         from dotenv import load_dotenv
     except ModuleNotFoundError:
-        print("Could Not Find module 'dotenv'\n")
+        print("Could Not Find module 'dotenv'\n", file=sys.stderr)
+        if os.path.exists(ENV) is not True:
+            print(f"Could Not find file {ENV}\n", file=sys.stderr)
         return False
-
+    
+    if os.path.exists(ENV) is not True:
+        print(f"Could Not find file {ENV}\n", file=sys.stderr)
+        return False
     load_dotenv(ENV)
+    print("DEBUG:", repr(os.environ.get("MATRIX_MODE")), file=sys.stderr)
     return True
 
 
@@ -39,8 +45,8 @@ def get(condition: bool) -> dict[str, str | None]:
     vars: dict[str, str | None] = {}
     for name, _, _ in VARS:
         var: str | None = os.environ.get(name)
-        if var is None:
-            print(f"Value for variable '{name}' missing")
+        if var is None or var == '':
+            print(f"Value for variable '{name}' missing", file=sys.stderr)
             continue
         vars[name] = var
     return vars
@@ -49,18 +55,25 @@ def get(condition: bool) -> dict[str, str | None]:
 def display(vars: dict[str, str | None], error: bool, mode: str) -> bool:
 
     if error is True:
-        print("MATRIX_MODE has to be set to either:")
-        print("     development or production")
+        print()
+        print(
+            f"[ERROR]: MATRIX_MODE was set to '{mode}'\n"
+            "[WARN]: It should only be set to ", end=""
+            "'development' or 'production'\n",
+            file=sys.stderr,
+        )
         return False
     if mode == "dev":
-        print(f"Mode: {vars.pop('MATRIX_MODE')}")
+        print(f"\nMode: {vars.pop('MATRIX_MODE')}")
         for key, value in vars.items():
             print(f"{key}: {value}")
+        print()
         return True
     elif mode == "prod":
-        print(f"Mode: {vars.pop('MATRIX_MODE')}")
+        print(f"\nMode: {vars.pop('MATRIX_MODE')}")
         for name, _, default in VARS[1:]:
             print(f"{name}: {default}")
+        print()
         return True
     else:
         return False
@@ -72,7 +85,10 @@ def oracle(vars: dict[str, str | None]) -> bool:
     if len(vars) < len(VARS):
         for name, _, default in VARS:
             if name not in vars:
-                print(f"{name} missing, using default value for it")
+                print(
+                    f"{name} missing, defaulting",
+                    file=sys.stderr,
+                )
                 vars[name] = default
     value: str | None = vars["MATRIX_MODE"]
 
@@ -81,7 +97,7 @@ def oracle(vars: dict[str, str | None]) -> bool:
     elif value == "development":
         return display(vars, False, "dev")
     else:
-        return display(vars, True, "")
+        return display(vars, True, value)
 
 
 def main() -> None:
@@ -91,13 +107,13 @@ def main() -> None:
     sec_check = oracle(data)
     if not sec_check:
         sys.exit(1)
+    print("Environment security check:\n")
     print(
-        "Environment security check:"
-        "[OK] No hardcoded secrets detected"
-        "[OK] .env file properly configured"
-        "[OK] Production overrides available"
-        "The Oracle sees all configurations"
+        "[OK] No hardcoded secrets detected\n"
+        "[OK] .env file properly configured\n"
+        "[OK] Production overrides available\n"
     )
+    print("The Oracle sees all configurations")
     return
 
 
