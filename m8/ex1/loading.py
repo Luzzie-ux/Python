@@ -29,7 +29,7 @@ def check() -> None:
         print(f"[OK] {name}: ", end="")
         print(f"({version(name)})", end="")
         print(f" - {desc(name)} ready")
-    return compute()
+    return simulate()
 
 
 def desc(name: str) -> str:
@@ -57,7 +57,7 @@ def conflict(n: int) -> None:
     sys.exit(1)
 
 
-def compute() -> None:
+def simulate() -> None:
     print("\nAnalyzing Matrix Data")
     import numpy as np
 
@@ -73,10 +73,7 @@ def compute() -> None:
 
     for col in range(2, t):
         matrix[:, col] = matrix[:, col - 1] + matrix[:, col - 2]
-    return dataframe(matrix, s, t)
 
-
-def dataframe(matrix, s: int, t: int) -> None:
     print(f"Processing {s * t} data points")
     import pandas as pd
 
@@ -85,12 +82,9 @@ def dataframe(matrix, s: int, t: int) -> None:
         index=[f"S{i}" for i in range(s)],
         columns=[f"T{i}" for i in range(t)],
     )
-    return graph(df)
 
-
-def graph(df) -> None:
     print("Generating visualization\n")
-    import matplotlib.pyplot as plt
+    from matplotlib import pyplot as plt
 
     fig, ax = plt.subplots()
     for seq_label in df.index:
@@ -107,7 +101,6 @@ def graph(df) -> None:
     print(df.iloc[:, -1].describe())
     print()
 
-    # saving graph
     plt.savefig("matrix_analysis.png")
     print("Analysis complete!")
     print("Results saved to: matrix_analysis.png")
