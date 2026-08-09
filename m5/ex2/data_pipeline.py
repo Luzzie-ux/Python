@@ -61,6 +61,12 @@ class DataProcessor(ABC):
     @abstractmethod
     def ft_all(self, data: Any) -> bool: ...
 
+    def get_rank(self) -> int:
+        return self._rank
+
+    def get_storage(self) -> list[tuple[int, str]]:
+        return self._storage
+
 
 # Numbers and List of Numbers
 class NumericProcessor(DataProcessor):
@@ -199,8 +205,8 @@ class DataStream:
         print("== DataStream statistics ==")
         for p in self._procs:
             name: str = p.__class__.__name__
-            t: int = p._rank
-            r: int = len(p._storage)
+            t: int = p.get_rank()
+            r: int = len(p.get_storage())
             print(f"{name}:", end=" ")
             print(f"total {t} items processed, remaining {r} on processor")
         print()
@@ -208,7 +214,7 @@ class DataStream:
 
     def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
         for proc in self._procs:
-            n: int = min(nb, len(proc._storage))
+            n: int = min(nb, len(proc.get_storage()))
             data: list[tuple[int, str]] = [proc.output() for _ in range(n)]
             plugin.process_output(data)
 

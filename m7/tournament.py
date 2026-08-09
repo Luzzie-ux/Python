@@ -55,7 +55,7 @@ def format_tournament(tournament: list[Opponent]) -> str:
         f, s = o
         beast: Creature = f.create_base()
         mode: str = type(s).__name__
-        parts.append(f"({beast._name}+{mode.removesuffix('Strategy')})")
+        parts.append(f"({beast.get_name()}+{mode.removesuffix('Strategy')})")
     return " [ " + ", ".join(parts) + " ]"
 
 

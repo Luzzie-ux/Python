@@ -34,6 +34,7 @@ extend-exclude = [
     "dist",
 ]
 show-fixes = true
+#output-format = "grouped"
 
 [tool.ruff.format]
 quote-style = "double"
@@ -42,28 +43,29 @@ line-ending = "auto"
 docstring-code-format = false
 
 [tool.ruff.lint]
-preview = true
-select = ["ALL"]
+#preview = true
+#select = ["ALL"]
 extend-select = []
-ignore = [
-    "T201",
-    "D",
-    "DOC",
-    "CPY",
-    "SLF001",
-    "RUF201",
-    "PLR6301",
-    "PLR0913",
-    "PLR0917",
-    "PLC0415",
-    "PTH",
-    "ANN401",
-    "FBT",
-    "S311",
-    "TID252",
-    "SIM115",
-]
-fixable = []
+
+# ignore = [
+#     "T201",     # print statements allowed (flake8-print)
+#     "D",        # all pydocstyle/docstring rules off
+#     "DOC",      # docstring content rules (pydoclint) off
+#     "CPY",      # copyright notice checks off
+#     "SLF001",   # allow accessing "private" (_attr) members
+#     "RUF201",   # a specific ruff-native rule off (unused-noqa-directive variant, check ruff changelog for exact meaning per version)
+#     "PLR6301",  # pylint: method could be a function/staticmethod — off
+#     "PLR0913",  # pylint: too many arguments — off
+#     "PLR0917",  # pylint: too many positional arguments — off
+#     "PLC0415",  # pylint: import not at top of file — off (allows local imports)
+#     "PTH",      # flake8-use-pathlib — off (allows os.path instead of pathlib)
+#     "ANN401",   # allow explicit "Any" type annotations
+#     "FBT",      # flake8-boolean-trap — off (allows bare bool positional args)
+#     "S311",     # bandit: allow non-cryptographic random (random.random) without warning
+#     "TID252",   # flake8-tidy-imports — off (allows relative imports)
+#     "SIM115",   # allow context-manager-less file open() (the rule we discussed earlier)
+# ]
+fixable = ["ALL"]
 unfixable = []
 
 
@@ -72,6 +74,9 @@ max-complexity = 10
 
 [tool.ruff.lint.per-file-ignores]
 "m0/**/*.py" = ["INP001"]
+"m2/**/*.py" = ["SIM115"]
+"m4/**/*.py" = ["SIM115"]
+"m5" = ["ANN401"]
 
 # 42 Tools Config:
 [tool.flake8]

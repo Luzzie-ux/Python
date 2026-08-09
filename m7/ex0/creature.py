@@ -36,3 +36,6 @@ class Creature(ABC):
 
     def describe(self) -> str:
         return f"{self._name}: is a {self._ctype} type Creature"
+
+    def get_name(self) -> str:
+        return self._name

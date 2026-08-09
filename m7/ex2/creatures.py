@@ -23,13 +23,14 @@ class Snape(Creature, PoisonCapability, HealCapability):
 
     def heal(self, target: Creature) -> str:
         heal: int = int(self._heal)
-        return f"{target._name} heals itself for a small amount ({heal})"
+        return f"{target.get_name()} heals itself for a small amount ({heal})"
 
     def poison(self, target: Creature) -> str:
         turns: int = self._poison_points
-        if target._name == self._name:
-            return f"{target._name} is now buffed for {turns} turns"
-        return f"{target._name} is now poisoned for {turns} turns"
+        name: str = target.get_name()
+        if name == self._name:
+            return f"{name} is now buffed for {turns} turns"
+        return f"{name} is now poisoned for {turns} turns"
 
 
 class Viper(Creature, PoisonCapability, HealCapability):
@@ -52,13 +53,14 @@ class Viper(Creature, PoisonCapability, HealCapability):
 
     def heal(self, target: Creature) -> str:
         heal: int = int(self._heal)
-        return f"{target._name} heals itself for a large amount ({heal})"
+        return f"{target.get_name()} heals itself for a large amount ({heal})"
 
     def poison(self, target: Creature) -> str:
         turns: int = self._poison_points
-        if target._name == self._name:
-            return f"{target._name} is now buffed for {turns} turns"
-        return f"{target._name} is now poisoned for {turns} turns"
+        name: str = target.get_name()
+        if name == self._name:
+            return f"{name} is now buffed for {turns} turns"
+        return f"{name} is now poisoned for {turns} turns"
 
 
 class Veilaw(Creature, DarkCapability, TransformCapability):

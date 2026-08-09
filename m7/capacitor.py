@@ -33,7 +33,7 @@ def test_heal(f: HealingCreatureFactory) -> None:
     creatures = [f.create_base(), f.create_evolved()]
     for creature in creatures:
         h = cast("HealCapability", creature)
-        if creature._name == "Bloomelle":
+        if creature.get_name() == "Bloomelle":
             print(" evolved:")
         else:
             print(" base:")
@@ -48,7 +48,7 @@ def test_trans(f: TransformCreatureFactory) -> None:
     creatures = [f.create_base(), f.create_evolved()]
     for creature in creatures:
         t = cast("TransformCapability", creature)
-        if creature._name == "Morphagon":
+        if creature.get_name() == "Morphagon":
             print(" evolved:")
         else:
             print(" base:")

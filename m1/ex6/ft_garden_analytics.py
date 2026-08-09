@@ -25,6 +25,12 @@ class Plant:
         self._age += 1
         self._stats.count_age()
 
+    def get_name(self) -> str:
+        return self._name
+
+    def ret_stats(self) -> None:
+        return self._stats.print_stats()
+
     @staticmethod
     def check_age(age: int) -> None:
         """
@@ -153,10 +159,13 @@ class Tree(Plant):
         print(f"Tree Oak now produces a shade of {self._height}cm", end=" ")
         print(f"long and {self._diameter}cm wide.")
 
+    def get_shade(self) -> int:
+        return self._shade
+
 
 def display(plant: Plant) -> None:
-    print(f"[statistics for {plant._name}]")
-    plant._stats.print_stats()
+    print(f"[statistics for {plant.get_name()}]")
+    plant.ret_stats()
 
 
 def ft_garden_analytics() -> None:
@@ -177,7 +186,7 @@ def ft_garden_analytics() -> None:
     tree: Tree = Tree("oak", 200.00, 365, 10, 5.0)
     tree.show()
     display(tree)
-    print(f"{tree._shade} shade ")
+    print(f"{tree.get_shade()} shade ")
     print("\n=== Seed")
     seed: Seed = Seed("sunflower", 80.0, 45, 1.5, "yellow")
     seed.show()

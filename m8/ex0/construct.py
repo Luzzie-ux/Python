@@ -13,7 +13,7 @@ import sys
 
 
 def is_venv() -> bool:
-    return sys.prefix != sys.base_exec_prefix or os.environ.get("VIRTUAL_ENV")
+    return bool(sys.prefix != sys.base_exec_prefix or os.environ.get("VIRTUAL_ENV"))
 
 
 def env_name() -> str:

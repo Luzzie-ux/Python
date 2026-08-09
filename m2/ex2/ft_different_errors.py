@@ -10,11 +10,11 @@ def garden_operations(operation_number: int) -> None:
         case 0:
             int("abc")
         case 1:
-            10 / 0  # ruff: ignore[useless-expression]
+            10 / 0  # noqa: B018
         case 2:
             open("/non/existent/file", encoding="utf-8")
         case 3:
-            "good morning" + 1  # ruff: ignore[useless-expression]
+            "good morning" + 1  # noqa: B018
         case _:
             operation_number * 10
 

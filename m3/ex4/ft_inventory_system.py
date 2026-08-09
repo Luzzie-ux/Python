@@ -60,12 +60,12 @@ def main() -> None:
     chest: list[str] = list(bag.keys())
     most: str = chest[0]
     least: str = chest[0]
-    for item in bag.key():
-        if bag[item] > bag[most]:
+    for item, value in bag.items():
+        if value > bag[most]:
             most = item
-        elif bag[item] < bag[least]:
+        elif value < bag[least]:
             least = item
-        print(f"Item {item} represents {round(bag[item] / t_value * 100, 2)}%")
+        print(f"Item {item} represents {round(value / t_value * 100, 2)}%")
     print(f"Item most abundant: {most} with quantity {bag[most]}")
     print(f"Item least abundant: {least} with quantity {bag[least]}")
     bag.update({"magic_item": 1})
