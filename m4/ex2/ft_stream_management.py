@@ -12,6 +12,8 @@ io.flush(), io.close(), print()
 from sys import argv, stderr, stdin, stdout
 from typing import IO
 
+MAX_ARGS = 2
+
 
 def save(content: str) -> int:
     stdout.write("Enter new file name (or empty): ")
@@ -22,11 +24,11 @@ def save(content: str) -> int:
     stdout.write(f"Saving data to '{name}'\n")
     file: IO[str] | None = None
     try:
-        file = open(name, "w")
+        file = open(name, "w", encoding="utf-8")
         file.write(content)
     except PermissionError as e:
         stderr.write(
-            f"[STDERR] Error opening file {name}: {e}\nData not saved\n"
+            f"[STDERR] Error opening file {name}: {e}\nData not saved\n",
         )
     finally:
         if file:
@@ -37,24 +39,21 @@ def save(content: str) -> int:
 
 def transform(text: str) -> None:
     stdout.write("\nTransform data:\n")
-    new: list[str] = []
-    for line in text.splitlines():
-        new.append(line + "#")
+    new: list[str] = [line + "#" for line in text.splitlines()]
     content: str = "\n".join(new)
     stdout.write(f"\n---\n\n{content}\n\n---\n")
     save(content)
-    return
 
 
 def main() -> None:
-    if len(argv) != 2:
+    if len(argv) != MAX_ARGS:
         return
     stdout.write("=== Cyber Archives Recovery & Preservation === \n")
     stdout.write(f"accessing file '{argv[1]}'\n")
     file: IO[str] | None = None
     data: str | None = None
     try:
-        file = open(argv[1])
+        file = open(argv[1], encoding="utf-8")
         data = file.read()
         stdout.write(f"---\n\n{data}\n\n---\n")
     except (FileNotFoundError, PermissionError) as e:

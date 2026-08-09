@@ -9,15 +9,16 @@ Authorized: open(), read(), write(), print()
 
 
 def secure_archive(
-    filename: str, mode: str, content: str | None = None
+    filename: str,
+    mode: str,
+    content: str | None = None,
 ) -> tuple[bool, str]:
     try:
         with open(filename, mode) as f:
             if mode == "r":
                 return (True, f.read())
-            else:
-                f.write(content)
-                return (True, "Content successfully written to file")
+            f.write(content)
+            return (True, "Content successfully written to file")
     except (FileNotFoundError, PermissionError) as e:
         return (False, str(e))
 
@@ -45,7 +46,7 @@ def main() -> None:
         elif file == "new_fragments.txt":
             print(
                 "\nUsing 'secure_archive'to write"
-                "previous content to a new file:"
+                "previous content to a new file:",
             )
             print(secure_archive(file, mode, content[1]))
         else:

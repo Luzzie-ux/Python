@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 
-import alchemy.transmutation as transmutation
+from alchemy import transmutation
 
 
 def main() -> None:
     print("=== Transmutation 1 ===")
     print(
         "Import transmutation module directly\n"
-        + f"Testing lead to gold: {transmutation.lead_to_gold()}"
+        f"Testing lead to gold: {transmutation.lead_to_gold()}",
     )
-    return
 
 
 if __name__ == "__main__":

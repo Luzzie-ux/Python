@@ -4,7 +4,11 @@
 factories.py
 """
 
-from ex0.creature import Creature
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from ex0.creature import Creature
+
 from ex0.factory import CreatureFactory
 
 from .creatures import Snape, Umbralon, Veilaw, Viper

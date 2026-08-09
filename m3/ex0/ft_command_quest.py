@@ -12,15 +12,12 @@ def main() -> None:
     print("=== Command Quest ===")
     print(f"Program name: {sys.argv[0]}")
     if len(sys.argv) != 1:
-        i: int = 1
         print(f"Arguments received {len(sys.argv) - 1}")
-        for _arg in sys.argv[i:]:
-            print(f"Argument {i}: {sys.argv[i]}")
-            i += 1
+        for i, arg in enumerate(sys.argv[1:], start=1):
+            print(f"Argument {i}: {arg}")
     else:
         print("No arguments provided!")
     print(f"Total arguments {len(sys.argv)}")
-    return
 
 
 if __name__ == "__main__":

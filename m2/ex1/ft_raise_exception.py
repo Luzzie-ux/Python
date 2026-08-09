@@ -12,10 +12,14 @@ def input_temperature(temp_str: str) -> int:
     40 or lower than 0
     """
     temp: int = int(temp_str)
-    if temp > 40:
-        raise ValueError(f"{temp}°C is too hot for plants (max 40°C)")
-    if temp < 0:
-        raise ValueError(f"{temp}°C is too cold for plants (min 0°C)")
+    hot: int = 40
+    cold: int = 0
+    if temp > hot:
+        too_hot: str = f"{temp}°C is too hot for plants (max 40°C)"
+        raise ValueError(too_hot)
+    if temp < cold:
+        too_cold: str = f"{temp}°C is too cold for plants (min 0°C)"
+        raise ValueError(too_cold)
     return temp
 
 
@@ -27,10 +31,10 @@ def test_temperature(inputs: list[str]) -> None:
     Caught input_temperatue error: {e}
     where e stores ValueError
     """
-    for input in inputs:
+    for inputx in inputs:
         try:
-            print(f"Input data is {input}")
-            temp: int = input_temperature(input)
+            print(f"Input data is {inputx}")
+            temp: int = input_temperature(inputx)
             print(f"Temperature is now {temp}°C\n")
         except ValueError as e:
             print(f"Caught input_temperature error: {e}\n")
@@ -45,7 +49,6 @@ def ft_raise_exception() -> None:
 
 def main() -> None:
     ft_raise_exception()
-    return
 
 
 if __name__ == "__main__":

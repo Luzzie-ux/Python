@@ -17,7 +17,6 @@ class Plant:
 
     def show(self) -> None:
         print(f"{self.name}: {self.height}cm, {self.age} days old")
-        return
 
 
 def ft_garden_data() -> None:
@@ -26,7 +25,6 @@ def ft_garden_data() -> None:
     Plant("Rose", 25, 30).show()
     Plant("Sunflower", 80, 45).show()
     Plant("Cactus", 15, 120).show()
-    return
 
 
 def main() -> None:

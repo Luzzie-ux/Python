@@ -17,10 +17,10 @@ from .strategy import (
 
 __all__: list[str] = [
     "AggressiveStrategy",
-    "PoisonFactory",
     "BattleStrategy",
     "DarkFactory",
     "DefensiveStrategy",
     "InvalidActError",
     "NormalStrategy",
+    "PoisonFactory",
 ]

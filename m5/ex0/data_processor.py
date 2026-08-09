@@ -11,30 +11,31 @@ from abc import ABC, abstractmethod
 from typing import Any
 
 
-# Data Processor Exception
 class DataProcessorError(Exception):
-    def __init__(self, message: str = "Unknown Processor Error") -> None:
+    def __init__(self, message: str = "Processor Error") -> None:
         super().__init__(message)
 
 
 # Numeric Processor Exception
 class NumericProcessorError(DataProcessorError):
     def __init__(
-        self, message: str = "Unknown Numeric Processor Error"
+        self,
+        message: str = "Improper numeric error",
     ) -> None:
         super().__init__(message)
 
 
 # Textual Processor Exception
 class TextualProcessorError(DataProcessorError):
-    def __init__(self, message: str = "Unknown Text Processor Error") -> None:
+    def __init__(self, message: str = "Improper textual error") -> None:
         super().__init__(message)
 
 
 # Logical Processor Exception
 class LogProcessorError(DataProcessorError):
     def __init__(
-        self, message: str = "Unknown Logical Processor Error"
+        self,
+        message: str = "Improper logical error",
     ) -> None:
         super().__init__(message)
 
@@ -67,13 +68,13 @@ class NumericProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
         if isinstance(data, (int, float)) and not isinstance(data, bool):
             return True
-        elif isinstance(data, list):
+        if isinstance(data, list):
             return self.ft_all(data)
         return False
 
-    def ingest(self, data: int | float | list[int | float]) -> None:
+    def ingest(self, data: float | list[int | float]) -> None:
         if self.validate(data) is not True:
-            raise NumericProcessorError("Improper numeric data")
+            raise NumericProcessorError
         items: list[int | float] = data if isinstance(data, list) else [data]
         for item in items:
             self._storage.append((self._rank, str(item)))
@@ -83,10 +84,7 @@ class NumericProcessor(DataProcessor):
     def ft_all(self, data: list[int | float]) -> bool:
         if not data:
             return False
-        for i in data:
-            if not isinstance(i, (int, float)):
-                return False
-        return True
+        return all(isinstance(i, (int, float)) for i in data)
 
 
 # Strings and List of strings
@@ -97,13 +95,13 @@ class TextProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
         if isinstance(data, str):
             return True
-        elif isinstance(data, list):
+        if isinstance(data, list):
             return self.ft_all(data)
         return False
 
     def ingest(self, data: str | list[str]) -> None:
         if self.validate(data) is not True:
-            raise TextualProcessorError("Improper textual data")
+            raise TextualProcessorError
         items: list[str] = data if isinstance(data, list) else [data]
         for item in items:
             self._storage.append((self._rank, item))
@@ -113,10 +111,7 @@ class TextProcessor(DataProcessor):
     def ft_all(self, data: list[str]) -> bool:
         if not data:
             return False
-        for s in data:
-            if not isinstance(s, str):
-                return False
-        return True
+        return all(isinstance(s, str) for s in data)
 
 
 # Dictionaries and List of dicts
@@ -132,13 +127,13 @@ class LogProcessor(DataProcessor):
 
     def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if self.validate(data) is not True:
-            raise LogProcessorError("Improper logical error")
+            raise LogProcessorError
         items: list[dict[str, str]] = (
             data if isinstance(data, list) else [data]
         )
         for item in items:
             self._storage.append(
-                (self._rank, f"{item['log_level']}: {item['log_message']}")
+                (self._rank, f"{item['log_level']}: {item['log_message']}"),
             )
             self._rank += 1
 
@@ -162,13 +157,11 @@ def test_validate(proc: DataProcessor) -> None:
     print(f" Trying to validate input '{i}': {proc.validate(i)}")
     print(f" Trying to validate input '{s}': {proc.validate(s)}")
     print(f" Trying to validate input '{d}': {proc.validate(d)}")
-    return
 
 
 def test_ingest(proc: DataProcessor) -> None:
     print("Testing invalid ingestion of data type 'None' ")
     proc.ingest(None)
-    return
 
 
 # will take, list of ints, strs, and dicts
@@ -191,10 +184,7 @@ def process(data: list[Any], proc: DataProcessor) -> None:
             l_rank, l_value = proc.output()
             print(f" Numeric value {l_rank}: {l_value}")
     else:
-        raise DataProcessorError(
-            "No Data Processor Match for Unknown Data Type"
-        )
-    return
+        raise DataProcessorError
 
 
 def data_processor() -> None:
@@ -222,8 +212,6 @@ def data_processor() -> None:
 
     for data, proc in zip(datas, procs, strict=True):
         process(data, proc)
-
-    return
 
 
 if __name__ == "__main__":

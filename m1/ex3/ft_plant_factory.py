@@ -22,21 +22,18 @@ class Plant:
         Shows plant information at the start of the script
         """
         print(f"{self.name}: is {self.height}cms and {self.age} days old")
-        return
 
     def grow(self) -> None:
         """
         Adds modifier to height
         """
         self.height = round(self.height + self.mod, 2)
-        return
 
     def aging(self) -> None:
         """
         Adds one to age
         """
-        self.age = self.age + 1
-        return
+        self.age += 1
 
     def simulate(self) -> None:
         """
@@ -52,7 +49,6 @@ class Plant:
             self.show()
         total: float = round(self.height - self.initial_height, 2)
         print(f"\n{self.name} total growth after 7 days: {total}cm\n")
-        return
 
 
 def ft_plant_factory() -> None:
@@ -70,7 +66,6 @@ def ft_plant_factory() -> None:
     print("\n=== Factory Output ===\n")
     for plant in plants:
         plant.simulate()
-    return
 
 
 def main() -> None:

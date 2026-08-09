@@ -15,7 +15,6 @@ def recursion_helper(days: int, i: int) -> None:
         recursion_helper(days, i)
     else:
         print("Harvest time!")
-    return
 
 
 def ft_count_harvest_recursive() -> None:
@@ -25,4 +24,3 @@ def ft_count_harvest_recursive() -> None:
     i: int = 1
     days: int = int(input("Days until harvest: "))
     recursion_helper(days, i)
-    return

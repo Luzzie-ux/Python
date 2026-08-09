@@ -26,7 +26,7 @@ The is_valid method returns a bool if a Creature can use the strategy,
 """
 
 from abc import ABC, abstractmethod
-from typing import List, cast
+from typing import cast
 
 from ex0.creature import Creature
 from ex1.capabilities import HealCapability, TransformCapability
@@ -43,7 +43,7 @@ class BattleStrategy(ABC):
         super().__init__()
 
     @abstractmethod
-    def act(self, creature: Creature) -> List[str]: ...
+    def act(self, creature: Creature) -> list[str]: ...
 
     @abstractmethod
     def is_valid(self, c: Creature) -> bool: ...
@@ -53,11 +53,11 @@ class NormalStrategy(BattleStrategy):
     def __init__(self) -> None:
         super().__init__()
 
-    def act(self, creature: Creature) -> List[str]:
+    def act(self, creature: Creature) -> list[str]:
         if not self.is_valid(creature):
-            raise InvalidActError(
-                f"Invalid Creature '{creature._name}' for this normal strategy"
-            )
+            errmsg: str = f"Invalid Creature '{creature._name}'"
+            nem: str = f"{errmsg} for this normal strategy"
+            raise InvalidActError(nem)
         return [creature.attack()]
 
     def is_valid(self, c: Creature) -> bool:
@@ -68,13 +68,12 @@ class AggressiveStrategy(BattleStrategy):
     def __init__(self) -> None:
         super().__init__()
 
-    def act(self, creature: Creature) -> List[str]:
+    def act(self, creature: Creature) -> list[str]:
         if not self.is_valid(creature):
-            raise InvalidActError(
-                f"Invalid Creature '{creature._name}' "
-                "for this aggressive strategy"
-            )
-        t: TransformCapability = cast(TransformCapability, creature)
+            errmsg: str = f"Invalid Creature '{creature._name}'"
+            aem: str = f"{errmsg} for this aggresive strategy"
+            raise InvalidActError(aem)
+        t: TransformCapability = cast("TransformCapability", creature)
         return [t.transform(), creature.attack(), t.revert()]
 
     def is_valid(self, c: Creature) -> bool:
@@ -85,13 +84,12 @@ class DefensiveStrategy(BattleStrategy):
     def __init__(self) -> None:
         super().__init__()
 
-    def act(self, creature: Creature) -> List[str]:
+    def act(self, creature: Creature) -> list[str]:
         if not self.is_valid(creature):
-            raise InvalidActError(
-                f"Invalid Creature '{creature._name}' "
-                "for this defensive strategy"
-            )
-        h: HealCapability = cast(HealCapability, creature)
+            errmsg: str = f"Invalid Creature '{creature._name}'"
+            dem: str = f"{errmsg} for this defensive strategy"
+            raise InvalidActError(dem)
+        h: HealCapability = cast("HealCapability", creature)
         return [creature.attack(), h.heal(creature)]
 
     def is_valid(self, c: Creature) -> bool:

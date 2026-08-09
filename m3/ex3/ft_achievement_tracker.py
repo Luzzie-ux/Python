@@ -37,7 +37,7 @@ def gen_player_achievements() -> set[str]:
 
 
 def main() -> None:
-    all: set[str] = set(ACHIEVEMENTS)
+    all_achivements: set[str] = set(ACHIEVEMENTS)
     players: dict[str, set[str]] = {
         "Alice": gen_player_achievements(),
         "Bob": gen_player_achievements(),
@@ -49,24 +49,23 @@ def main() -> None:
     print()
     distinct: set[str] = set()
     for achievements in players.values():
-        distinct = distinct & achievements
+        distinct &= achievements
     print(f"\nAll distinct achievements: {distinct}")
-    common: set[str] = all.copy()
+    common: set[str] = all_achivements.copy()
     for achievements in players.values():
-        common = common - achievements
+        common -= achievements
     print(f"\nCommon achievements: {common}\n")
     for player, achievements in players.items():
         other: set[str] = set()
         for o_player, o_achievements in players.items():
             if player != o_player:
-                other = other | o_achievements
+                other |= o_achievements
         print(f"Only {player} has: {other - achievements}")
     print()
     missing: set[str] = set()
     for user, achievements in players.items():
-        missing = all - achievements
+        missing = all_achivements - achievements
         print(f"{user} is missing: {missing}")
-    return
 
 
 if __name__ == "__main__":

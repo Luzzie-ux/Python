@@ -12,7 +12,6 @@ def main() -> None:
     print("=== Alembic 5 ===")
     print("Accessing the alchemy module using 'from alchemy import ...'")
     print(f"Testing the create_air: {create_air()}")
-    return
 
 
 if __name__ == "__main__":

@@ -20,7 +20,9 @@ dependencies = [
 
 # My Ruff Config:
 [tool.ruff]
-line-length = 79
+indent-width = 4
+line-length = 88
+respect-gitignore = true
 target-version = "py314"
 extend-exclude = [
     ".git",
@@ -31,31 +33,49 @@ extend-exclude = [
     "build",
     "dist",
 ]
+show-fixes = true
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+docstring-code-format = false
 
 [tool.ruff.lint]
-select = ["E", "W", "F", "C90"]
-extend-select = [
-    "I",    # isort (import sorting — flake8-isort equivalent)
-    "B",    # flake8-bugbear
-    "C4",   # flake8-comprehensions
-    "N",    # pep8-naming
+preview = true
+select = ["ALL"]
+extend-select = []
+ignore = [
+    "T201",
+    "D",
+    "DOC",
+    "CPY",
+    "SLF001",
+    "RUF201",
+    "PLR6301",
+    "PLR0913",
+    "PLR0917",
+    "PLC0415",
+    "PTH",
+    "ANN401",
+    "FBT",
+    "S311",
+    "TID252",
+    "SIM115",
 ]
-ignore = ["E203"]
+fixable = []
+unfixable = []
 
-[tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["F401"]
 
 [tool.ruff.lint.mccabe]
 max-complexity = 10
 
-[tool.ruff.format]
-line-ending = "lf"
-quote-style = "double"
-indent-style = "space"
+[tool.ruff.lint.per-file-ignores]
+"m0/**/*.py" = ["INP001"]
 
 # 42 Tools Config:
 [tool.flake8]
-max-line-length = 79
+max-line-length = 88
 extend-ignore = ["E203", "W503"]
 extend-exclude = [
     ".git",

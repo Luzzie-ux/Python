@@ -21,16 +21,18 @@ class WaterError(GardenError):
 
 
 def ft_plant_error() -> None:
-    raise PlantError("The tomato plant is wilting!")
+    pe: str = "The tomato plant is wilting!"
+    raise PlantError(pe)
 
 
 def ft_water_error() -> None:
-    raise WaterError("Not enough water in the tank!")
+    we: str = "Not enough water in the tank!"
+    raise WaterError(we)
 
 
 def ft_custom_errors() -> None:
     print("=== Custom Garden Errors Demo ===\n")
-    for i in range(0, 2):
+    for i in range(2):
         try:
             if i == 0:
                 ft_plant_error()
@@ -54,7 +56,6 @@ def ft_custom_errors() -> None:
 
 def main() -> None:
     ft_custom_errors()
-    return
 
 
 if __name__ == "__main__":

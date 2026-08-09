@@ -10,8 +10,10 @@ of the base and evolved Creature for each family
 (respectively Flameling and Pyrodon for FlameFactory,
 Aquabub and Torragon for AquaFactory,)
 """
+from typing import TYPE_CHECKING
 
-from .creature import Creature
+if TYPE_CHECKING:
+    from .creature import Creature
 from .creature_type import (
     Aquabub,
     Flameling,

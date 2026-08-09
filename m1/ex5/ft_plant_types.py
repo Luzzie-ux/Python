@@ -16,7 +16,6 @@ class Plant:
     def grow(self) -> None:
         self._height = round(self._height + self.mod, 2)
         self._age += 1
-        return
 
     def set_att(self, height: float, age: int) -> None:
         if height < 0.0:
@@ -26,9 +25,8 @@ class Plant:
             print(f"{self._name}: Error: Age can't be negative")
             print("Age update Rejected")
             return
-        else:
-            self._height = height
-            self._age = age
+        self._height = height
+        self._age = age
         return
 
     def update(self, height: float, age: int) -> None:
@@ -37,7 +35,6 @@ class Plant:
             print(f"Height updated: {height}cm")
         if self._age == age:
             print(f"Age updated: {age} days")
-        return
 
     def show(self) -> None:
         print(f"{self._name}: {self._height}cm, {self._age} days old")
@@ -124,10 +121,9 @@ class Vegetable(Plant):
         """
         Makes the Vegetable age for a certain amount of time given as param
         """
-        for i in range(0, days):
+        for _i in range(days):
             super().grow()
             self._nutritional_value += 1
-            i += 1
         print(f"[make {self._name} grow and age for {days} days]")
         self.show()
 

@@ -11,6 +11,8 @@ io.read(), io.write(), io.close(), print(), input()
 import sys
 import typing
 
+MAX_ARGS = 2
+
 
 def save(content: str) -> None:
     name: str = input("Enter new file name (or empty): ")
@@ -19,7 +21,7 @@ def save(content: str) -> None:
     print(f"Saving data to '{name}'")
     file: typing.IO[str] | None = None
     try:
-        file = open(name, "w")
+        file = open(name, "w", encoding="utf-8")
         file.write(content)
     except PermissionError as e:
         print(f"Error opening file {name}: {e}")
@@ -27,30 +29,27 @@ def save(content: str) -> None:
         if file:
             file.close()
             print(f"Data saved in file '{name}'")
-    return
+    return None
 
 
 def transform(text: str) -> None:
     print("\nTransform data:\n")
-    new: list[str] = []
-    for line in text.splitlines():
-        new.append(line + "#")
+    new: list[str] = [line + "#" for line in text.splitlines()]
     content: str = "\n".join(new)
     print(f"\n---\n\n{content}\n\n---\n")
     save(content)
-    return
 
 
 def main() -> None:
     argc: int = len(sys.argv)
-    if not argc == 2:
+    if argc != MAX_ARGS:
         return print(f"Usage: {sys.argv[0]} <file>")
     print("=== Cyber Archives Recovery & Preservation ===")
     print(f"accessing file '{sys.argv[1]}'")
     file: typing.IO[str] | None = None
     data: str | None = None
     try:
-        file = open(sys.argv[1])
+        file = open(sys.argv[1], encoding="utf-8")
         data = file.read()
         print(f"\n---\n\n{data}\n\n---\n")
     except (FileNotFoundError, PermissionError) as e:
@@ -61,7 +60,7 @@ def main() -> None:
         print(f"File '{sys.argv[1]}' closed.")
     if data:
         transform(data)
-    return
+    return None
 
 
 if __name__ == "__main__":

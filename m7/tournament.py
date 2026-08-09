@@ -4,10 +4,12 @@
 tournament.py
 """
 
-from typing import List, Tuple
+from typing import TYPE_CHECKING
 
 from ex0 import AquaFactory, CreatureFactory, FlameFactory
-from ex0.creature import Creature
+
+if TYPE_CHECKING:
+    from ex0.creature import Creature
 from ex1 import HealingCreatureFactory, TransformCreatureFactory
 from ex2 import (
     AggressiveStrategy,
@@ -19,13 +21,13 @@ from ex2 import (
     PoisonFactory,
 )
 
-Opponent = Tuple[CreatureFactory, BattleStrategy]
+Opponent = tuple[CreatureFactory, BattleStrategy]
 
 
-def battle(ops: List[Opponent]) -> None:
+def battle(ops: list[Opponent]) -> None:
     size: int = len(ops)
     print(f"*** Tournament ***\n{size} opponents involved")
-    for i in range(0, size):
+    for i in range(size):
         for j in range(i + 1, size):
             a = ops[i]
             b = ops[j]
@@ -39,13 +41,12 @@ def battle(ops: List[Opponent]) -> None:
                 f" {c1.describe()}\n"
                 "   vs."
                 f"\n {c2.describe()}\n\n"
-                "NOW FIGHT!\n"
+                "NOW FIGHT!\n",
             )
             for line in s1.act(c1):
                 print(line)
             for line in s2.act(c2):
                 print(line)
-    return
 
 
 def format_tournament(tournament: list[Opponent]) -> str:
@@ -90,7 +91,6 @@ def main() -> None:
             print(f"Battle error, aborting tournament: {e}")
         finally:
             j += 1
-    return
 
 
 if __name__ == "__main__":

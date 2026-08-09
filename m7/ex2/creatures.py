@@ -37,7 +37,12 @@ class Viper(Creature, PoisonCapability, HealCapability):
         HealCapability.__init__(self)
         PoisonCapability.__init__(self, 1.5)
         Creature.__init__(
-            self, "Viper", "Poison/Thunder", "Karmic Thunderstorm", 35, 50
+            self,
+            "Viper",
+            "Poison/Thunder",
+            "Karmic Thunderstorm",
+            35,
+            50,
         )
         self._heal: float = self._hp * (self._mp / 50)
         self._poison_points += int(self._poison_points * self._modifier)
@@ -89,7 +94,11 @@ class Umbralon(Creature, DarkCapability, TransformCapability):
         TransformCapability.__init__(self)
         DarkCapability.__init__(self, 1.8)
         Creature.__init__(
-            self, "Umbralon", "Dark/Explosive", "Boom Claw", evade=12
+            self,
+            "Umbralon",
+            "Dark/Explosive",
+            "Boom Claw",
+            evade=12,
         )
         self._evade *= self._mod
 

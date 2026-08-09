@@ -25,7 +25,7 @@ def check() -> None:
             continue
     if not pkgs or len(pkgs.values()) < size:
         conflict(len(pkgs.values()) - size)
-    for name in pkgs.keys():
+    for name in pkgs:
         print(f"[OK] {name}: ", end="")
         print(f"({version(name)})", end="")
         print(f" - {desc(name)} ready")
@@ -121,11 +121,10 @@ def main() -> None:
     print(
         "\nLOADING STATUS: Loading programs... \n\n"
         f"Python Version: {sys.executable}\n"
-        f"Current PATH: {sys.prefix}\n"
+        f"Current PATH: {sys.prefix}\n",
     )
     check()
     manager()
-    return
 
 
 if __name__ == "__main__":

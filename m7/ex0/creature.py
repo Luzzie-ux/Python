@@ -17,7 +17,7 @@ class Creature(ABC):
     def __init__(
         self,
         name: str,
-        type: str,
+        ctype: str,
         attack: str,
         hp: int = 50,
         mp: int = 20,
@@ -25,7 +25,7 @@ class Creature(ABC):
     ) -> None:
         super().__init__()
         self._name: str = name
-        self._type: str = type
+        self._ctype: str = ctype
         self._attack: str = attack
         self._hp: int = hp
         self._mp: int = mp
@@ -35,4 +35,4 @@ class Creature(ABC):
     def attack(self) -> str: ...
 
     def describe(self) -> str:
-        return f"{self._name}: is a {self._type} type Creature"
+        return f"{self._name}: is a {self._ctype} type Creature"

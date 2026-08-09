@@ -13,11 +13,7 @@ import sys
 
 
 def is_venv() -> bool:
-    if sys.prefix != sys.base_exec_prefix:
-        return True
-    elif os.environ.get("VIRTUAL_ENV"):
-        return True
-    return False
+    return sys.prefix != sys.base_exec_prefix or os.environ.get("VIRTUAL_ENV")
 
 
 def env_name() -> str:
@@ -54,7 +50,7 @@ def main() -> None:
             "Safe to install packages without affecting\n"
             "the global system.\n\n"
             "Package installation path:\n"
-            f"{get_pkcg()}"
+            f"{get_pkcg()}",
         )
     return print(
         "You're still plugged in\n\n"
@@ -66,7 +62,7 @@ def main() -> None:
         "python -m venv matrix_env\n"
         "source matrix_env/bin/activate # On Unix\n"
         "matrix_env\\Scripts\\activate # On Windows\n\n"
-        "Then run this program again."
+        "Then run this program again.",
     )
 
 

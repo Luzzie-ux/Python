@@ -10,7 +10,7 @@ from .factory import CreatureFactory
 from .factory_type import AquaFactory, FlameFactory
 
 __all__: list[str] = [
-    "CreatureFactory",
     "AquaFactory",
+    "CreatureFactory",
     "FlameFactory",
 ]

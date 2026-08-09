@@ -19,8 +19,10 @@ These methods will return simple strings that describe
 """
 
 from abc import ABC, abstractmethod
+from typing import TYPE_CHECKING
 
-from ex0.creature import Creature
+if TYPE_CHECKING:
+    from ex0.creature import Creature
 
 
 class HealCapability(ABC):

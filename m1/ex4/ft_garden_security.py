@@ -26,9 +26,8 @@ class Plant:
             print(f"{self._name}: Error: Age can't be negative")
             print("Height update Rejected")
             return
-        else:
-            self._height = height
-            self._age = age
+        self._height = height
+        self._age = age
         return
 
     def update(self, height: float, age: int) -> None:
@@ -40,7 +39,6 @@ class Plant:
             print(f"Height updated: {height}cm")
         if self._age == age:
             print(f"Age updated: {age} days")
-        return
 
     def get_height(self) -> float:
         """Returns the height when called"""
@@ -54,7 +52,6 @@ class Plant:
         h: float = self.get_height()
         a: int = self.get_age()
         print(f"Current state: {self._name}: {h}cm, {a} days old")
-        return
 
 
 def ft_garden_security() -> None:

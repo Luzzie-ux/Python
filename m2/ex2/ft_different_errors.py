@@ -6,16 +6,17 @@ ft_different_errors.py
 
 
 def garden_operations(operation_number: int) -> None:
-    if operation_number == 0:
-        int("abc")
-    elif operation_number == 1:
-        10 / 0  # noqa: B018
-    elif operation_number == 2:
-        open("/non/existent/file")
-    elif operation_number == 3:
-        "good morning" + 1  # type: ignore # noqa: B018
-    else:
-        operation_number * 10
+    match operation_number:
+        case 0:
+            int("abc")
+        case 1:
+            10 / 0  # ruff: ignore[useless-expression]
+        case 2:
+            open("/non/existent/file", encoding="utf-8")
+        case 3:
+            "good morning" + 1  # ruff: ignore[useless-expression]
+        case _:
+            operation_number * 10
 
 
 def test_error_types() -> None:
@@ -42,7 +43,6 @@ def ft_different_errors() -> None:
 
 def main() -> None:
     ft_different_errors()
-    return
 
 
 if __name__ == "__main__":

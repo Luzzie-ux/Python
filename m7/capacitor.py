@@ -32,13 +32,13 @@ def test_heal(f: HealingCreatureFactory) -> None:
     print("Testing Creature with healing capability")
     creatures = [f.create_base(), f.create_evolved()]
     for creature in creatures:
-        h = cast(HealCapability, creature)
+        h = cast("HealCapability", creature)
         if creature._name == "Bloomelle":
             print(" evolved:")
         else:
             print(" base:")
         print(
-            f"{creature.describe()}\n{creature.attack()}\n{h.heal(creature)}"
+            f"{creature.describe()}\n{creature.attack()}\n{h.heal(creature)}",
         )
     print()
 
@@ -47,8 +47,8 @@ def test_trans(f: TransformCreatureFactory) -> None:
     print("Testing Creature with transformation capability")
     creatures = [f.create_base(), f.create_evolved()]
     for creature in creatures:
-        t = cast(TransformCapability, creature)
-        if creature._name == "Bloomelle" or creature._name == "Morphagon":
+        t = cast("TransformCapability", creature)
+        if creature._name == "Morphagon":
             print(" evolved:")
         else:
             print(" base:")
@@ -57,7 +57,7 @@ def test_trans(f: TransformCreatureFactory) -> None:
             f"{creature.attack()}\n"
             f"{t.transform()}\n"
             f"{creature.attack()}\n"
-            f"{t.revert()}"
+            f"{t.revert()}",
         )
     print()
 
@@ -69,7 +69,6 @@ def main() -> None:
             test_heal(factory)
         elif isinstance(factory, TransformCreatureFactory):
             test_trans(factory)
-    return
 
 
 if __name__ == "__main__":

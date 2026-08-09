@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-__all__: list[str] = ["create_earth", "create_air"]
+__all__: list[str] = ["create_air", "create_earth"]
 
 
 def create_earth() -> str:

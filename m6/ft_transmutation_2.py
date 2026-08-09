@@ -7,9 +7,8 @@ def main() -> None:
     print("=== Transmutation 2 ===")
     print(
         "Using import alchemy only\n"
-        + f"Testing lead to gold: {alchemy.lead_to_gold()}"
+        f"Testing lead to gold: {alchemy.lead_to_gold()}",
     )
-    return
 
 
 if __name__ == "__main__":

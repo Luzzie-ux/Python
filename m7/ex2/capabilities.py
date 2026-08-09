@@ -5,8 +5,10 @@ capabilities.py
 """
 
 from abc import ABC, abstractmethod
+from typing import TYPE_CHECKING
 
-from ex0.creature import Creature
+if TYPE_CHECKING:
+    from ex0.creature import Creature
 
 
 class PoisonCapability(ABC):

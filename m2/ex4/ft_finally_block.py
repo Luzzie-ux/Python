@@ -12,9 +12,10 @@ class PlantError(Exception):
 
 def water_plant(plant_name: str) -> None:
     if plant_name == plant_name.capitalize():
-        return print(f"Watering {plant_name}: [OK]")
-    else:
-        raise PlantError(f"Invalid plant name to water: '{plant_name}'")
+        msg: str = f"Watering {plant_name}: [OK]"
+        return print(msg)
+        plant_errmsg: str = f"Invalid plant name to water: '{plant_name}'"
+    raise PlantError(plant_errmsg)
 
 
 def test_watering_plant() -> None:
@@ -38,7 +39,7 @@ def test_watering_plant() -> None:
     finally:
         print(
             "Closing watering system\n"
-            "\nCleanup always happens, even with errors!"
+            "\nCleanup always happens, even with errors!",
         )
 
 
@@ -49,7 +50,6 @@ def ft_finally_block() -> None:
 
 def main() -> None:
     ft_finally_block()
-    return
 
 
 if __name__ == "__main__":

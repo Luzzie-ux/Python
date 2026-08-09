@@ -30,14 +30,13 @@ def main() -> None:
         else:
             print(
                 "No scores provided. Usage: python3 "
-                "ft_score_analytics.py <score1> <score2> ..."
+                "ft_score_analytics.py <score1> <score2> ...",
             )
     else:
         print(
             "No scores provided. Usage: python3 "
-            "ft_score_analytics.py <score1> <score2> ..."
+            "ft_score_analytics.py <score1> <score2> ...",
         )
-    return
 
 
 if __name__ == "__main__":

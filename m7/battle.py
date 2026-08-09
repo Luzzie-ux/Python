@@ -21,7 +21,6 @@ def test(factory: CreatureFactory) -> None:
         print(creature.describe())
         print(creature.attack())
     print()
-    return
 
 
 def battle(f1: CreatureFactory, f2: CreatureFactory) -> None:
@@ -33,9 +32,8 @@ def battle(f1: CreatureFactory, f2: CreatureFactory) -> None:
             "Testing battle: \n"
             f" {c1.describe()}\n    vs. \n {c2.describe()}\nFight!\n\n"
             f" {c1.attack()}\n"
-            f" {c2.attack()}"
+            f" {c2.attack()}",
         )
-    return
 
 
 def main() -> None:
@@ -43,7 +41,6 @@ def main() -> None:
     for factory in factories:
         test(factory)
     battle(factories[0], factories[1])
-    return
 
 
 if __name__ == "__main__":

@@ -16,9 +16,8 @@ def main() -> None:
         "=== Kaboom 0 ===\n"
         "Using grimoirer module directly\n"
         "Testing record light spell: "
-        f"{record}"
+        f"{record}",
     )
-    return
 
 
 if __name__ == "__main__":

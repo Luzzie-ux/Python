@@ -8,7 +8,8 @@ Authorized: os,  python-dotenv modules, file operations
 """
 
 import os
-from sys import exit, stderr
+import sys
+from sys import stderr
 
 FILE: str = ".env"
 EXISTS: bool = os.path.exists(FILE)
@@ -31,25 +32,24 @@ def check() -> bool:
 
         load_dotenv(FILE)
         return True
-    else:
-        print(f"Could Not find file {FILE}\n", file=stderr)
-        return False
+    print(f"Could Not find file {FILE}\n", file=stderr)
+    return False
 
 
-def get(condition: bool) -> dict[str, str | None]:
-    if not condition:
+def get(loaded: bool) -> dict[str, str | None]:
+    if not loaded:
         print("Looking in PATH for vars\n")
 
-    vars: dict[str, str | None] = {}
+    env_vars: dict[str, str | None] = {}
     for name, _ in PROD:
         var: str | None = os.environ.get(name)
 
-        if var is None or var == "":
+        if var is None or not var:
             print(f"Value for variable '{name}' missing", file=stderr)
             continue
 
-        vars[name] = var
-    return vars
+        env_vars[name] = var
+    return env_vars
 
 
 def oracle(env: dict[str, str | None]) -> bool:
@@ -93,14 +93,16 @@ def main() -> None:
     data: dict[str, str | None] = get(loaded)
     sec_check: bool = oracle(data)
     if not sec_check:
-        print("The Oracle rejects your attempt to communication", file=stderr)
-        exit(1)
+        print(
+            "The Oracle rejects your attempt to communication",
+            file=stderr,
+        )
+        sys.exit(1)
     print("Environment security check:\n")
     print("[OK] No hardcoded secrets detected")
     print("[OK] .env file properly configured")
     print("[OK] Production overrides available")
     print("\nThe Oracle sees all configurations")
-    return
 
 
 if __name__ == "__main__":

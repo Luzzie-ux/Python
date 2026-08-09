@@ -8,7 +8,7 @@ ft_kaboom_1.py
 print(
     "=== Kaboom 1 ===\n"
     "Access to alchemy/grimoire/dark_spellbook.py directly\n"
-    "Test import now - THIS WILL RAISE AN UNCAUGHT EXCEPTION"
+    "Test import now - THIS WILL RAISE AN UNCAUGHT EXCEPTION",
 )
 
 

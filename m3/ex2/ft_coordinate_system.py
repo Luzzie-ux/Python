@@ -9,12 +9,14 @@ Authorized: import math, math.sqrt(), input(), round(), print()
 
 import math
 
+AXIS: int = 3
+
 
 def get_player_pos() -> tuple[float, float, float]:
     while True:
         cin: str = input("Enter new coordinates as floats in format 'x,y,z': ")
         axis: list[str] = cin.split(",")
-        if len(axis) < 3:
+        if len(axis) < AXIS:
             print("Invalid syntax")
             continue
         coordinates: list[float] = []
@@ -44,10 +46,9 @@ def main() -> None:
     pos2: tuple[float, float, float] = get_player_pos()
     x2, y2, z2 = pos2
     con: float = math.sqrt(
-        ((x1 - x1) ** 2) + ((y1 - y2) ** 2) + ((z1 - z2) ** 2)
+        ((x1 - x2) ** 2) + ((y1 - y2) ** 2) + ((z1 - z2) ** 2),
     )
     print(f"Distance between the 2 sets of coordinates: {round(con, 4)}")
-    return
 
 
 if __name__ == "__main__":

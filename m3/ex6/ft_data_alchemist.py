@@ -35,7 +35,6 @@ def main() -> None:
     print(f"Score average: {round(ave, 2)}")
     high: dict[str, int] = {key: p for key, p in score.items() if p > ave}
     print(f"High score: {high}")
-    return
 
 
 if __name__ == "__main__":

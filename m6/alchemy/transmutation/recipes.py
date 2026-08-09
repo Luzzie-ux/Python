@@ -12,6 +12,6 @@ __all__: list[str] = ["lead_to_gold"]
 def lead_to_gold() -> str:
     recipe: str = (
         "Recipe transmuting Lead to Gold: brew "
-        + f"'{create_air()}' and '{buff()}' mixed with '{create_fire()}'."
+        f"'{create_air()}' and '{buff()}' mixed with '{create_fire()}'."
     )
     return recipe

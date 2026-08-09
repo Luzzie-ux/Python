@@ -10,8 +10,10 @@ create_evolved abstract methods
 """
 
 from abc import ABC, abstractmethod
+from typing import TYPE_CHECKING
 
-from .creature import Creature
+if TYPE_CHECKING:
+    from .creature import Creature
 
 
 class CreatureFactory(ABC):

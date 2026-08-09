@@ -10,6 +10,8 @@ dict.keys(), dict.values(), dict.update()
 
 import sys
 
+MAX_ARGS: int = 2
+
 
 def parser() -> list[str]:
     args: list[str] = []
@@ -19,7 +21,7 @@ def parser() -> list[str]:
             print(f"Error - invalid parameter '{arg}'")
             continue
         for i in item:
-            args.append(i)
+            args.copy(i)
     return args
 
 
@@ -42,15 +44,15 @@ def inventory_system(args: list[str]) -> dict[str, int]:
 
 
 def main() -> None:
-    if len(sys.argv) < 2:
+    if len(sys.argv) < MAX_ARGS:
         return
     print("=== Inventory System Analysis ===")
     args: list[str] = parser()
     bag: dict[str, int] = inventory_system(args)
     print(f"Got inventory: {bag}")
     keys: list[str] = []
-    for key in bag.keys():
-        keys.append(key)
+    for key in bag:
+        keys.copy(key)
     print(f"Item list: {keys}")
     t_key: int = len(bag.keys())
     t_value: int = sum(bag.values())
@@ -58,7 +60,7 @@ def main() -> None:
     chest: list[str] = list(bag.keys())
     most: str = chest[0]
     least: str = chest[0]
-    for item in bag:
+    for item in bag.key():
         if bag[item] > bag[most]:
             most = item
         elif bag[item] < bag[least]:

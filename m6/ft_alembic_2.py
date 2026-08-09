@@ -14,7 +14,6 @@ def main() -> None:
     print("Testing create_earth:", end=" ")
     s: str = alchemy.elements.create_earth()
     print(s)
-    return
 
 
 if __name__ == "__main__":

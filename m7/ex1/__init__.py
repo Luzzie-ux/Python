@@ -11,7 +11,7 @@ from .factories import HealingCreatureFactory, TransformCreatureFactory
 
 __all__: list[str] = [
     "HealCapability",
-    "TransformCapability",
     "HealingCreatureFactory",
+    "TransformCapability",
     "TransformCreatureFactory",
 ]

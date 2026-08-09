@@ -7,34 +7,37 @@ Files to Submit: data_pipeline.py
 Authorized: builtins, standard types, import typing, import abc
 """
 
+import math
 from abc import ABC, abstractmethod
 from typing import Any, Protocol
 
 
 # Data Processor Exception
 class DataProcessorError(Exception):
-    def __init__(self, message: str = "Unknown Processor Error") -> None:
+    def __init__(self, message: str = "Processor Error") -> None:
         super().__init__(message)
 
 
 # Numeric Processor Exception
 class NumericProcessorError(DataProcessorError):
     def __init__(
-        self, message: str = "Unknown Numeric Processor Error"
+        self,
+        message: str = "Improper numeric error",
     ) -> None:
         super().__init__(message)
 
 
 # Textual Processor Exception
 class TextualProcessorError(DataProcessorError):
-    def __init__(self, message: str = "Unknown Text Processor Error") -> None:
+    def __init__(self, message: str = "Improper textual error") -> None:
         super().__init__(message)
 
 
 # Logical Processor Exception
 class LogProcessorError(DataProcessorError):
     def __init__(
-        self, message: str = "Unknown Logical Processor Error"
+        self,
+        message: str = "Improper logical error",
     ) -> None:
         super().__init__(message)
 
@@ -67,13 +70,13 @@ class NumericProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
         if isinstance(data, (int, float)) and not isinstance(data, bool):
             return True
-        elif isinstance(data, list):
+        if isinstance(data, list):
             return self.ft_all(data)
         return False
 
-    def ingest(self, data: int | float | list[int | float]) -> None:
+    def ingest(self, data: float | list[int | float]) -> None:
         if self.validate(data) is not True:
-            raise NumericProcessorError("Improper numeric data")
+            raise NumericProcessorError
         items: list[int | float] = data if isinstance(data, list) else [data]
         for item in items:
             self._storage.append((self._rank, str(item)))
@@ -83,10 +86,7 @@ class NumericProcessor(DataProcessor):
     def ft_all(self, data: list[int | float]) -> bool:
         if not data:
             return False
-        for i in data:
-            if not isinstance(i, (int, float)):
-                return False
-        return True
+        return all(isinstance(i, (int, float)) for i in data)
 
 
 # Strings and List of strings
@@ -97,13 +97,13 @@ class TextProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
         if isinstance(data, str):
             return True
-        elif isinstance(data, list):
+        if isinstance(data, list):
             return self.ft_all(data)
         return False
 
     def ingest(self, data: str | list[str]) -> None:
         if self.validate(data) is not True:
-            raise TextualProcessorError("Improper textual data")
+            raise TextualProcessorError
         items: list[str] = data if isinstance(data, list) else [data]
         for item in items:
             self._storage.append((self._rank, item))
@@ -113,10 +113,7 @@ class TextProcessor(DataProcessor):
     def ft_all(self, data: list[str]) -> bool:
         if not data:
             return False
-        for s in data:
-            if not isinstance(s, str):
-                return False
-        return True
+        return all(isinstance(s, str) for s in data)
 
 
 # Dictionaries and List of dicts
@@ -132,13 +129,13 @@ class LogProcessor(DataProcessor):
 
     def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if self.validate(data) is not True:
-            raise LogProcessorError("Improper logical error")
+            raise LogProcessorError
         items: list[dict[str, str]] = (
             data if isinstance(data, list) else [data]
         )
         for item in items:
             self._storage.append(
-                (self._rank, f"{item['log_level']}: {item['log_message']}")
+                (self._rank, f"{item['log_level']}: {item['log_message']}"),
             )
             self._rank += 1
 
@@ -186,13 +183,12 @@ class DataStream:
                 if proc.validate(item) is not True:
                     print(
                         "DataStream Error - "
-                        f"Can't process element in stream: {item}"
+                        f"Can't process element in stream: {item}",
                     )
                     continue
                 proc.ingest(item)
                 del stream[i]
         self.print_processors_stats()
-        return
 
     def print_processors_stats(self) -> None:
         if not self._procs:
@@ -215,14 +211,13 @@ class DataStream:
             n: int = min(nb, len(proc._storage))
             data: list[tuple[int, str]] = [proc.output() for _ in range(n)]
             plugin.process_output(data)
-        return
 
 
 def data_pipeline() -> None:
     print("=== Code Nexus - Data Pipeline ===\n")
     data: list[Any] = [
         "Hello world",
-        [3.14, -1, 2.71],
+        [math.pi, -1, math.e],
         [
             {
                 "log_level": "WARNING",
@@ -274,7 +269,6 @@ def data_pipeline() -> None:
     print("Send 3 processed data from each processor to a JSON plugin")
     stream.output_pipeline(5, JSONExportPlugin())
     stream.print_processors_stats()
-    return
 
 
 if __name__ == "__main__":

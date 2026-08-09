@@ -16,7 +16,6 @@ def ft_garden_intro() -> None:
     print(f"Age: {age} days")
     print()
     print("=== End of Program ===")
-    return
 
 
 def main() -> None:

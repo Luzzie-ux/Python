@@ -8,9 +8,8 @@ def main() -> None:
     print("=== Transmutation 0 ===")
     print(
         "Using file alchemy/transmutation/recipes.py direcly\n"
-        + f"Testing lead to gold: {recipe}"
+        f"Testing lead to gold: {recipe}",
     )
-    return
 
 
 if __name__ == "__main__":

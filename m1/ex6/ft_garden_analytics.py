@@ -31,10 +31,11 @@ class Plant:
         Static method of Plant used to check
         if a certain age is older than a year
         """
-        print(f"Is {age} days more than a year? -> {age > 365}")
+        year: int = 365
+        print(f"Is {age} days more than a year? -> {age > year}")
 
     @classmethod
-    def anonymous(cls) -> "Plant":
+    def anonymous(cls) -> Plant:
         """
         Class method of Plant used to create an unknown type of object
         """
@@ -98,7 +99,12 @@ class Flower(Plant):
 
 class Seed(Flower):
     def __init__(
-        self, name: str, height: float, age: int, mod: float, color: str
+        self,
+        name: str,
+        height: float,
+        age: int,
+        mod: float,
+        color: str,
     ) -> None:
         super().__init__(name, height, age, mod, color)
         self._seeds: int = 0
@@ -182,7 +188,6 @@ def ft_garden_analytics() -> None:
     anon: Plant = Plant.anonymous()
     anon.show()
     display(anon)
-    pass
 
 
 def main() -> None:
