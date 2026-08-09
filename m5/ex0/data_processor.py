@@ -12,13 +12,13 @@ from typing import Any
 
 
 # Data Processor Exception
-class DPE(Exception):
+class DataProcessorError(Exception):
     def __init__(self, message: str = "Unknown Processor Error") -> None:
         super().__init__(message)
 
 
 # Numeric Processor Exception
-class NPE(DPE):
+class NumericProcessorError(DataProcessorError):
     def __init__(
         self, message: str = "Unknown Numeric Processor Error"
     ) -> None:
@@ -26,13 +26,13 @@ class NPE(DPE):
 
 
 # Textual Processor Exception
-class TPE(DPE):
+class TextualProcessorError(DataProcessorError):
     def __init__(self, message: str = "Unknown Text Processor Error") -> None:
         super().__init__(message)
 
 
 # Logical Processor Exception
-class LPE(DPE):
+class LogProcessorError(DataProcessorError):
     def __init__(
         self, message: str = "Unknown Logical Processor Error"
     ) -> None:
@@ -73,7 +73,7 @@ class NumericProcessor(DataProcessor):
 
     def ingest(self, data: int | float | list[int | float]) -> None:
         if self.validate(data) is not True:
-            raise NPE("Improper numeric data")
+            raise NumericProcessorError("Improper numeric data")
         items: list[int | float] = data if isinstance(data, list) else [data]
         for item in items:
             self._storage.append((self._rank, str(item)))
@@ -103,7 +103,7 @@ class TextProcessor(DataProcessor):
 
     def ingest(self, data: str | list[str]) -> None:
         if self.validate(data) is not True:
-            raise TPE("Improper textual data")
+            raise TextualProcessorError("Improper textual data")
         items: list[str] = data if isinstance(data, list) else [data]
         for item in items:
             self._storage.append((self._rank, item))
@@ -132,7 +132,7 @@ class LogProcessor(DataProcessor):
 
     def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if self.validate(data) is not True:
-            raise LPE("Improper logical error")
+            raise LogProcessorError("Improper logical error")
         items: list[dict[str, str]] = (
             data if isinstance(data, list) else [data]
         )
@@ -191,7 +191,9 @@ def process(data: list[Any], proc: DataProcessor) -> None:
             l_rank, l_value = proc.output()
             print(f" Numeric value {l_rank}: {l_value}")
     else:
-        raise DPE("No Data Processor Match for Unknown Data Type")
+        raise DataProcessorError(
+            "No Data Processor Match for Unknown Data Type"
+        )
     return
 
 
@@ -215,10 +217,10 @@ def data_processor() -> None:
         test_validate(proc)
         try:
             test_ingest(proc)
-        except DPE as e:
+        except DataProcessorError as e:
             print(f" Got exception: {e}")
 
-    for data, proc in zip(datas, procs):
+    for data, proc in zip(datas, procs, strict=True):
         process(data, proc)
 
     return

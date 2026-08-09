@@ -26,7 +26,7 @@ def save(content: str) -> int:
         file.write(content)
     except PermissionError as e:
         stderr.write(
-            f"[STDERR] Error opening file {name}: {e}" "\nData not saved\n"
+            f"[STDERR] Error opening file {name}: {e}\nData not saved\n"
         )
     finally:
         if file:

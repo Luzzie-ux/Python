@@ -38,9 +38,7 @@ def test_heal(f: HealingCreatureFactory) -> None:
         else:
             print(" base:")
         print(
-            f"{creature.describe()}\n"
-            f"{creature.attack()}\n"
-            f"{h.heal(creature)}"
+            f"{creature.describe()}\n{creature.attack()}\n{h.heal(creature)}"
         )
     print()
 

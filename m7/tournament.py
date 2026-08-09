@@ -6,35 +6,20 @@ tournament.py
 
 from typing import List, Tuple
 
-from ex0 import AquaFactory as AF
-from ex0 import CreatureFactory as CF
-from ex0 import FlameFactory as FF
+from ex0 import AquaFactory, CreatureFactory, FlameFactory
 from ex0.creature import Creature
-from ex1 import HealingCreatureFactory as HCF
-from ex1 import TransformCreatureFactory as TCF
+from ex1 import HealingCreatureFactory, TransformCreatureFactory
 from ex2 import (
-    AggressiveStrategy as AS,
-)
-from ex2 import (
-    BattleStrategy as BS,
-)
-from ex2 import (
-    DarkFactory as DF,
-)
-from ex2 import (
-    DefensiveStrategy as DS,
-)
-from ex2 import (
-    InvalidActError as IAE,
-)
-from ex2 import (
-    NormalStrategy as NS,
-)
-from ex2 import (
-    PoisonFactory as PF,
+    AggressiveStrategy,
+    BattleStrategy,
+    DarkFactory,
+    DefensiveStrategy,
+    InvalidActError,
+    NormalStrategy,
+    PoisonFactory,
 )
 
-Opponent = Tuple[CF, BS]
+Opponent = Tuple[CreatureFactory, BattleStrategy]
 
 
 def battle(ops: List[Opponent]) -> None:
@@ -46,7 +31,7 @@ def battle(ops: List[Opponent]) -> None:
             b = ops[j]
             f1, s1 = a
             f2, s2 = b
-            factories: list[CF] = [f1, f2]
+            factories: list[CreatureFactory] = [f1, f2]
             c1: Creature = factories[0].create_base()
             c2: Creature = factories[1].create_base()
             print(
@@ -75,10 +60,25 @@ def format_tournament(tournament: list[Opponent]) -> str:
 
 def main() -> None:
     tournament: list[list[Opponent]] = [
-        [(FF(), NS()), (HCF(), DS())],
-        [(FF(), AS()), (HCF(), DS())],
-        [(AF(), NS()), (HCF(), DS()), (TCF(), AS())],
-        [(FF(), NS()), (AF(), NS()), (PF(), DS()), (DF(), AS())],
+        [
+            (FlameFactory(), NormalStrategy()),
+            (HealingCreatureFactory(), DefensiveStrategy()),
+        ],
+        [
+            (FlameFactory(), AggressiveStrategy()),
+            (HealingCreatureFactory(), DefensiveStrategy()),
+        ],
+        [
+            (AquaFactory(), NormalStrategy()),
+            (HealingCreatureFactory(), DefensiveStrategy()),
+            (TransformCreatureFactory(), AggressiveStrategy()),
+        ],
+        [
+            (FlameFactory(), NormalStrategy()),
+            (AquaFactory(), NormalStrategy()),
+            (PoisonFactory(), DefensiveStrategy()),
+            (DarkFactory(), AggressiveStrategy()),
+        ],
     ]
     j: int = 0
     for i in range(1, len(tournament) + 1):
@@ -86,7 +86,7 @@ def main() -> None:
         try:
             print(f"{format_tournament(tournament[j])}")
             battle(tournament[j])
-        except IAE as e:
+        except InvalidActError as e:
             print(f"Battle error, aborting tournament: {e}")
         finally:
             j += 1

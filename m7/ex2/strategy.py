@@ -56,8 +56,7 @@ class NormalStrategy(BattleStrategy):
     def act(self, creature: Creature) -> List[str]:
         if not self.is_valid(creature):
             raise InvalidActError(
-                f"Invalid Creature '{creature._name}' "
-                "for this normal strategy"
+                f"Invalid Creature '{creature._name}' for this normal strategy"
             )
         return [creature.attack()]
 

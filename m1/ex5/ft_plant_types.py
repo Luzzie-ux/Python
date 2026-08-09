@@ -51,11 +51,11 @@ class Flower(Plant):
         height: float,
         mod: float,
         color: str,
-        isBloom: bool = False,
+        bloom: bool = False,
     ) -> None:
         super().__init__(name, height, age, mod)
         self._color: str = color
-        self._isBloom: bool = isBloom
+        self._bloom: bool = bloom
 
     def show(self) -> None:
         super().show()
@@ -66,8 +66,8 @@ class Flower(Plant):
         """
         Asks the Flower to bloom if it hasn't already
         """
-        if not self._isBloom:
-            self._isBloom = True
+        if not self._bloom:
+            self._bloom = True
             print(f"{self._name} has not bloomed yet")
             print(f"[asking the {self._name.lower()} to bloom]")
             self.show()

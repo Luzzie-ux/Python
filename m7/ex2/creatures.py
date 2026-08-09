@@ -98,7 +98,8 @@ class Umbralon(Creature, DarkCapability, TransformCapability):
             return f"{self._name} uses {self._attack}!"
         clones: str = (
             f"{self.still_image()}\n"
-            f"{self._name} and its clones use {self._attack}")
+            f"{self._name} and its clones use {self._attack}"
+        )
         return clones
 
     def transform(self) -> str:

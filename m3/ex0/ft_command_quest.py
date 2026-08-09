@@ -14,7 +14,7 @@ def main() -> None:
     if len(sys.argv) != 1:
         i: int = 1
         print(f"Arguments received {len(sys.argv) - 1}")
-        for arg in sys.argv[i:]:
+        for _arg in sys.argv[i:]:
             print(f"Argument {i}: {sys.argv[i]}")
             i += 1
     else:

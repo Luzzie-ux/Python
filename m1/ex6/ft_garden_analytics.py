@@ -72,25 +72,25 @@ class Flower(Plant):
         age: int,
         mod: float,
         color: str,
-        isBloom: bool = False,
+        bloom: bool = False,
     ) -> None:
         super().__init__(name, height, age, mod)
         self._color: str = color
-        self._isBloom: bool = isBloom
+        self._bloom: bool = bloom
 
     def show(self) -> None:
         super().show()
         print(f"Color: {self._color}")
 
     def has_bloomed(self) -> None:
-        if self._isBloom:
+        if self._bloom:
             print(f"{self._name} is blooming beautifully!")
         else:
             print(f"{self._name} has not bloomed yet")
 
     def grow_bloom(self) -> None:
-        if not self._isBloom:
-            self._isBloom = True
+        if not self._bloom:
+            self._bloom = True
             print(f"[asking the {self._name.lower()} to grow and bloom]")
             self.grow()
             self.has_bloomed()
@@ -109,9 +109,9 @@ class Seed(Flower):
         print(f"Seeds: {self._seeds}")
 
     def age_grow_bloom(self) -> None:
-        if not self._isBloom:
-            self._isBloom = True
-            for i in range(20):
+        if not self._bloom:
+            self._bloom = True
+            for _i in range(20):
                 self.grow()
                 self.aging()
             self._seeds = 42
