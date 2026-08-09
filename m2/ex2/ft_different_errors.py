@@ -9,11 +9,11 @@ def garden_operations(operation_number: int) -> None:
     if operation_number == 0:
         int("abc")
     elif operation_number == 1:
-        10 / 0
+        10 / 0  # noqa: B018
     elif operation_number == 2:
         open("/non/existent/file")
     elif operation_number == 3:
-        "good morning" + 1  # type: ignore
+        "good morning" + 1  # type: ignore # noqa: B018
     else:
         operation_number * 10
 
