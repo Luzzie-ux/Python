@@ -9,7 +9,7 @@ open(), import typing, typing.IO, io.read(), io.readline(), io.write(),
 io.flush(), io.close(), print()
 """
 
-from sys import argv, stdin, stderr, stdout
+from sys import argv, stderr, stdin, stdout
 from typing import IO
 
 

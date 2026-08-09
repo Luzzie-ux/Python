@@ -11,7 +11,7 @@ Instantiating the Flameling and Aquabub factories.
     and makes base Creature fight.
 """
 
-from ex0 import CreatureFactory, AquaFactory, FlameFactory
+from ex0 import AquaFactory, CreatureFactory, FlameFactory
 
 
 def test(factory: CreatureFactory) -> None:

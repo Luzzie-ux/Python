@@ -13,6 +13,7 @@ Shiftling and Morphagon for TransformFactory)
 
 from ex0.creature import Creature
 from ex0.factory import CreatureFactory
+
 from .creatures import Bloomelle, Morphagon, Shiftling, Sproutling
 
 

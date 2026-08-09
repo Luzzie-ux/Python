@@ -1,22 +1,58 @@
-[tool.black]
-line-length = 79
-target-version = ["py314"]
-skip-string-normalization = false
-skip-magic-trailing-comma = false
-preview = false
+# ===================
+# « Project section »
+# ===================
 
-[tool.mypy]
-python_version = "3.14"
-strict = true
-exclude = [
-    ".venv/",
-    ".git/",
-    "__pycache__/",
-    "matrix_env/",
-    "vpip/",
-    "vpoetry/",
+[project]
+name = "python_modules"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "flake8>=7.3.0",
+    "mypy>=2.3.0",
+    "pydantic>=2.13.4",
+    "ruff>=0.16.2",
 ]
 
+# =================
+# « Tools section »
+# =================
+
+# My Ruff Config:
+[tool.ruff]
+line-length = 79
+target-version = "py314"
+extend-exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    ".mypy_cache",
+    ".ruff_cache",
+    "build",
+    "dist",
+]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "C90"]
+extend-select = [
+    "I",    # isort (import sorting — flake8-isort equivalent)
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "N",    # pep8-naming
+]
+ignore = ["E203"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.format]
+line-ending = "lf"
+quote-style = "double"
+indent-style = "space"
+
+# 42 Tools Config:
 [tool.flake8]
 max-line-length = 79
 extend-ignore = ["E203", "W503"]
@@ -25,13 +61,25 @@ extend-exclude = [
     ".venv",
     "__pycache__",
     ".mypy_cache",
-    "matrix_env",
-    "vpip",
-    "vpoetry",
+    ".ruff_cache",
+    "build",
+    "dist",
 ]
 count = true
 statistics = true
 show-source = true
 per-file-ignores = [
     "__init__.py:F401",
+]
+
+[tool.mypy]
+python_version = "3.14"
+strict = true
+exclude = [
+    ".venv/",
+    ".git/",
+    "build/",
+    "dist/",
+    "__pycache__/",
+    ".ruff_cache"
 ]

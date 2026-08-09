@@ -7,9 +7,9 @@ Files to Submit: construct.py
 Authorized: sys, os, site modules, print()
 """
 
-import sys
 import os
 import site
+import sys
 
 
 def is_venv() -> bool:

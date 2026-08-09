@@ -5,17 +5,33 @@ tournament.py
 """
 
 from typing import List, Tuple
-from ex0 import AquaFactory as AF, CreatureFactory as CF, FlameFactory as FF
+
+from ex0 import AquaFactory as AF
+from ex0 import CreatureFactory as CF
+from ex0 import FlameFactory as FF
 from ex0.creature import Creature
-from ex1 import HealingCreatureFactory as HCF, TransformCreatureFactory as TCF
+from ex1 import HealingCreatureFactory as HCF
+from ex1 import TransformCreatureFactory as TCF
 from ex2 import (
     AggressiveStrategy as AS,
-    PoisonFactory as PF,
+)
+from ex2 import (
     BattleStrategy as BS,
+)
+from ex2 import (
     DarkFactory as DF,
+)
+from ex2 import (
     DefensiveStrategy as DS,
+)
+from ex2 import (
     InvalidActError as IAE,
+)
+from ex2 import (
     NormalStrategy as NS,
+)
+from ex2 import (
+    PoisonFactory as PF,
 )
 
 Opponent = Tuple[CF, BS]
@@ -58,18 +74,18 @@ def format_tournament(tournament: list[Opponent]) -> str:
 
 
 def main() -> None:
-    Tournament: list[list[Opponent]] = [
+    tournament: list[list[Opponent]] = [
         [(FF(), NS()), (HCF(), DS())],
         [(FF(), AS()), (HCF(), DS())],
         [(AF(), NS()), (HCF(), DS()), (TCF(), AS())],
         [(FF(), NS()), (AF(), NS()), (PF(), DS()), (DF(), AS())],
     ]
     j: int = 0
-    for i in range(1, len(Tournament) + 1):
+    for i in range(1, len(tournament) + 1):
         print(f"=== Tournament {i} ===")
         try:
-            print(f"{format_tournament(Tournament[j])}")
-            battle(Tournament[j])
+            print(f"{format_tournament(tournament[j])}")
+            battle(tournament[j])
         except IAE as e:
             print(f"Battle error, aborting tournament: {e}")
         finally:

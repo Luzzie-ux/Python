@@ -19,10 +19,11 @@ Create a transforming Creature factory.
 """
 
 from typing import cast
+
 from ex1 import (
     HealCapability,
-    TransformCapability,
     HealingCreatureFactory,
+    TransformCapability,
     TransformCreatureFactory,
 )
 

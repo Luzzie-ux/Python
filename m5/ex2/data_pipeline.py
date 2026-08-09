@@ -7,8 +7,8 @@ Files to Submit: data_pipeline.py
 Authorized: builtins, standard types, import typing, import abc
 """
 
-from typing import Any, Protocol
 from abc import ABC, abstractmethod
+from typing import Any, Protocol
 
 
 # Data Processor Exception

@@ -27,6 +27,7 @@ The is_valid method returns a bool if a Creature can use the strategy,
 
 from abc import ABC, abstractmethod
 from typing import List, cast
+
 from ex0.creature import Creature
 from ex1.capabilities import HealCapability, TransformCapability
 

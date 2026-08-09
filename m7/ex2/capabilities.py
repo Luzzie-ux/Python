@@ -4,8 +4,9 @@
 capabilities.py
 """
 
-from ex0.creature import Creature
 from abc import ABC, abstractmethod
+
+from ex0.creature import Creature
 
 
 class PoisonCapability(ABC):

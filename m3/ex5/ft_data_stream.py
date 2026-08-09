@@ -8,8 +8,8 @@ Authorized: next(), range(), len(), print(), import typing,
 typing.Generator, import random, random.*
 """
 
-import typing
 import random
+import typing
 
 ACTIONS: list[str] = ["eat", "sleep", "run", "move", "grab", "climb", "swim"]
 

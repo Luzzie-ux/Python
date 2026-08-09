@@ -6,6 +6,7 @@ Files to Submit: tournament.py, ex2/ as a package with all needed files in it
 Authorized: builtins, standard types, import typing, import abc
 """
 
+from .factories import DarkFactory, PoisonFactory
 from .strategy import (
     AggressiveStrategy,
     BattleStrategy,
@@ -13,8 +14,6 @@ from .strategy import (
     InvalidActError,
     NormalStrategy,
 )
-
-from .factories import PoisonFactory, DarkFactory
 
 __all__: list[str] = [
     "AggressiveStrategy",

@@ -7,7 +7,7 @@ Authorized: builtins, standard types, import typing, import abc
 """
 
 from .factory import CreatureFactory
-from .factory_type import FlameFactory, AquaFactory
+from .factory_type import AquaFactory, FlameFactory
 
 __all__: list[str] = [
     "CreatureFactory",

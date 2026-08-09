@@ -1,4 +1,17 @@
-.python-version
-.mypy_cache
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
 .venv
-__pycache__
+
+# Lint and Type checking cache
+.mypy_cache
+.ruff_cache
+
+# .Env file
+.env

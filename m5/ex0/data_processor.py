@@ -7,8 +7,8 @@ Files to Submit: data_processor.py
 Authorized: builtins, standard types, import typing, import abc
 """
 
-from typing import Any
 from abc import ABC, abstractmethod
+from typing import Any
 
 
 # Data Processor Exception

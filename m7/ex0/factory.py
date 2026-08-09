@@ -10,6 +10,7 @@ create_evolved abstract methods
 """
 
 from abc import ABC, abstractmethod
+
 from .creature import Creature
 
 

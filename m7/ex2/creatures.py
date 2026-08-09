@@ -6,7 +6,8 @@ creatures.py
 
 from ex0.creature import Creature
 from ex1.capabilities import HealCapability, TransformCapability
-from .capabilities import PoisonCapability, DarkCapability
+
+from .capabilities import DarkCapability, PoisonCapability
 
 
 class Snape(Creature, PoisonCapability, HealCapability):

@@ -12,6 +12,7 @@ Their attack method will return an appropriate string message.
 """
 
 from ex0.creature import Creature
+
 from .capabilities import HealCapability, TransformCapability
 
 

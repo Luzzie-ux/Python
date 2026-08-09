@@ -18,8 +18,9 @@ These methods will return simple strings that describe
     the action (just like the attack method).
 """
 
-from ex0.creature import Creature
 from abc import ABC, abstractmethod
+
+from ex0.creature import Creature
 
 
 class HealCapability(ABC):

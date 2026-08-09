@@ -7,8 +7,8 @@ Files to Submit: oracle.py, requirements.txt, .env.example, .gitignore
 Authorized: os,  python-dotenv modules, file operations
 """
 
-from sys import stderr, exit
 import os
+from sys import exit, stderr
 
 FILE: str = ".env"
 EXISTS: bool = os.path.exists(FILE)

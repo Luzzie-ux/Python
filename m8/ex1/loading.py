@@ -14,10 +14,10 @@ from importlib.metadata import version
 
 def check() -> None:
     print("Checking dependencies:\n")
-    Modules: list[str] = ["numpy", "pandas", "matplotlib"]
-    size: int = len(Modules)
+    modules: list[str] = ["numpy", "pandas", "matplotlib"]
+    size: int = len(modules)
     pkgs = {}
-    for name in Modules:
+    for name in modules:
         try:
             pkgs[name] = imp(name)
         except ImportError:
