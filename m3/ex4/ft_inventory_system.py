@@ -20,8 +20,7 @@ def parser() -> list[str]:
         if len(item) % 2 != 0:
             print(f"Error - invalid parameter '{arg}'")
             continue
-        for i in item:
-            args.copy(i)
+        args += item
     return args
 
 
@@ -50,9 +49,7 @@ def main() -> None:
     args: list[str] = parser()
     bag: dict[str, int] = inventory_system(args)
     print(f"Got inventory: {bag}")
-    keys: list[str] = []
-    for key in bag:
-        keys.copy(key)
+    keys: list[str] = [list(bag)]
     print(f"Item list: {keys}")
     t_key: int = len(bag.keys())
     t_value: int = sum(bag.values())
