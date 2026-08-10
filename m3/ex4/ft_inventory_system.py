@@ -49,7 +49,7 @@ def main() -> None:
     args: list[str] = parser()
     bag: dict[str, int] = inventory_system(args)
     print(f"Got inventory: {bag}")
-    keys: list[str] = [list(bag)]
+    keys: list[str] = list(bag)
     print(f"Item list: {keys}")
     t_key: int = len(bag.keys())
     t_value: int = sum(bag.values())
