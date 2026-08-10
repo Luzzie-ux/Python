@@ -10,6 +10,7 @@ of the base and evolved Creature for each family:
 (Sproutling and Bloomelle for HealingFactory,
 Shiftling and Morphagon for TransformFactory)
 """
+
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:

@@ -63,7 +63,9 @@ def main() -> None:
             crew_size=21,
             power_level=30.2,
             oxygen_level=50.0,
-            last_maintenance=datetime(2021, 6, 18, tzinfo=timezone.utcoffset()),
+            last_maintenance=datetime(
+                2021, 6, 18, tzinfo=timezone.utcoffset()
+            ),
             is_operational=True,
             notes="Everything not alright",
         )
