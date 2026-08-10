@@ -26,6 +26,15 @@ dependencies = [
 # « Tools section »
 # =================
 
+# My TY config:
+[tool.ty]
+
+
+[tool.ty.analysis]
+
+# Disable support for `type: ignore` comments
+respect-type-ignore-comments = true
+
 # My Ruff Config:
 [tool.ruff]
 indent-width = 4
@@ -53,14 +62,26 @@ docstring-code-format = false
 [tool.ruff.lint]
 #preview = true
 #select = ["ALL"]
-extend-select = ["E", "F", "W"]
+extend-select = [
+    "E",
+    "F",
+    "W",
+    "I",
+    "B",
+]
+
+ignore = [
+    "D",
+    "DOC",
+    "RUF",
+    "CPY",
+]
 
 # ignore = [
 #     "T201",     # print statements allowed (flake8-print)
 #     "D",        # all pydocstyle/docstring rules off
 #     "DOC",      # docstring content rules (pydoclint) off
 #     "CPY",      # copyright notice checks off
-#     "SLF001",   # allow accessing "private" (_attr) members
 #     "RUF201",   # a specific ruff-native rule off (unused-noqa-directive variant, check ruff changelog for exact meaning per version)
 #     "PLR6301",  # pylint: method could be a function/staticmethod — off
 #     "PLR0913",  # pylint: too many arguments — off
@@ -74,7 +95,7 @@ extend-select = ["E", "F", "W"]
 #     "SIM115",   # allow context-manager-less file open() (the rule we discussed earlier)
 # ]
 fixable = ["ALL"]
-unfixable = []
+unfixable = ["T20"]
 
 
 [tool.ruff.lint.mccabe]
