@@ -1,5 +1,3 @@
-#!/sur/bin/env python3
-
 from .light_validator import validate_ingredients
 
 __all__: list[str] = ["light_spell_allowed_ingredients", "light_spell_record"]

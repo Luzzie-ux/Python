@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-
-
 __all__: list[str] = ["validate_ingredients"]
 
 

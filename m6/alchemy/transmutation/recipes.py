@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from elements import create_fire
 
 from alchemy.potions import strength_potion as buff

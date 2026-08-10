@@ -1,5 +1,3 @@
-#!/sur/bin/env python3
-
 from .dark_validator import validate_ingredients
 
 __all__: list[str] = ["dark_spell_allowed_ingredients", "dark_spell_record"]
