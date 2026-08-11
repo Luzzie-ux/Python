@@ -6,6 +6,7 @@ Directory: ex1/
 Files to Submit: alien_contact.py
 Authorized: None
 """
+
 import sys
 from datetime import UTC, datetime
 from enum import Enum
@@ -42,22 +43,38 @@ class AlienContact(BaseModel):
 
     @model_validator(mode="after")
     def validation(self) -> AlienContact:
-        errmsg: str = "Something Went Wrong"
-        if self.acontact_id.startswith("AC"):
-            raise ValueError(errmsg)
+        if not self.acontact_id.startswith("AC"):
+            iderr: str = "Contact ID must start with AC (Alien Contact)"
+            raise ValueError(iderr)
+        if self.contact_type == ContactType.PHYSICAL:
+            if not self.is_verified:
+                verr: str = "Physical contact reports must be verified"
+                raise ValueError(verr)
+        if self.contact_type == ContactType.TELEPATHIC:
+            required_witness: int = 3
+            if self.witness_count < required_witness:
+                werr: str = "Telepathic contact requires at least 3 witnesses"
+                raise ValueError(werr)
+        strong: float = 7.0
+        if self.signal_strength > strong:
+            if not self.message_received:
+                sigerr: str = (
+                    "Strong signals (> 7.0) should include received messages"
+                )
+                raise ValueError(sigerr)
         return self
 
 
 def main() -> None:
     try:
         AlienContact(
-        acontact_id="AC_2024_001",
-        timestamp=datetime(year=2021, month=6, day=18, tzinfo=UTC),
-        location="Earth",
-        contact_type=ContactType.RADIO,
-        signal_strength=5.0,
-        duration_minutes=1440,
-        witness_count=10,
+            acontact_id="AC_2024_001",
+            timestamp=datetime(year=2021, month=6, day=18, tzinfo=UTC),
+            location="Earth",
+            contact_type=ContactType.RADIO,
+            signal_strength=5.0,
+            duration_minutes=1440,
+            witness_count=10,
         )
     except ValidationError as e:
         print(e)
