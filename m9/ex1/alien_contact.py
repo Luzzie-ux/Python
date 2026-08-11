@@ -69,6 +69,8 @@ class AlienContact(BaseModel):
         return self
 
     def display(self) -> None:
+        print("=" * 39)
+        print("Valid contact report:")
         print(f"ID: {self.acontact_id}")
         print(f"Type: {self.contact_type.value}")
         print(f"Location: {self.location}")
@@ -79,11 +81,11 @@ class AlienContact(BaseModel):
             print("Message: None")
         print(f"Message: '{self.message_received}'")
         print()
+        print("=" * 39)
 
 
 def main() -> None:
     print("Alien Contact Log")
-    print("=" * 39)
     valid = AlienContact(
         acontact_id="AC_2024_011",
         timestamp=datetime(year=2024, month=1, day=1, tzinfo=UTC),
@@ -94,9 +96,7 @@ def main() -> None:
         witness_count=5,
         message_received="Greetings from Zeta Reticuli",
     )
-    print("Valid contact report:")
     valid.display()
-    print("=" * 39)
     try:
         AlienContact(
             acontact_id="AC_2022_033",
