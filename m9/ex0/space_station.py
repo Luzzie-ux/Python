@@ -6,9 +6,14 @@ Files to Submit: space_station.py
 Authorized: None
 """
 
-from datetime import datetime, timezone
+import sys
+from datetime import datetime
 
-from pydantic import BaseModel, Field, ValidationError
+try:
+    from pydantic import BaseModel, Field, ValidationError
+except (ModuleNotFoundError, ImportError) as e:
+    print(f"{e.__class__.__name__}: {e}", file=sys.stderr)
+    sys.exit(1)
 
 
 class SpaceStation(BaseModel):
@@ -49,7 +54,7 @@ def main() -> None:
         crew_size=6,
         power_level=85.5,
         oxygen_level=92.3,
-        last_maintenance=datetime(2000, 2, 12, tzinfo=timezone.utcoffset()),
+        last_maintenance=datetime(2000, 2, 12),
         is_operational=True,
         notes="Everything alright",
     )
@@ -63,9 +68,7 @@ def main() -> None:
             crew_size=21,
             power_level=30.2,
             oxygen_level=50.0,
-            last_maintenance=datetime(
-                2021, 6, 18, tzinfo=timezone.utcoffset()
-            ),
+            last_maintenance=datetime(2021, 6, 18),
             is_operational=True,
             notes="Everything not alright",
         )
