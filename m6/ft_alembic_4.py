@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-# type: ignore[attr-defined]
-# ty: ignore
 
 """
 ft_alembic_4.py
@@ -21,7 +19,7 @@ def main() -> None:
     )
     print("Testing the hidden create_earth:", end=" ")
     try:
-        alchemy.create_earth()
+        alchemy.create_earth()  # type: ignore
     except AttributeError as e:
         print(f"{e.__class__.__name__}: {e}")
 

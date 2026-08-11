@@ -14,7 +14,7 @@ import sys
 
 def is_venv() -> bool:
     return bool(
-        sys.prefix != sys.base_exec_prefix or os.environ.get("VIRTUAL_ENV")
+        sys.prefix != sys.base_exec_prefix or os.environ.get("VIRTUAL_ENV"),
     )
 
 

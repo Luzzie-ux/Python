@@ -25,7 +25,7 @@ PROD: list[tuple[str, str]] = [
 def check() -> bool:
     if EXISTS:
         try:
-            from dotenv import load_dotenv
+            from dotenv import load_dotenv  # type: ignore
         except ModuleNotFoundError:
             print("Could Not Find module 'dotenv'\n", file=stderr)
             return False

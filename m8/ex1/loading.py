@@ -59,7 +59,7 @@ def conflict(n: int) -> None:
 
 def simulate() -> None:
     print("\nAnalyzing Matrix Data")
-    import numpy as np
+    import numpy as np  # type: ignore
 
     s: int = 10
     t: int = 10
@@ -75,7 +75,7 @@ def simulate() -> None:
         matrix[:, col] = matrix[:, col - 1] + matrix[:, col - 2]
 
     print(f"Processing {s * t} data points")
-    import pandas as pd
+    import pandas as pd  # type: ignore
 
     df = pd.DataFrame(
         matrix,
@@ -84,7 +84,7 @@ def simulate() -> None:
     )
 
     print("Generating visualization\n")
-    from matplotlib import pyplot as plt
+    from matplotlib import pyplot as plt  # type: ignore
 
     fig, ax = plt.subplots()
     for seq_label in df.index:
