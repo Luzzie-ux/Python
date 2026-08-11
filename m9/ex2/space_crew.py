@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-
+# mypy: disable-error-code="import-not-found"
+# mypy: disable-error-code="misc"
+# mypy: disable-error-code="untyped-decorator"
 
 """
 Directory: ex2/
@@ -9,10 +11,11 @@ Authorized: None
 
 import random
 import sys
-from datetime import UTC, datetime
 from enum import Enum
 
 try:
+    from datetime import UTC, datetime
+
     from pydantic import (
         BaseModel,
         Field,

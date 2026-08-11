@@ -93,6 +93,7 @@ max-complexity = 10
 
 
 # 42 Tools Config:
+
 [tool.flake8]
 max-line-length = 79
 extend-ignore = ["E203", "W503"]
