@@ -53,32 +53,64 @@ class AlienContact(BaseModel):
         if self.contact_type == ContactType.TELEPATHIC:
             required_witness: int = 3
             if self.witness_count < required_witness:
-                werr: str = "Telepathic contact requires at least 3 witnesses"
+                werr: str = (
+                    "Telepathic contact requires at least "
+                    f"{required_witness} witnesses"
+                )
                 raise ValueError(werr)
         strong: float = 7.0
         if self.signal_strength > strong:
             if not self.message_received:
                 sigerr: str = (
-                    "Strong signals (> 7.0) should include received messages"
+                    f"Strong signals (> {strong}) "
+                    "should include received messages"
                 )
                 raise ValueError(sigerr)
         return self
 
+    def display(self) -> None:
+        print(f"ID: {self.acontact_id}")
+        print(f"Type: {self.contact_type.value}")
+        print(f"Location: {self.location}")
+        print(f"Signal: {self.signal_strength}/10")
+        print(f"Duration: {self.duration_minutes}")
+        print(f"Witness: {self.witness_count}")
+        if not self.message_received:
+            print("Message: None")
+        print(f"Message: '{self.message_received}'")
+        print()
+
 
 def main() -> None:
+    print("Alien Contact Log")
+    print("=" * 39)
+    valid = AlienContact(
+        acontact_id="AC_2024_011",
+        timestamp=datetime(year=2024, month=1, day=1, tzinfo=UTC),
+        location="Area 51, Nevada",
+        contact_type=ContactType.RADIO,
+        signal_strength=8.5,
+        duration_minutes=45,
+        witness_count=5,
+        message_received="Greetings from Zeta Reticuli",
+    )
+    print("Valid contact report:")
+    valid.display()
+    print("=" * 39)
     try:
         AlienContact(
-            acontact_id="AC_2024_001",
-            timestamp=datetime(year=2021, month=6, day=18, tzinfo=UTC),
-            location="Earth",
-            contact_type=ContactType.RADIO,
-            signal_strength=5.0,
-            duration_minutes=1440,
-            witness_count=10,
+            acontact_id="AC_2022_033",
+            timestamp=datetime(year=2022, month=3, day=3, tzinfo=UTC),
+            location="Moonshine Farm",
+            contact_type=ContactType.TELEPATHIC,
+            signal_strength=10.0,
+            duration_minutes=45,
+            witness_count=1,
         )
     except ValidationError as e:
-        print(e)
-    return
+        print("Expected validation error:", file=sys.stderr)
+        msg: str = e.errors()[0]["msg"]
+        print(msg.removeprefix("Value error, "), file=sys.stderr)
 
 
 if __name__ == "__main__":
