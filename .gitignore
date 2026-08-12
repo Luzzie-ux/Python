@@ -15,3 +15,6 @@ wheels/
 
 # .Env file
 .env
+
+# Test Files
+m10/data_generator.py

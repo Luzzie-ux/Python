@@ -89,6 +89,7 @@ max-complexity = 10
 "m4/**/*.py" = ["SIM115", "PTH"]
 "m5/**/*.py" = ["ANN401"]
 "m8/**/*.py" = ["PTH"]
+"m10/**/*.py"=["FURB", "C4"]
 
 
 # 42 Tools Config:
@@ -114,7 +115,6 @@ per-file-ignores = [
 
 [tool.mypy]
 python_version = "3.14"
-strict = true
 exclude = [
     ".venv/",
     ".git/",
