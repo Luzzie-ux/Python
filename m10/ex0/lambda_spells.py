@@ -21,10 +21,14 @@ def spell_transformer(spells: list[str]) -> list[str]:
 
 
 def mage_stats(mages: list[dict]) -> dict:
-    max(mages, key=lambda m: m["power"])["power"]
-    min(mages, key=lambda m: m["power"])["power"]
-    sum(mages, key=lambda m: m["power"]) / len(mages)
-    return {}
+    max_power: int = max(mages, key=lambda m: m["power"])["power"]
+    min_power: int = min(mages, key=lambda m: m["power"])["power"]
+    avg_power: float = sum(map(lambda m: m["power"], mages)) / len(mages)
+    return {
+        "max_power": max_power,
+        "min_power": min_power,
+        "avg_power": avg_power,
+    }
 
 
 def main() -> None:
@@ -42,18 +46,25 @@ def main() -> None:
         {"name": "Rowan", "power": 54, "element": "wind"},
     ]
     spells = ["flash", "earthquake", "fireball", "tornado"]
-    print("\nTesting artifact sorter...")
-    print(artifact_sorter(artifacts))
 
-    print("\nTesting Power Filter...")
-    print(power_filter(mages, 60))
+    try:
+        print("\nTesting artifact sorter...")
+        a = artifact_sorter(artifacts)
+        print(a)
 
-    print("\nTesting spell transformer...")
-    print(spell_transformer(spells))
+        print("\nTesting Mage Stats")
+        m = mage_stats(mages)
+        print(m)
 
-    print("\nTesting Mage Stats")
-    print(mage_stats(mages))
+        print("\nTesting spell transformer...")
+        s = spell_transformer(spells)
+        print(s)
 
+        print("\nTesting Power Filter...")
+        p = power_filter(mages, m["avg_power"])
+        print(p)
+    except ValueError as e:
+        print(e)
     return
 
 
