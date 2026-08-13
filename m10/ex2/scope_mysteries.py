@@ -1,9 +1,10 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 
 """
 scope_mysteries.py
 """
+
 
 from typing import TYPE_CHECKING, Any
 
@@ -53,6 +54,11 @@ def memory_vault() -> dict[str, Callable]:
 
 
 def main() -> None:
+    initial_powers = [65, 60, 63]
+    power_additions = [9, 20, 12]
+    enchantment_types = ["Radiant", "Shocking", "Frozen"]
+    items_to_enchant = ["Shield", "Amulet", "Ring", "Wand"]
+
     print("Testing mage counter...")
     counter_a = mage_counter()
     counter_b = mage_counter()
@@ -61,22 +67,14 @@ def main() -> None:
     print(f"counter_b call 1: {counter_b()}")
 
     print("\nTesting spell accumulator...")
-    accumulator = spell_accumulator(100)
-    print(f"Base 100 add 20: {accumulator(20)}")
-    print(f"Base 100 add 30: {accumulator(30)}")
+    for power in initial_powers:
+        accumulator = spell_accumulator(power)
+        for addition in power_additions:
+            print(f"Base {power} add {addition}: {accumulator(addition)}")
 
     print("\nTesting enchantment factory...")
-    flaming = enchantment_factory("Flaming")
-    frozen = enchantment_factory("Frozen")
-    print(flaming("Sword"))
-    print(frozen("Shield"))
 
     print("\nTesting memory vault...")
-    vault = memory_vault()
-    vault["store"]("secret", 42)
-    vault["store"]("pass", 12)
-    print(f"Recall 'secret': {vault['recall']('secret')}")
-    print(f"Recall 'unknown': {vault['recall']('batata')}")
 
 
 if __name__ == "__main__":
