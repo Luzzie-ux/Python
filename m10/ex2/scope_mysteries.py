@@ -6,7 +6,6 @@ scope_mysteries.py
 """
 
 from collections.abc import Callable
-from typing import TYPE_CHECKING, Any
 
 
 def mage_counter() -> Callable:
@@ -23,7 +22,7 @@ def mage_counter() -> Callable:
 def spell_accumulator(initial_power: int) -> Callable:
     accumulator = initial_power
 
-    def accumulated(amount: Any) -> int:
+    def accumulated(amount: int) -> int:
         nonlocal accumulator
         accumulator += amount
         return accumulator
@@ -41,10 +40,10 @@ def enchantment_factory(enchantment_type: str) -> Callable:
 def memory_vault() -> dict[str, Callable]:
     storage = {}
 
-    def store(key: Any, value: Any) -> None:
+    def store(key: int, value: str) -> None:
         storage[key] = value
 
-    def recall(key: Any) -> Any:
+    def recall(key: int) -> str:
         return storage.get(key, "Memory not found")
 
     return {"store": store, "recall": recall}
@@ -53,7 +52,7 @@ def memory_vault() -> dict[str, Callable]:
 def main() -> None:
     initial_powers = [65, 60, 63]
     power_additions = [9, 20, 12]
-    enchantment_types = ["Radiant", "Shocking", "Frozen"]
+    enchantment_types = ["Radiant", "Shocking", "Frozen", "Arcane"]
     items_to_enchant = ["Shield", "Amulet", "Ring", "Wand"]
 
     print("Testing mage counter...")
@@ -64,14 +63,23 @@ def main() -> None:
     print(f"counter_b call 1: {counter_b()}")
 
     print("\nTesting spell accumulator...")
-    for power in initial_powers:
+    for addition, power in zip(power_additions, initial_powers, strict=False):
         accumulator = spell_accumulator(power)
-        for addition in power_additions:
-            print(f"Base {power} add {addition}: {accumulator(addition)}")
+        print(f"Base {power} add {addition}: {accumulator(addition)}")
 
     print("\nTesting enchantment factory...")
+    for item, enchantment in zip(
+        items_to_enchant, enchantment_types, strict=False
+    ):
+        factory = enchantment_factory(enchantment)
+        print(factory(item))
 
     print("\nTesting memory vault...")
+    vault = memory_vault()
+    for i, item in zip(range(5), items_to_enchant, strict=False):
+        vault["store"](i, item)
+    for i in range(5):
+        print(f"{i}: {vault['recall'](i)}")
 
 
 if __name__ == "__main__":

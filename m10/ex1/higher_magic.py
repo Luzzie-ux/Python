@@ -18,6 +18,7 @@ def fireball(target: str, power: int) -> str:
 
 
 def condition(target: str, power: int) -> bool:
+    del target
     if not power < 10:
         return True
     return False
