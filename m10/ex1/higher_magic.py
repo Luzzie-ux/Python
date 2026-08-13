@@ -5,10 +5,8 @@
 higher_magic.py
 """
 
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from collections.abc import Callable
+from collections.abc import Callable
 
 
 def heal(target: str, power: int) -> str:
@@ -19,7 +17,7 @@ def fireball(target: str, power: int) -> str:
     return f"Fireball takes {power} HP from {target}"
 
 
-def condition(power: int) -> bool:
+def condition(target: str, power: int) -> bool:
     if not power < 10:
         return True
     return False

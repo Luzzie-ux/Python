@@ -1,15 +1,12 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 
 """
 scope_mysteries.py
 """
 
-
+from collections.abc import Callable
 from typing import TYPE_CHECKING, Any
-
-if TYPE_CHECKING:
-    from collections.abc import Callable
 
 
 def mage_counter() -> Callable:
