@@ -2,9 +2,10 @@
 
 
 """
-higher_magic.py
+Directory: ex1/
+Files to Submit: higher_magic.py
+Authorized: callable(), Callable
 """
-
 
 from collections.abc import Callable
 

@@ -2,7 +2,9 @@
 
 
 """
-scope_mysteries.py
+Directory: ex2/
+Files to Submit: scope_mysteries.py
+Authorized: nonlocal
 """
 
 from collections.abc import Callable
