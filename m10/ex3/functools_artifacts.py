@@ -42,7 +42,7 @@ def partial_enchanter(base_enchantment: Callable) -> dict[str, Callable]:
 def memoized_fibonacci(n: int) -> int:
     if n < 2:
         return n
-    return memoized_fibonacci(n + 1) + memoized_fibonacci(n + 2)
+    return memoized_fibonacci(n - 1) + memoized_fibonacci(n - 2)
 
 
 def spell_dispatcher() -> Callable[[Any], str]:
@@ -73,7 +73,6 @@ def main() -> None:
     print("Testing spell reducer...")
     for op in operations:
         print(f"Operation {op}: {spell_reducer(spell_powers, op)}")
-    print("\nTesting partial enchanter...")
     print("\nTesting memoized fibonacci...")
     for test in fibonacci_tests:
         print(f"Fib({test}): {memoized_fibonacci(test)}")
@@ -84,7 +83,6 @@ def main() -> None:
     print(dispatcher("fireball"))
     print(dispatcher([1, 2, 3]))
     print(dispatcher((1, 2)))
-
     return
 
 
