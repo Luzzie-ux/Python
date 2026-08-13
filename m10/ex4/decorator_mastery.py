@@ -46,16 +46,15 @@ def retry_spell(max_attempts: int) -> Callable:
         @wraps(func)
         def wrapper(*args, **kwargs):
             for i in range(1, max_attempts + 1):
-                res: Callable
                 try:
                     res = func(*args, **kwargs)
+                    return res
                 except Exception:
                     print(
                         "Spell failed, retrying..."
                         f"(attempt {i}/{max_attempts})"
                     )
                     continue
-                return res
             return f"Spell casting failed after {max_attempts} attempts"
 
         return wrapper
@@ -84,17 +83,35 @@ def fireball(power: int) -> str:
 
 
 @retry_spell(3)
-def spell(name: str) -> str:
+def test_spell(name: str) -> str:
+    int(name)
     return f"{name} spell!"
 
 
 def main() -> None:
+    test_powers = [23, 11, 10, 7]
+    spell_names = ["lightning", "earthquake", "meteor", "heal"]
+    mage_names = ["Morgan", "Ember", "River", "Phoenix", "Ash", "Sage"]
+    invalid_names = ["Jo", "A", "Alex123", "Test@Name"]
+
     print("Testing spell timer...")
-    print(fireball(10))
+    print(f"Result: {fireball(10)}")
+
+    print("\nTesting retrying spell...")
+    print(test_spell("Firestorm"))
+    print(test_spell("42"))
 
     mage = MageGuild()
-    print("Testing power validator...")
-    print(mage.cast_spell("Ice Spike", 10))
+    print("\nTesting power validator...")
+    for spell, power in zip(spell_names, test_powers, strict=False):
+        print(mage.cast_spell(spell, power))
+    print("\nTesting MageGuild..")
+    for valid, invalid in zip(mage_names, invalid_names, strict=False):
+        print(valid, end=": ")
+        print(mage.validate_mage_name(valid))
+        print(invalid, end=": ")
+        print(mage.validate_mage_name(invalid))
+    print()
 
 
 if __name__ == "__main__":
