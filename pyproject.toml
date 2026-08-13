@@ -89,7 +89,7 @@ max-complexity = 10
 "m4/**/*.py" = ["SIM115", "PTH"]
 "m5/**/*.py" = ["ANN401"]
 "m8/**/*.py" = ["PTH"]
-"m10/**/*.py"=["FURB", "C4"]
+"m10/**/*.py"=["FURB", "C4", "TC", "ANN"]
 
 
 # 42 Tools Config:
