@@ -6,14 +6,19 @@
 The purpose of this Script is to understand the way python handles
 file descriptors, file operations and ruff/ty rule checking
 for python files, mostly to also save myself from having to
-manually correcting every single thing ruff is saying it's wrong
+manually correct every single thing ruff is saying it's wrong
 """
 
 import ast
 import json
-import subprocess
+import shutil
+import subprocess  # noqa: S404 - used deliberately, only to invoke ruff itself
 import sys
 from pathlib import Path
+
+# Resolved once so subprocess calls use a full path instead of a bare
+# "ruff", which avoids S607 (partial executable path / PATH hijacking).
+RUFF_BIN = shutil.which("ruff") or "ruff"
 
 MAX_ARGS: int = 2
 COPYRIGHT_LINE = "# Copyright (c) 2026 Luz\n"
@@ -35,6 +40,8 @@ MISSING_DOCSTRING_CODES = (
 
 # Summary + blank line + description, closing quotes on their own line.
 # Every generated docstring (module or function) follows this shape.
+# (Used only as a fallback - in practice regular files already carry
+# their own real docstring, so this rarely gets inserted.)
 MODULE_DOCSTRING_LINES = [
     '"""TODO: describe this module.\n',
     "\n",
@@ -45,7 +52,7 @@ MODULE_DOCSTRING_LINES = [
 # __init__.py files get a fixed, minimal docstring instead of a TODO stub,
 # since package-level docstrings rarely need real content.
 INIT_DOCSTRING_LINES = [
-    '"""Package.\n',
+    '"""Function Package.\n',
     "\n",
     "This docstring is to appease Ruff.\n",
     '"""\n',
@@ -66,9 +73,9 @@ def run_ruff(filepath: Path) -> list[dict]:
         JSON diagnostics ruff reported for this file
 
     """
-    result = subprocess.run(
+    result = subprocess.run(  # noqa: S603 - list args, no shell, trusted binary
         [
-            "ruff",
+            RUFF_BIN,
             "check",
             "--select",
             "CPY,D",
@@ -107,9 +114,9 @@ def apply_ruff_autofix(filepath: Path) -> bool:
 
     """
     before = filepath.read_text(encoding="utf-8")
-    subprocess.run(
+    subprocess.run(  # noqa: S603 - list args, no shell, trusted binary
         [
-            "ruff",
+            RUFF_BIN,
             "check",
             "--select",
             "CPY,D",
@@ -148,8 +155,7 @@ def _annotation_is_none(annotation: ast.expr | None) -> bool:
 
 
 def build_stub_docstring(
-    node: ast.FunctionDef | ast.AsyncFunctionDef | ast.ClassDef,
-    indent: str,
+    node: ast.FunctionDef | ast.AsyncFunctionDef | ast.ClassDef, indent: str
 ) -> list[str]:
     """Build a numpy-style TODO docstring for a function, method, or class.
 
@@ -190,23 +196,18 @@ def build_stub_docstring(
         f"{indent}TODO: add description.\n",
     ]
     if params:
-        lines.extend(
-            (f"{indent}\n", f"{indent}Parameters\n", f"{indent}----------\n"),
-        )
+        lines.append(f"{indent}\n")
+        lines.append(f"{indent}Parameters\n")
+        lines.append(f"{indent}----------\n")
         for p in params:
-            lines.extend(
-                (f"{indent}{p} : TODO\n", f"{indent}    TODO: describe {p}\n"),
-            )
+            lines.append(f"{indent}{p} : TODO\n")
+            lines.append(f"{indent}    TODO: describe {p}\n")
     if has_return:
-        lines.extend(
-            (
-                f"{indent}\n",
-                f"{indent}Returns\n",
-                f"{indent}-------\n",
-                f"{indent}TODO\n",
-                f"{indent}    TODO: describe return value\n",
-            ),
-        )
+        lines.append(f"{indent}\n")
+        lines.append(f"{indent}Returns\n")
+        lines.append(f"{indent}-------\n")
+        lines.append(f"{indent}TODO\n")
+        lines.append(f"{indent}    TODO: describe return value\n")
     # Numpy-style (D413) wants a blank line after the last section, but
     # only when there was a section to begin with.
     if params or has_return:
@@ -216,8 +217,7 @@ def build_stub_docstring(
 
 
 def find_docstring_node(
-    tree: ast.Module,
-    lineno: int,
+    tree: ast.Module, lineno: int
 ) -> ast.FunctionDef | ast.AsyncFunctionDef | ast.ClassDef | None:
     """Find the function, method, or class node matching a violation's line.
 
@@ -242,9 +242,7 @@ def find_docstring_node(
 
 
 def insert_missing_docstrings(
-    lines: list[str],
-    tree: ast.Module,
-    violations: list[dict],
+    lines: list[str], tree: ast.Module, violations: list[dict]
 ) -> list[str]:
     """Insert TODO docstrings for every function, method, or class missing one.
 
@@ -284,7 +282,123 @@ def insert_missing_docstrings(
     return lines
 
 
-def open_file(filepath: Path) -> bool:
+def _relative_path_comment(filepath: Path, root: Path | None) -> str:
+    """Build the '# path/to/file.py' comment line used in init headers.
+
+    Parameters
+    ----------
+    filepath : Path
+        the file being processed
+    root : Path | None
+        the root folder passed on the command line, if known
+
+    Returns
+    -------
+    str
+        a comment line with the file's path relative to root
+
+    """
+    if root is not None:
+        try:
+            rel = filepath.relative_to(root)
+        except ValueError:
+            rel = filepath
+    else:
+        rel = filepath
+    return f"# {rel.as_posix()}\n"
+
+
+def build_header_prepend(
+    filepath: Path,
+    root: Path | None,
+    codes: set[str],
+    lines: list[str],
+) -> tuple[list[str], int]:
+    """Work out which header lines (shebang/copyright/docstring) to add.
+
+    __init__.py files get: copyright, a "# relative/path.py" comment,
+    then the fixed package docstring directly underneath (no shebang,
+    no blank line before the docstring, one blank line after it).
+
+    Every other file gets: shebang, copyright, a blank line, then the
+    module docstring - matching what ruff itself expects.
+
+    Parameters
+    ----------
+    filepath : Path
+        the file being processed
+    root : Path | None
+        the root folder passed on the command line, if known
+    codes : set[str]
+        ruff violation codes still present for this file
+    lines : list[str]
+        current file contents, one entry per line
+
+    Returns
+    -------
+    tuple[list[str], int]
+        the lines to insert, and the index to insert them at
+
+    """
+    is_init = filepath.name == INIT_FILENAME
+    prepend: list[str] = []
+    body_start = 0
+
+    if lines and lines[0].startswith("#!"):
+        body_start = 1
+    elif not is_init:
+        # __init__.py files don't get a shebang - they aren't executed
+        # directly, just imported.
+        prepend.append(SHEBANG_LINE)
+
+    if "CPY001" in codes:
+        prepend.append(COPYRIGHT_LINE)
+        if is_init:
+            prepend.append(_relative_path_comment(filepath, root))
+
+    if codes & MISSING_MODULE_DOCSTRING_CODES:
+        if is_init:
+            prepend.extend(INIT_DOCSTRING_LINES)
+            prepend.append("\n")
+        else:
+            prepend.append("\n")
+            prepend.extend(MODULE_DOCSTRING_LINES)
+
+    return prepend, body_start
+
+
+def finalize_and_report(filepath: Path) -> bool:
+    """Run a second autofix pass, then report anything still unresolved.
+
+    Our inserted stubs can themselves trigger new *fixable* violations
+    (e.g. a class docstring needs a blank line after it before D204 is
+    happy), so autofix runs again here to mop those up. Whatever's left
+    after that is a genuinely unresolved issue needing a human's
+    judgment (e.g. D401 imperative mood, D417 argument descriptions
+    that don't match reality) - reported, not touched.
+
+    Parameters
+    ----------
+    filepath : Path
+        the file to finalize
+
+    Returns
+    -------
+    bool
+        True if this second pass changed the file
+
+    """
+    changed = apply_ruff_autofix(filepath)
+    leftover = {v["code"] for v in run_ruff(filepath)}
+    if leftover:
+        codes_str = ", ".join(sorted(leftover))
+        print(
+            f"  needs manual review ({codes_str}): {filepath}", file=sys.stderr
+        )
+    return changed
+
+
+def open_file(filepath: Path, root: Path | None = None) -> bool:
     """Alters the file given to it.
 
     Runs ruff's own autofix first (covers every D/CPY violation ruff can
@@ -297,6 +411,9 @@ def open_file(filepath: Path) -> bool:
     ----------
     filepath : Path
         path to the given file
+    root : Path | None
+        the root folder this file was discovered under, used to build
+        the relative-path comment in __init__.py headers
 
     Returns
     -------
@@ -327,26 +444,7 @@ def open_file(filepath: Path) -> bool:
             lines = new_lines
             changed = True
 
-    # Header-level fixes (shebang / copyright / module docstring).
-    is_init = filepath.name == INIT_FILENAME
-    prepend: list[str] = []
-    body_start = 0
-
-    if lines and lines[0].startswith("#!"):
-        body_start = 1
-    elif not is_init:
-        # __init__.py files don't get a shebang - they aren't executed
-        # directly, just imported.
-        prepend.append(SHEBANG_LINE)
-
-    if "CPY001" in codes:
-        prepend.append(COPYRIGHT_LINE)
-
-    if codes & MISSING_MODULE_DOCSTRING_CODES:
-        prepend.extend(
-            INIT_DOCSTRING_LINES if is_init else MODULE_DOCSTRING_LINES,
-        )
-
+    prepend, body_start = build_header_prepend(filepath, root, codes, lines)
     if prepend:
         lines = lines[:body_start] + prepend + lines[body_start:]
         changed = True
@@ -355,22 +453,8 @@ def open_file(filepath: Path) -> bool:
         with filepath.open("w", encoding="utf-8") as f:
             f.writelines(lines)
 
-    # Our inserted stubs can themselves trigger new *fixable* violations
-    # (e.g. a class docstring needs a blank line after it before D204 is
-    # happy). Run ruff's autofix again to mop those up, then report only
-    # what's left after both passes - genuinely unresolved issues that
-    # need a human's judgment (e.g. D401 imperative mood, D417 argument
-    # descriptions that don't match reality).
-    if apply_ruff_autofix(filepath):
+    if finalize_and_report(filepath):
         changed = True
-
-    leftover = {v["code"] for v in run_ruff(filepath)}
-    if leftover:
-        codes_str = ", ".join(sorted(leftover))
-        print(
-            f"  needs manual review ({codes_str}): {filepath}",
-            file=sys.stderr,
-        )
 
     return changed
 
@@ -385,7 +469,7 @@ def main() -> None:
         print(f"{folder} is not a valid dir", file=sys.stderr)
         sys.exit(1)
     for py_file in folder.rglob("*.py"):
-        modified = open_file(py_file)
+        modified = open_file(py_file, root=folder)
         status = "updated" if modified else "unchanged"
         print(f"{status}: {py_file}")
 

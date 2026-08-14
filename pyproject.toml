@@ -45,7 +45,7 @@ preview = true
 select = ["ALL"]
 extend-select = []
 
-ignore = ["T20"]
+ignore = ["T20", "RUF"]
 fixable = ["ALL"]
 unfixable = ["T20"]
 
