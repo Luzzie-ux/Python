@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
-"""
-Directory: ex0/
+"""Directory: ex0/.
+
 Files to Submit: ft_garden_intro.py
 Authorized: print()
 """
 
 
 def ft_garden_intro() -> None:
-    """Prints garden info"""
+    """Print garden info."""
     print("=== Welcome to My Garden ===")
     name: str = "Rose"
     print(f"Plant: {name}")
@@ -21,6 +21,7 @@ def ft_garden_intro() -> None:
 
 
 def main() -> None:
+    """Entry point."""
     ft_garden_intro()
 
 

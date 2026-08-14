@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 """
-ft_finally_block.py
+Directory: ex4/
+Files to Submit: ft_finally_block.py
+Authorized: print(), str.capitalize()
 """
 
 

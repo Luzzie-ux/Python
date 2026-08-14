@@ -1,7 +1,9 @@
 #! /usr/bin/env python3
 
 """
-ft_first_excption.py
+Directory: ex0/
+Files to Submit: ft_first_exception.py
+Authorized: int(), print()
 """
 
 

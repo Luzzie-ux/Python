@@ -2,7 +2,9 @@
 # type: ignore
 
 """
-ft_different_errors.py
+Directory: ex2/
+Files to Submit: ft_different_errors.py
+Authorized: print(), open(), int()
 """
 
 

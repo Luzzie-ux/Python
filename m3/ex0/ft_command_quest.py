@@ -2,7 +2,9 @@
 
 
 """
-ft_command_quest.py
+Directory: ex0/
+Files to Submit: ft_command_quest.py
+Authorized: import sys, sys.argv, len(), print()
 """
 
 import sys

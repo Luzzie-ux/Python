@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 
 """
-ft_custom_errors.py
+Directory: ex3◁
+Files to Submit: ft_custom_errors.py
+Authorized: print()
 """
 
 
 class GardenError(Exception):
-    def __init__(self, message: str = "Unknown plant error") -> None:
+    def __init__(self, message: str = "Unknown garden error") -> None:
         super().__init__(message)
 
 
@@ -16,7 +18,7 @@ class PlantError(GardenError):
 
 
 class WaterError(GardenError):
-    def __init__(self, message: str = "Unknown plant error") -> None:
+    def __init__(self, message: str = "Unknown water error") -> None:
         super().__init__(message)
 
 

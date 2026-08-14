@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 """
-ft_raise_exception.py
+Directory: ex1/
+Files to Submit: ft_raise_exception.py
+Authorized: int(), print()
 """
 
 
