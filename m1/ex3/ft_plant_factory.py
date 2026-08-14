@@ -1,18 +1,33 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Luz
 
-"""
-Directory: ex3/
+"""Directory: ex3/.
+
 Files to Submit: ft_plant_factory.py
-Authorized: print(), range(), round()
+Authorized: print(), range(), round().
 """
 
 
 class Plant:
-    """
-    Plant class composed of name, initial height and initial age.
-    """
+    """Plant class composed of name, initial height and initial age."""
 
     def __init__(self, name: str, height: float, age: int, mod: float) -> None:
+        """Plant class __init__.
+
+        Plant: Class plant that will has, name, heiight and age.
+
+        Parameters
+        ----------
+        name : str
+            name: plant name
+        height : float
+            height: plant height
+        age : int
+            age: plant age
+        mod : float
+            mod: plant growth rate
+
+        """
         self.name: str = name
         self.height: float = height
         self.age: int = age
@@ -20,28 +35,22 @@ class Plant:
         self.initial_height: float = height
 
     def show(self) -> None:
-        """
-        Shows plant information at the start of the script
-        """
+        """Show plant information at the start of the script."""
         print(f"{self.name}: is {self.height}cms and {self.age} days old")
 
     def grow(self) -> None:
-        """
-        Adds modifier to height
-        """
+        """Add modifier to height."""
         self.height = round(self.height + self.mod, 2)
 
     def aging(self) -> None:
-        """
-        Adds one to age
-        """
+        """Add one to age."""
         self.age += 1
 
     def simulate(self) -> None:
-        """
-        Displays plant status in loop iterating grow and age,
+        """Display plant status in loop iterating grow and age.
+
         showing every stage until 7, then at the end shows
-        "total growth" of the plant after the loop is done
+        "total growth" of the plant after the loop is done.
         """
         print(f" --- {self.name} status: ---")
         for days in range(1, 8):
@@ -54,7 +63,7 @@ class Plant:
 
 
 def ft_plant_factory() -> None:
-    """Creates plants and prints it's growth cycle"""
+    """Create plants and prints it's growth cycle."""
     print("\n=== Factory Input ===\n")
     plants: list[Plant] = [
         Plant("Rose", 5.0, 10, 1.5),
@@ -71,6 +80,10 @@ def ft_plant_factory() -> None:
 
 
 def main() -> None:
+    """TODO: describe main.
+
+    TODO: add description.
+    """
     ft_plant_factory()
 
 

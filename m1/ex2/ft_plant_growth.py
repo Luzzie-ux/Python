@@ -1,20 +1,37 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Luz
 
-"""
-Directory: ex2/
+"""Directory: ex2/.
+
 Files to Submit: ft_plant_growth.py
-Authorized: print(), range(), round()
+Authorized: print(), range(), round().
 """
 
 
 class Plant:
-    """
-    Plant class that will define name, age, height, mod and initial_height
+    """Plant class that will define name, age, height, mod and initial_height.
+
     as Plant parameters, and then define four functions:
-    grow(), age(), show() and simulate()
+    grow(), age(), show() and simulate().
     """
 
     def __init__(self, name: str, old: int, height: float, mod: float) -> None:
+        """Plant class __init__.
+
+        Plant: Class plant that will has, name, heiight and age.
+
+        Parameters
+        ----------
+        name : str
+            name: plant name
+        height : float
+            height: plant height
+        old : int
+            age: plant age
+        mod : float
+            mod: plant growth rate
+
+        """
         self.name: str = name
         self.old: int = old
         self.height: float = height
@@ -22,28 +39,22 @@ class Plant:
         self.initial_height: float = height
 
     def show(self) -> None:
-        """
-        Shows plant information at the start of the script
-        """
+        """Show plant information at the start of the script."""
         print(f"{self.name}: is {self.height}cms and {self.old} days old")
 
     def grow(self) -> None:
-        """
-        Adds modifier to height
-        """
+        """Add modifier to height."""
         self.height = round(self.height + self.mod, 2)
 
     def age(self) -> None:
-        """
-        Adds one to age
-        """
+        """Add one to age."""
         self.old += 1
 
     def simulate(self) -> None:
-        """
-        Displays plant status in loop iterating grow and age,
+        """Display plant status in loop iterating grow and age.
+
         showing every stage until 7, then at the end shows
-        "total growth" of the plant after the loop is done
+        "total growth" of the plant after the loop is done.
         """
         print(f" --- {self.name} status: ---")
         self.show()
@@ -57,7 +68,7 @@ class Plant:
 
 
 def ft_plant_growth() -> None:
-    """Prints the garden plants growth cycle"""
+    """Print the garden plants growth cycle."""
     print("=== Garden Plant Growth ===")
     rose = Plant("Roses", 10, 25, 0.8)
     rose.simulate()
@@ -68,6 +79,10 @@ def ft_plant_growth() -> None:
 
 
 def main() -> None:
+    """TODO: describe main.
+
+    TODO: add description.
+    """
     ft_plant_growth()
 
 
