@@ -1,7 +1,10 @@
+# Copyright (c) 2026 Luz
 # harvest total
 
 """
-defines function that counts total harvest
+Directory: ex3/
+Files to Submit: ft_harvest_total.py
+Authorized: input(), int(), print()
 """
 
 

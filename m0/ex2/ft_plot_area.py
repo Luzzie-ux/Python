@@ -1,7 +1,10 @@
+# Copyright (c) 2026 Luz
 # plot area
 
 """
-defines function that calcutes plot area
+Directory: ex2/
+Files to Submit: ft_plot_area.py
+Authorized: input(), int(), print()
 """
 
 

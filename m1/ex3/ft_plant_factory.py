@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 """
-ft_plant_factory.py
+Directory: ex3/
+Files to Submit: ft_plant_factory.py
+Authorized: print(), range(), round()
 """
 
 

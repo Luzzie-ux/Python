@@ -1,7 +1,11 @@
+# Copyright (c) 2026 Luz
 # count harverst recursive
 
 """
-this file defines the recursion helper and the count harvest with recursion
+Directory: ex6/
+Files to Submit: ft_count_harvest_iterative.py, ft_count_harvest_recursive.py
+Authorized: input(), int(), print(), range(), defining helper functions for
+recursion
 """
 
 

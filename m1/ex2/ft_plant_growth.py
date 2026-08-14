@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 """
-ft_plant_growth.py
+Directory: ex2/
+Files to Submit: ft_plant_growth.py
+Authorized: print(), range(), round()
 """
 
 

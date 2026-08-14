@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 """
-ft_garden_data.py
+Directory: ex1/
+Files to Submit: ft_garden_data.py
+Authorized: print()
 """
 
 

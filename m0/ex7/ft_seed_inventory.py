@@ -1,7 +1,10 @@
+# Copyright (c) 2026 Luz
 # seed inventory
 
 """
-defines function that prints seed inventory taken from stdin
+Directory: ex7/
+Files to Submit: ft_seed_inventory.py
+Authorized: print(), string methods
 """
 
 

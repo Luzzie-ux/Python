@@ -1,12 +1,13 @@
+# Copyright (c) 2026 Luz
 # hello garden
 
-"""
-standard hello world function but with garden theme
+"""Directory: ex0/.
+
+Files to Submit: ft_hello_garden.py
+Authorized: print()
 """
 
 
 def ft_hello_garden() -> None:
-    """
-    function that says hello garden community
-    """
+    """Function that will says hello garden community."""
     print("Hello, Garden Community!")

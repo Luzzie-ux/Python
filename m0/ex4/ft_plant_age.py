@@ -1,7 +1,10 @@
+# Copyright (c) 2026 Luz
 # plant age
 
 """
-defines function that checks plant age
+Directory: ex4/
+Files to Submit: ft_plant_age.py
+Authorized: input(), int(), print()
 """
 
 

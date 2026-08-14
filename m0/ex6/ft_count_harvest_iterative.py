@@ -1,7 +1,11 @@
+# Copyright (c) 2026 Luz
 # count harvest iterative
 
 """
-defined function that counts days until harvest
+Directory: ex6/
+Files to Submit: ft_count_harvest_iterative.py, ft_count_harvest_recursive.py
+Authorized: input(), int(), print(), range(), defining helper functions for
+recursion
 """
 
 

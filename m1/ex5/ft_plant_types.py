@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 """
-ft_plant_types.py
+irectory: ex5/
+Files to Submit: ft_plant_types.py
+Authorized: super(), print(), range(), round()
 """
 
 

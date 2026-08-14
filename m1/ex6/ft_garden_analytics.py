@@ -1,7 +1,10 @@
 #! /usr/bin/env python3
 
 """
-ft_garden_analytics.py
+Directory: ex6/
+Files to Submit: ft_garden_analytics.py
+Authorized: super(), print(), range(), round(), staticmethod(),
+classmethod()
 """
 
 

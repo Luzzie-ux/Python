@@ -1,7 +1,10 @@
+# Copyright (c) 2026 Luz
 # water reminder
 
 """
-defines function that checks if plants needs water
+Directory: ex5/
+Files to Submit: ft_water_reminder.py
+Authorized: input(), int(), print()
 """
 
 

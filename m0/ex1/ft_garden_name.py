@@ -1,7 +1,10 @@
+# Copyright (c) 2026 Luz
 # garden name
 
 """
-defines function garden name
+Directory: ex1/
+Files to Submit: ft_garden_name.py
+Authorized: input(), print()
 """
 
 

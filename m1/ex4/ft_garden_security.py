@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 """
-ft_garden_security.py
+Directory: ex4/
+Files to Submit: ft_garden_security.py
+Authorized: print(), range(), round()
 """
 
 

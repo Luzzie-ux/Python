@@ -15,8 +15,6 @@ dependencies = []
 # My TY config:
 [tool.ty]
 
-[tool.ty.analysis]
-
 
 # My Ruff Config:
 [tool.ruff]
@@ -34,7 +32,7 @@ extend-exclude = [
     "dist",
 ]
 show-fixes = true
-#output-format = "grouped"
+output-format = "grouped"
 
 [tool.ruff.format]
 quote-style = "double"
@@ -45,44 +43,15 @@ docstring-code-format = false
 [tool.ruff.lint]
 preview = true
 select = ["ALL"]
-extend-select = [
-    "E",
-    "F",
-    "W",
-    "I",
-    "B",
-    "N",
-    "C90",
-]
+extend-select = []
 
-ignore = [
-    "D",
-    "DOC",
-    "RUF",
-    "CPY",
-    "SIM",
-    "TID",
-    "S",
-    "FBT",
-    "PL",
-    "T20",
-    "PGH",
-    "COM"
-]
+ignore = ["T20"]
 fixable = ["ALL"]
-unfixable = ["T20", "PGH"]
+unfixable = ["T20"]
 
 
 [tool.ruff.lint.mccabe]
 max-complexity = 10
-
-[tool.ruff.lint.per-file-ignores]
-"m0/**/*.py" = ["INP001"]
-"m2/**/*.py" = ["SIM115", "PTH"]
-"m4/**/*.py" = ["SIM115", "PTH"]
-"m5/**/*.py" = ["ANN401"]
-"m8/**/*.py" = ["PTH"]
-"m10/**/*.py"=["FURB", "C4", "TC", "ANN"]
 
 
 # 42 Tools Config:
@@ -102,12 +71,10 @@ extend-exclude = [
 count = true
 statistics = true
 show-source = true
-per-file-ignores = [
-    "__init__.py:F401",
-]
 
 [tool.mypy]
 python_version = "3.14"
+strict = true
 exclude = [
     ".venv/",
     ".git/",
