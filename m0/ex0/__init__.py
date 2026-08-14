@@ -3,7 +3,7 @@
 
 """Function Package.
 
-This package is just so ruff shuts up.
+This docstring is to appease Ruff.
 """
 
 from .ft_hello_garden import ft_hello_garden
