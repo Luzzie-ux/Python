@@ -1,17 +1,15 @@
 # Copyright (c) 2026 Luz
 # seed inventory
 
-"""
-Directory: ex7/
+"""Directory: ex7/.
+
 Files to Submit: ft_seed_inventory.py
 Authorized: print(), string methods
 """
 
 
 def ft_seed_inventory(seed_type: str, quantity: int, unit: str) -> None:
-    """
-    function that displays seed inventory with inputs from stdin
-    """
+    """Display seed inventory with inputs from stdin."""
     if unit.lower() == "packets":
         print(
             f"{seed_type.capitalize()} seeds: "
