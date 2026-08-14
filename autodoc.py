@@ -15,16 +15,35 @@ from pathlib import Path
 MAX_ARGS: int = 2
 
 
+def open_file(filepath: Path) -> bool:
+    """Alters the file given to it.
+
+    Parameters
+    ----------
+    filepath : Path
+        path to the given file
+
+    Returns
+    -------
+    bool
+        if it can alter the file: True
+        if it cant alter the file. False
+
+    """
+    return True
+
+
 def main() -> None:
     """Entry point of the script."""
     if len(sys.argv) != MAX_ARGS:
-        print(f"Usage: python {__file__} <folder>", file=sys.stderr)
+        print("Usage: python autodoc.py <folder>", file=sys.stderr)
         sys.exit(0)
     folder: Path = Path(sys.argv[1])
     if not folder.is_dir():
         print(f"{folder} is not a valid dir", file=sys.stderr)
         sys.exit(1)
-    print(folder)
+    for py_file in folder.rglob("*.py"):
+        open_file(py_file)
 
 
 if __name__ == "__main__":

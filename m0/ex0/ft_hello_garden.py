@@ -9,5 +9,5 @@ Authorized: print()
 
 
 def ft_hello_garden() -> None:
-    """Function that will says hello garden community."""
+    """Says hello garden community."""
     print("Hello, Garden Community!")
