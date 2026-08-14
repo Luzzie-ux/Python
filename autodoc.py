@@ -155,7 +155,8 @@ def _annotation_is_none(annotation: ast.expr | None) -> bool:
 
 
 def build_stub_docstring(
-    node: ast.FunctionDef | ast.AsyncFunctionDef | ast.ClassDef, indent: str
+    node: ast.FunctionDef | ast.AsyncFunctionDef | ast.ClassDef,
+    indent: str,
 ) -> list[str]:
     """Build a numpy-style TODO docstring for a function, method, or class.
 
@@ -196,18 +197,23 @@ def build_stub_docstring(
         f"{indent}TODO: add description.\n",
     ]
     if params:
-        lines.append(f"{indent}\n")
-        lines.append(f"{indent}Parameters\n")
-        lines.append(f"{indent}----------\n")
+        lines.extend(
+            (f"{indent}\n", f"{indent}Parameters\n", f"{indent}----------\n"),
+        )
         for p in params:
-            lines.append(f"{indent}{p} : TODO\n")
-            lines.append(f"{indent}    TODO: describe {p}\n")
+            lines.extend(
+                (f"{indent}{p} : TODO\n", f"{indent}    TODO: describe {p}\n"),
+            )
     if has_return:
-        lines.append(f"{indent}\n")
-        lines.append(f"{indent}Returns\n")
-        lines.append(f"{indent}-------\n")
-        lines.append(f"{indent}TODO\n")
-        lines.append(f"{indent}    TODO: describe return value\n")
+        lines.extend(
+            (
+                f"{indent}\n",
+                f"{indent}Returns\n",
+                f"{indent}-------\n",
+                f"{indent}TODO\n",
+                f"{indent}    TODO: describe return value\n",
+            ),
+        )
     # Numpy-style (D413) wants a blank line after the last section, but
     # only when there was a section to begin with.
     if params or has_return:
@@ -217,7 +223,8 @@ def build_stub_docstring(
 
 
 def find_docstring_node(
-    tree: ast.Module, lineno: int
+    tree: ast.Module,
+    lineno: int,
 ) -> ast.FunctionDef | ast.AsyncFunctionDef | ast.ClassDef | None:
     """Find the function, method, or class node matching a violation's line.
 
@@ -242,7 +249,9 @@ def find_docstring_node(
 
 
 def insert_missing_docstrings(
-    lines: list[str], tree: ast.Module, violations: list[dict]
+    lines: list[str],
+    tree: ast.Module,
+    violations: list[dict],
 ) -> list[str]:
     """Insert TODO docstrings for every function, method, or class missing one.
 
@@ -393,7 +402,8 @@ def finalize_and_report(filepath: Path) -> bool:
     if leftover:
         codes_str = ", ".join(sorted(leftover))
         print(
-            f"  needs manual review ({codes_str}): {filepath}", file=sys.stderr
+            f"  needs manual review ({codes_str}): {filepath}",
+            file=sys.stderr,
         )
     return changed
 
