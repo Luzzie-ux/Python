@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-# type: ignore
+# Copyright (c) 2026 Luz
 
-"""
-Directory: ex2/
+"""Directory: ex2/.
+
 Files to Submit: ft_different_errors.py
-Authorized: print(), open(), int()
+Authorized: print(), open(), int().
 """
 
 
@@ -17,7 +17,7 @@ def garden_operations(operation_number: int) -> None:
         case 2:
             open("/non/existent/file", encoding="utf-8")
         case 3:
-            "good morning" + 1  # noqa: B018
+            "good morning" + 1  # noqa: B018    #ty: ignore
         case _:
             operation_number * 10
 

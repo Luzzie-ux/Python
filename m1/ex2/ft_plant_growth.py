@@ -16,22 +16,6 @@ class Plant:
     """
 
     def __init__(self, name: str, old: int, height: float, mod: float) -> None:
-        """Plant class __init__.
-
-        Plant: Class plant that will has, name, heiight and age.
-
-        Parameters
-        ----------
-        name : str
-            name: plant name
-        height : float
-            height: plant height
-        old : int
-            age: plant age
-        mod : float
-            mod: plant growth rate
-
-        """
         self.name: str = name
         self.old: int = old
         self.height: float = height
@@ -79,10 +63,6 @@ def ft_plant_growth() -> None:
 
 
 def main() -> None:
-    """TODO: describe main.
-
-    TODO: add description.
-    """
     ft_plant_growth()
 
 

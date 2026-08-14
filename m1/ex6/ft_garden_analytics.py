@@ -10,28 +10,10 @@ classmethod().
 
 
 class Plant:
-    """TODO: describe Plant.
-
-    TODO: add description.
-    """
+    """Plant class composed of name, initial height and initial age."""
 
     def __init__(self, name: str, height: float, age: int, mod: float) -> None:
-        """TODO: describe __init__.
 
-        TODO: add description.
-
-        Parameters
-        ----------
-        name : TODO
-            TODO: describe name
-        height : TODO
-            TODO: describe height
-        age : TODO
-            TODO: describe age
-        mod : TODO
-            TODO: describe mod
-
-        """
         self._name: str = name.capitalize()
         self._height: float = height
         self._age: int = age
@@ -39,47 +21,21 @@ class Plant:
         self._stats: Plant.Statistics = Plant.Statistics()
 
     def show(self) -> None:
-        """TODO: describe show.
-
-        TODO: add description.
-        """
         print(f"{self._name}: {self._height}cm, {self._age} days old")
         self._stats.count_show()
 
     def grow(self) -> None:
-        """TODO: describe grow.
-
-        TODO: add description.
-        """
         self._height += self._mod
         self._stats.count_grow()
 
     def aging(self) -> None:
-        """TODO: describe aging.
-
-        TODO: add description.
-        """
         self._age += 1
         self._stats.count_age()
 
     def get_name(self) -> str:
-        """TODO: describe get_name.
-
-        TODO: add description.
-
-        Returns
-        -------
-        str:
-            name: describe return value
-
-        """
         return self._name
 
     def ret_stats(self) -> None:
-        """TODO: describe ret_stats.
-
-        TODO: add description.
-        """
         return self._stats.print_stats()
 
     @staticmethod
@@ -90,61 +46,32 @@ class Plant:
 
     @classmethod
     def anonymous(cls) -> Plant:
-        """Create an unknown type of object.
-
-        Returns
-        -------
-        cls: "Plant"
-
-        """
+        """Create an unknown type of object."""
         return cls("Unknown plant", 0.0, 0, 0.0)
 
     class Statistics:
         """Statistics subclass of Plant."""
 
         def __init__(self) -> None:
-            """TODO: describe __init__.
-
-            TODO: add description.
-            """
             self.grow: int = 0
             self.age: int = 0
             self.show: int = 0
 
         def count_grow(self) -> None:
-            """TODO: describe count_grow.
-
-            TODO: add description.
-            """
             self.grow += 1
 
         def count_age(self) -> None:
-            """TODO: describe count_age.
-
-            TODO: add description.
-            """
             self.age += 1
 
         def count_show(self) -> None:
-            """TODO: describe count_show.
-
-            TODO: add description.
-            """
             self.show += 1
 
         def print_stats(self) -> None:
-            """TODO: describe print_stats.
-
-            TODO: add description.
-            """
             print(f"Stats: {self.grow} grow, {self.age} age, {self.show} show")
 
 
 class Flower(Plant):
-    """TODO: describe Flower.
-
-    TODO: add description.
-    """
+    """Child Class of Plant."""
 
     def __init__(
         self,
@@ -154,51 +81,21 @@ class Flower(Plant):
         mod: float,
         color: str,
     ) -> None:
-        """TODO: describe __init__.
-
-        TODO: add description.
-
-        Parameters
-        ----------
-        name : TODO
-            TODO: describe name
-        height : TODO
-            TODO: describe height
-        age : TODO
-            TODO: describe age
-        mod : TODO
-            TODO: describe mod
-        color : TODO
-            TODO: describe color
-
-        """
         super().__init__(name, height, age, mod)
         self._color: str = color
         self._bloom: bool = False
 
     def show(self) -> None:
-        """TODO: describe show.
-
-        TODO: add description.
-        """
         super().show()
         print(f"Color: {self._color}")
 
     def has_bloomed(self) -> None:
-        """TODO: describe has_bloomed.
-
-        TODO: add description.
-        """
         if self._bloom:
             print(f"{self._name} is blooming beautifully!")
         else:
             print(f"{self._name} has not bloomed yet")
 
     def grow_bloom(self) -> None:
-        """TODO: describe grow_bloom.
-
-        TODO: add description.
-        """
         if not self._bloom:
             self._bloom = True
             print(f"[asking the {self._name.lower()} to grow and bloom]")
@@ -207,10 +104,7 @@ class Flower(Plant):
 
 
 class Seed(Flower):
-    """TODO: describe Seed.
-
-    TODO: add description.
-    """
+    """Child Class of Plant."""
 
     def __init__(
         self,
@@ -220,41 +114,15 @@ class Seed(Flower):
         mod: float,
         color: str,
     ) -> None:
-        """TODO: describe __init__.
-
-        TODO: add description.
-
-        Parameters
-        ----------
-        name : TODO
-            TODO: describe name
-        height : TODO
-            TODO: describe height
-        age : TODO
-            TODO: describe age
-        mod : TODO
-            TODO: describe mod
-        color : TODO
-            TODO: describe color
-
-        """
         super().__init__(name, height, age, mod, color)
         self._seeds: int = 0
 
     def show(self) -> None:
-        """TODO: describe show.
-
-        TODO: add description.
-        """
         super().show()
         self.has_bloomed()
         print(f"Seeds: {self._seeds}")
 
     def age_grow_bloom(self) -> None:
-        """TODO: describe age_grow_bloom.
-
-        TODO: add description.
-        """
         if not self._bloom:
             self._bloom = True
             for _i in range(20):
@@ -265,10 +133,7 @@ class Seed(Flower):
 
 
 class Tree(Plant):
-    """TODO: describe Tree.
-
-    TODO: add description.
-    """
+    """Child Class of Plant."""
 
     def __init__(
         self,
@@ -278,33 +143,11 @@ class Tree(Plant):
         mod: float,
         trunk_diameter: float,
     ) -> None:
-        """TODO: describe __init__.
-
-        TODO: add description.
-
-        Parameters
-        ----------
-        name : TODO
-            TODO: describe name
-        height : TODO
-            TODO: describe height
-        age : TODO
-            TODO: describe age
-        mod : TODO
-            TODO: describe mod
-        trunk_diameter : TODO
-            TODO: describe trunk_diameter
-
-        """
         super().__init__(name, height, age, mod)
         self._diameter: float = trunk_diameter
         self._shade: int = 0
 
     def show(self) -> None:
-        """TODO: describe show.
-
-        TODO: add description.
-        """
         super().show()
         print(f"Trunk diameter: {self._diameter}cm")
         display(self)
@@ -319,30 +162,11 @@ class Tree(Plant):
         print(f"long and {self._diameter}cm wide.")
 
     def get_shade(self) -> int:
-        """TODO: describe get_shade.
-
-        TODO: add description.
-
-        Returns
-        -------
-        int:
-            shade: describe return value
-
-        """
         return self._shade
 
 
 def display(plant: Plant) -> None:
-    """TODO: describe display.
-
-    TODO: add description.
-
-    Parameters
-    ----------
-    plant : TODO
-        TODO: describe plant
-
-    """
+    """Display Plant statistics."""
     print(f"[statistics for {plant.get_name()}]")
     plant.ret_stats()
 

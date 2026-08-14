@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Luz
 
-"""
-Directory: ex4/
+"""Directory: ex4/.
+
 Files to Submit: ft_finally_block.py
-Authorized: print(), str.capitalize()
+Authorized: print(), str.capitalize().
 """
 
 

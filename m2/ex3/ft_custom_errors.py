@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Luz
 
-"""
-Directory: ex3◁
+"""Directory: ex3/.
+
 Files to Submit: ft_custom_errors.py
-Authorized: print()
+Authorized: print().
 """
 
 

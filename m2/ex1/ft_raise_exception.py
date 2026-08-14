@@ -1,18 +1,15 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Luz
 
-"""
-Directory: ex1/
+"""Directory: ex1/.
+
 Files to Submit: ft_raise_exception.py
-Authorized: int(), print()
+Authorized: int(), print().
 """
 
 
 def input_temperature(temp_str: str) -> int:
-    """
-    Input_temperature now will raise an ValueError
-    if the value stored in var temp is higher than
-    40 or lower than 0
-    """
+    """Raise a ValueError from the value stored in temp."""
     temp: int = int(temp_str)
     hot: int = 40
     cold: int = 0
@@ -26,12 +23,12 @@ def input_temperature(temp_str: str) -> int:
 
 
 def test_temperature(inputs: list[str]) -> None:
-    """
-    Tests the return value of input_temperature(),
+    """Tests the return value of input_temperature().
+
     if it fails, it will not crash the program,
     but print to stdout the msg:
     Caught input_temperatue error: {e}
-    where e stores ValueError
+    where e stores ValueError.
     """
     for inputx in inputs:
         try:

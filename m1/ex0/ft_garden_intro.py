@@ -22,7 +22,6 @@ def ft_garden_intro() -> None:
 
 
 def main() -> None:
-    """Entry point."""
     ft_garden_intro()
 
 

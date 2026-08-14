@@ -267,10 +267,6 @@ def ft_plant_types() -> None:
 
 
 def main() -> None:
-    """TODO: describe main.
-
-    TODO: add description.
-    """
     ft_plant_types()
 
 

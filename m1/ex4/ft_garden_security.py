@@ -12,20 +12,6 @@ class Plant:
     """Plant class composed of name, initial height and initial age."""
 
     def __init__(self, name: str, height: float, age: int) -> None:
-        """Plant class __init__.
-
-        Plant: Class plant that will has, name, heiight and age.
-
-        Parameters
-        ----------
-        name : str
-            name: plant name
-        height : float
-            height: plant height
-        age : int
-            age: plant age
-
-        """
         self._name: str = name.capitalize()
         self._height: float = 0.0
         self._age: int = 0
@@ -48,10 +34,7 @@ class Plant:
         return
 
     def update(self, height: float, age: int) -> None:
-        """Update plants attributes.
-
-        but first verifies if they are not negative.
-        """
+        """Update plants attributes."""
         self.set_att(height, age)
         if self._height == height:
             print(f"Height updated: {height}cm")
@@ -59,40 +42,13 @@ class Plant:
             print(f"Age updated: {age} days")
 
     def get_height(self) -> float:
-        """Get the height when called.
-
-        Parameter:
-        ---------
-        self: Class
-
-        Returns
-        -------
-        float
-            is height
-
-        """
         return self._height
 
     def get_age(self) -> int:
-        """Get the age when called.
-
-        Parameter:
-        ---------
-        self: Class
-
-        Returns
-        -------
-        int
-            age
-
-        """
         return self._age
 
     def info(self) -> None:
-        """TODO: describe info.
-
-        TODO: add description.
-        """
+        """Display Info."""
         h: float = self.get_height()
         a: int = self.get_age()
         print(f"Current state: {self._name}: {h}cm, {a} days old")
@@ -110,10 +66,6 @@ def ft_garden_security() -> None:
 
 
 def main() -> None:
-    """TODO: describe main.
-
-    TODO: add description.
-    """
     ft_garden_security()
 
 

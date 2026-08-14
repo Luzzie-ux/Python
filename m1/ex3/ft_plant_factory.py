@@ -12,22 +12,6 @@ class Plant:
     """Plant class composed of name, initial height and initial age."""
 
     def __init__(self, name: str, height: float, age: int, mod: float) -> None:
-        """Plant class __init__.
-
-        Plant: Class plant that will has, name, heiight and age.
-
-        Parameters
-        ----------
-        name : str
-            name: plant name
-        height : float
-            height: plant height
-        age : int
-            age: plant age
-        mod : float
-            mod: plant growth rate
-
-        """
         self.name: str = name
         self.height: float = height
         self.age: int = age
@@ -80,10 +64,6 @@ def ft_plant_factory() -> None:
 
 
 def main() -> None:
-    """TODO: describe main.
-
-    TODO: add description.
-    """
     ft_plant_factory()
 
 
