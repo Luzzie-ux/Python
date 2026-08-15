@@ -1,7 +1,6 @@
 # ex2/__init__.py
 
 
-
 from .factories import DarkFactory, PoisonFactory
 from .strategy import (
     AggressiveStrategy,

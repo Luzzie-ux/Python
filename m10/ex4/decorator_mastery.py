@@ -51,7 +51,7 @@ def retry_spell(max_attempts: int) -> Callable:
             for i in range(1, max_attempts + 1):
                 try:
                     return func(*args, **kwargs)
-                except Exception:   # noqa: BLE001
+                except Exception:  # noqa: BLE001
                     print(
                         "Spell failed, retrying..."
                         f"(attempt {i}/{max_attempts})",
