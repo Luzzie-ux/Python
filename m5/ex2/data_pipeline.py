@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex2/
+"""Directory: ex2/.
+
 Files to Submit: data_pipeline.py
 Authorized: builtins, standard types, import typing, import abc
 """

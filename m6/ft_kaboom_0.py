@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
 
-"""
-ft_kaboom_0.py
-"""
+"""ft_kaboom_0.py"""
 
 from alchemy import grimoire
 

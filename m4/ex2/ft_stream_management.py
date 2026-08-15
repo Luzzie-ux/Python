@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex2/
+"""Directory: ex2/.
+
 Files to Submit: ft_stream_management.py
 Authorized: import sys, sys.argv, sys.stdin, sys.stdout, sys.stderr, len(),
 open(), import typing, typing.IO, io.read(), io.readline(), io.write(),

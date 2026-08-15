@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex0/
+"""Directory: ex0/.
+
 Files to Submit: construct.py
 Authorized: sys, os, site modules, print()
 """

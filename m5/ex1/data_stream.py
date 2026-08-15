@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex1/
+"""Directory: ex1/.
+
 Files to Submit: data_stream.py
 Authorized: builtins, standard types, import typing, import abc
 """

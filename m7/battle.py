@@ -1,14 +1,9 @@
 #!/usr/bin/env python3
 
-"""
-battle.py will test ex0 by:
+"""Directory: ex0/.
 
-Instantiating the Flameling and Aquabub factories.
- •Using a single function that receives a factory object
-    and verifies that it can create the base and evolved Creature,
-    and then each Creature can be described and can attack.
- •Using another function that receives both factories
-    and makes base Creature fight.
+Files to Submit: battle.py, ex0/ as a package with all needed files in it
+Authorized: builtins, standard types, import typing, import abc
 """
 
 from ex0 import AquaFactory, CreatureFactory, FlameFactory

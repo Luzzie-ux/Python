@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex5/
+"""Directory: ex5/.
+
 Files to Submit: ft_data_stream.py
 Authorized: next(), range(), len(), print(), import typing,
 typing.Generator, import random, random.*

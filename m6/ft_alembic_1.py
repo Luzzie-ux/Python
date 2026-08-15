@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
 
-"""
-ft_alembic_1.py
-"""
+"""ft_alembic_1.py"""
 
 from elements import create_water
 

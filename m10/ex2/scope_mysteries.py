@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex2/
+"""Directory: ex2/.
+
 Files to Submit: scope_mysteries.py
 Authorized: nonlocal
 """
 
-from collections.abc import Callable
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 def mage_counter() -> Callable:

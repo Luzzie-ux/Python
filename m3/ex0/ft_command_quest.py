@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex0/
+"""Directory: ex0/.
+
 Files to Submit: ft_command_quest.py
 Authorized: import sys, sys.argv, len(), print()
 """

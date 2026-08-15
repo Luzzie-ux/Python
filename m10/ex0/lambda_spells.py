@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex0/
+"""Directory: ex0/.
+
 Files to Submit: lambda_spells.py
 Authorized: map, filter, sorted, min, max, round, sum, len
 """
@@ -47,25 +47,21 @@ def main() -> None:
     ]
     spells = ["flash", "earthquake", "fireball", "tornado"]
 
-    try:
-        print("\nTesting artifact sorter...")
-        a = artifact_sorter(artifacts)
-        print(a)
+    print("\nTesting artifact sorter...")
+    a = artifact_sorter(artifacts)
+    print(a)
 
-        print("\nTesting Mage Stats")
-        m = mage_stats(mages)
-        print(m)
+    print("\nTesting Mage Stats")
+    m = mage_stats(mages)
+    print(m)
 
-        print("\nTesting spell transformer...")
-        s = spell_transformer(spells)
-        print(s)
+    print("\nTesting spell transformer...")
+    s = spell_transformer(spells)
+    print(s)
 
-        print("\nTesting Power Filter...")
-        p = power_filter(mages, m["avg_power"])
-        print(p)
-    except ValueError as e:
-        print(e)
-    return
+    print("\nTesting Power Filter...")
+    p = power_filter(mages, m["avg_power"])
+    print(p)
 
 
 if __name__ == "__main__":

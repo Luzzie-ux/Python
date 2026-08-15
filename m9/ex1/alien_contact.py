@@ -3,8 +3,8 @@
 # mypy: disable-error-code="misc"
 # mypy: disable-error-code="untyped-decorator"
 
-"""
-Directory: ex1/
+"""Directory: ex1/.
+
 Files to Submit: alien_contact.py
 Authorized: None
 """

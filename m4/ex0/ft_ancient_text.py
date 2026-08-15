@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex0/
+"""Directory: ex0/.
+
 Files to Submit: ft_ancient_text.py
 Authorized: import sys, sys.argv, len(), open(), import typing, typing.IO,
 io.read(), io.close(), print()

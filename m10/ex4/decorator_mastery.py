@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex4/
+"""Directory: ex4/.
+
 Files to Submit: decorator_mastery.py
 Authorized: functools.wraps, staticmethod
 """
 
-from collections.abc import Callable
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
+
 from functools import wraps
 from time import sleep, time
-from typing import Any
 
 
 def spell_timer(func: Callable) -> Callable:
@@ -30,7 +33,7 @@ def spell_timer(func: Callable) -> Callable:
 def power_validator(min_power: int) -> Callable:
     def decorator(func: Callable) -> Callable:
         @wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper(*args, **kwargs) -> str:
             value = args[-1]
             if value >= min_power:
                 return func(*args, **kwargs)
@@ -44,14 +47,14 @@ def power_validator(min_power: int) -> Callable:
 def retry_spell(max_attempts: int) -> Callable:
     def decorator(func: Callable) -> Callable:
         @wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper(*args, **kwargs) -> str:
             for i in range(1, max_attempts + 1):
                 try:
                     return func(*args, **kwargs)
                 except Exception:   # noqa: BLE001
                     print(
                         "Spell failed, retrying..."
-                        f"(attempt {i}/{max_attempts})"
+                        f"(attempt {i}/{max_attempts})",
                     )
                     continue
             return f"Spell casting failed after {max_attempts} attempts"

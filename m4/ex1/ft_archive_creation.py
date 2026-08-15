@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex1/
+"""Directory: ex1/.
+
 Files to Submit: ft_archive_creation.py
 Authorized: import sys, sys.argv, len(), open(), import typing, typing.IO,
 io.read(), io.write(), io.close(), print(), input()

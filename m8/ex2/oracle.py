@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex2/
+"""Directory: ex2/.
+
 Files to Submit: oracle.py, requirements.txt, .env.example, .gitignore
 Authorized: os,  python-dotenv modules, file operations
 """

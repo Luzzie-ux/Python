@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
 
-"""
-ft_kaboom_1.py
-"""
+"""ft_kaboom_1.py."""
 
 print(
     "=== Kaboom 1 ===\n"

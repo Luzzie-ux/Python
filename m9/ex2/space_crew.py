@@ -3,8 +3,8 @@
 # mypy: disable-error-code="misc"
 # mypy: disable-error-code="untyped-decorator"
 
-"""
-Directory: ex2/
+"""Directory: ex2/.
+
 Files to Submit: space_crew.py
 Authorized: None
 """

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex1/
+"""Directory: ex1/.
+
 Files to Submit: ft_score_analytics.py
 Authorized: import sys, sys.argv, len(), sum(), max(), min(), print(
 """

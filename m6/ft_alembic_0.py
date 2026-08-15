@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
 
-"""
-ft_alembic_0.py
-"""
+"""ft_alembic_0.py"""
 
 import elements
 

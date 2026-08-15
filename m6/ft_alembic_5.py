@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
 
-"""
-ft_alembic_5.py
-"""
+"""ft_alembic_5.py"""
 
 from alchemy import create_air
 

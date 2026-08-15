@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex0/
+"""Directory: ex0/.
+
 Files to Submit: data_processor.py
 Authorized: builtins, standard types, import typing, import abc
 """

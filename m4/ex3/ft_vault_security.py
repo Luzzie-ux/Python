@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex3/
+"""Directory: ex3/.
+
 Files to Submit: ft_vault_security.py
 Authorized: open(), read(), write(), print()
 """

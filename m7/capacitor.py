@@ -1,21 +1,9 @@
 #!/usr/bin/env python3
 
-"""
-capacitor.py will:
+"""Directory: ex1/.
 
-Create a healing Creature factory.
-    •Create the base, then the evolved Creature and make them:
-    1) be described;
-    2) attack;
-    3) heal.
-
-Create a transforming Creature factory.
-    •Create the base, then the evolved Creature and make them:
-    1) be described;
-    2) attack;
-    3) transform;
-    4) attack again;
-    5) revert.
+Files to Submit: capacitor.py, ex1/ as a package with all needed files in it
+Authorized: builtins, standard types, import typing, import abc
 """
 
 from typing import cast

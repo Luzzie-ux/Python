@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex2/
+"""Directory: ex2/.
+
 Files to Submit: ft_coordinate_system.py
 Authorized: import math, math.sqrt(), input(), round(), print()
 """

@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
-"""
-ft_alembic_4.py
-"""
+"""ft_alembic_4.py"""
 
 import alchemy
 

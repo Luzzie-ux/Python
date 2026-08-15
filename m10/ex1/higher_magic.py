@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex1/
+"""Directory: ex1/.
+
 Files to Submit: higher_magic.py
 Authorized: callable(), Callable
 """
 
-from collections.abc import Callable
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 def heal(target: str, power: int) -> str:
@@ -20,9 +23,8 @@ def fireball(target: str, power: int) -> str:
 
 def condition(target: str, power: int) -> bool:
     del target
-    if not power < 10:
-        return True
-    return False
+    min_power: int = 10
+    return bool(not power < min_power)
 
 
 def spell_combiner(spell1: Callable, spell2: Callable) -> Callable:

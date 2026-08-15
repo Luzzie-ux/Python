@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex6/
+"""Directory: ex6/.
+
 Files to Submit: ft_data_alchemist.py
 Authorized: import random, random.*, print(), len(), sum(), round(
 """

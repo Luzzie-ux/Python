@@ -3,8 +3,8 @@
 # mypy: disable-error-code="misc"
 # mypy: disable-error-code="untyped-decorator"
 
-"""
-Directory: ex0/
+"""Directory: ex0/.
+
 Files to Submit: space_station.py
 Authorized: None
 """

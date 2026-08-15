@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
 
-"""
-ft_distillation_1.py
-"""
+"""ft_distillation_1.py"""
 
 import alchemy
 

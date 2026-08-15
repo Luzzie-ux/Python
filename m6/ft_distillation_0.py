@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
 
-"""
-ft_distillation_0.py
-"""
+"""ft_distillation_0.py"""
 
 from alchemy.potions import healing_potion, strength_potion
 

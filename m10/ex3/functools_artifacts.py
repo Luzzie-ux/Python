@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 
 
-"""
-Directory: ex3/
+"""Directory: ex3/.
+
 Files to Submit: functools_artifacts.py
 Authorized: functools, operator
 """
 
 import operator
-from collections.abc import Callable
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 from functools import lru_cache, partial, reduce, singledispatch
-from typing import Any
 
 
 def spell_reducer(spells: list[int], operation: str) -> int:
@@ -83,7 +85,6 @@ def main() -> None:
     print(dispatcher("fireball"))
     print(dispatcher([1, 2, 3]))
     print(dispatcher((1, 2)))
-    return
 
 
 if __name__ == "__main__":
